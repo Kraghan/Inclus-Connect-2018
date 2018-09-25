@@ -6,7 +6,7 @@ namespace Scripting.Actors
 {
     internal class PlayerController : ActorFSM
     {
-        enum EPlayerStates
+        internal enum EPlayerStates
         {
             Idle,
             Running,
@@ -24,6 +24,7 @@ namespace Scripting.Actors
 
         /// The inputs
         private ArduInput   m_inputs;
+        internal ArduInput  inputs {get {return m_inputs;}}
 
 
         /// Jumping state datas
@@ -32,6 +33,11 @@ namespace Scripting.Actors
 
         // Jump duration
         float m_jumpDuration = 1f;
+
+        /// Sprinting state
+        // Sprint coefficient
+        [SerializeField]
+        float m_sprintCoefficient = 5f;
 
         /// Start
         void Start()
@@ -70,7 +76,6 @@ namespace Scripting.Actors
 
             }
 
-            float speed = m_speed;
             m_body.velocity = new Vector2(m_speed, m_body.velocity.y);
         }
 
@@ -79,8 +84,10 @@ namespace Scripting.Actors
         {
             if (m_firstFrameInState == true)
             {
-                m_speed *= 2f;
+                m_speed *= m_sprintCoefficient;
             }
+
+            m_body.velocity = new Vector2(m_speed, m_body.velocity.y);
         }
         
         /// Idle State
@@ -151,7 +158,7 @@ namespace Scripting.Actors
         protected override void OnStateChanged()
         {
             if (m_previousState == (int)EPlayerStates.Sprinting)
-                m_speed *= 0.5f;
+                m_speed /= m_sprintCoefficient;
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Scripting.Actors;
 using UnityEngine;
 
 namespace Scripting
@@ -77,6 +78,9 @@ namespace Scripting
             //PlayerData data = s_player.GetWeakestPlayer(m_QTENeeded);
 
             Utility.TimeManager.StartSlowMotion();
+
+            if (PlayerDatas.instance.player.inputs.buttonJustOn == true)
+                PlayerDatas.instance.player.ForceState((int)PlayerController.EPlayerStates.Sprinting);
 
             m_activated = true;
         }

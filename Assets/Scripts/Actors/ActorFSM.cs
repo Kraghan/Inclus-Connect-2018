@@ -17,10 +17,10 @@ namespace Scripting.Actors
         protected float m_stateDuration = 0f;
 
         /// State => method
-        protected System.Action[] m_actions; // YOU MUST SETUP THIS ARRAY MANUALLY
+        protected System.Action[] m_actions = null; // YOU MUST SETUP THIS ARRAY MANUALLY
 
         // onStateChanged(p_previousState, p_newState)
-        protected System.Action<int, int> onStateChanged;
+        protected System.Action<int, int> onStateChanged = null;
 
         /// Awake
         void Awake()
