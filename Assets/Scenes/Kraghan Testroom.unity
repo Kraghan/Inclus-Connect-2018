@@ -117950,7 +117950,6 @@ GameObject:
   - component: {fileID: 679937618}
   - component: {fileID: 679937617}
   - component: {fileID: 679937620}
-  - component: {fileID: 679937622}
   - component: {fileID: 679937621}
   m_Layer: 0
   m_Name: Player
@@ -118045,21 +118044,6 @@ MonoBehaviour:
   m_readTimeout: 20
   m_queueLenght: 1
   m_portName: COM5
---- !u!114 &679937622
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 679937616}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 75f53c1c022d6264eb7a8aa68c9871d0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  portName: COM8
-  baudRate: 250000
-  ReadTimeout: 20
-  QueueLenght: 1
 --- !u!1 &939046047
 GameObject:
   m_ObjectHideFlags: 0
@@ -118117,6 +118101,7 @@ MonoBehaviour:
     m_enable: 0
     m_isDisabledPlayer: 0
     m_skill: 0.5
+  m_player: {fileID: 679937620}
 --- !u!1 &955406194
 GameObject:
   m_ObjectHideFlags: 0
@@ -118145,7 +118130,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b53a73bdf4472e14685da1abdde66c6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_QTENeeded: 03000000
+  m_QTENeeded:
+  - m_type: 0
+    p_done: 0
 --- !u!4 &955406196
 Transform:
   m_ObjectHideFlags: 0
