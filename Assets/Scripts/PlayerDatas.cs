@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Scripting.Actors;
 using UnityEngine;
 
 namespace Scripting
@@ -55,7 +56,7 @@ namespace Scripting
         /// Player controller
         [SerializeField]
         private PlayerController m_player;
-        internal PlayerController player {get {return m_player;} }
+        internal PlayerController player {get {return m_player;} set {m_player = value;}}
 
         /// The datas for each players
         internal PlayerData[] datas = new PlayerData[4];

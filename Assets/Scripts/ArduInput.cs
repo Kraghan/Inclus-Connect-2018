@@ -75,7 +75,7 @@ namespace Scripting
             m_arduino.connect();
         }
 
-        // Update is called once per frame
+        /// Physics update
         void FixedUpdate()
         {
             m_lightPreviouslyOn = m_lightOn;
@@ -83,9 +83,16 @@ namespace Scripting
             m_acceleroPreviouslyOn = m_acceleroOn;
             m_microPreviouslyOn = m_microOn;
 
-            string data = m_arduino.readQueue();
+            // string data = m_arduino.readQueue();
+
+            /// parsing
+
+            // Cheat - Pc control
+            m_acceleroOn    = Input.GetKeyDown(KeyCode.Space);
+            m_lightOn       = Input.GetKeyDown(KeyCode.L);
+            m_microOn       = Input.GetKeyDown(KeyCode.M);
+            m_buttonOn      = Input.GetKeyDown(KeyCode.B);
+            ///
         }
-
-
     }
 }
