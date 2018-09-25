@@ -26,7 +26,7 @@ namespace Scripting
         public bool p_done = false;
     }
 
-    [RequireComponent(typeof(Collider2D))]
+    [RequireComponent(typeof(BoxCollider2D))]
     public class QuickTimeEvent : MonoBehaviour
     {
         [SerializeField]
@@ -35,6 +35,7 @@ namespace Scripting
         protected static ArduInput s_inputs = null;
 
         private bool m_activated = false;
+        private BoxCollider2D m_collider;
 
         // Use this for initialization
         void Start()
@@ -43,6 +44,8 @@ namespace Scripting
                 s_player = GameObject.FindObjectOfType<PlayerDatas>();
             if (!s_inputs)
                 s_inputs = s_player.player.GetComponent<ArduInput>();
+
+            m_collider = GetComponent<BoxCollider2D>();
         }
         
         void FixedUpdate()
@@ -67,6 +70,8 @@ namespace Scripting
             {
                 m_activated = false;
                 Utility.TimeManager.StopSlowMotion();
+
+                GetPositionInCollider();
             }
         }
 
@@ -80,6 +85,11 @@ namespace Scripting
             Utility.TimeManager.StartSlowMotion(0.25f);
 
             m_activated = true;
+        }
+
+        private void OnTriggerStay2D(Collider2D collision)
+        {
+            GetPositionInCollider();
         }
 
         private void UpdateQTERequierement()
@@ -112,6 +122,22 @@ namespace Scripting
                         break;
                 }
             }
+        }
+
+        private float GetPositionInCollider()
+        {
+            float playerXPos = s_player.player.transform.position.x;
+
+            float qteSize = m_collider.size.x * transform.localScale.x;
+
+            float qteLeftPosition   = transform.position.x - qteSize / 2;
+            float qteRightPosition  = transform.position.x + qteSize / 2;
+
+            //print(qteLeftPosition + " " + qteRightPosition + " " + playerXPos);
+
+            print((qteLeftPosition - playerXPos) / (qteLeftPosition - qteRightPosition));
+
+            return Mathf.Clamp01(qteLeftPosition - playerXPos) / (qteLeftPosition - qteRightPosition);
         }
     }
 
