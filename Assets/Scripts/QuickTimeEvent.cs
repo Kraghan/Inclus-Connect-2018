@@ -29,10 +29,17 @@ namespace Scripting
     [RequireComponent(typeof(BoxCollider2D))]
     public class QuickTimeEvent : MonoBehaviour
     {
+        /// TEMP
+        [SerializeField]
+        GameObject m_destination = null;
+
+        [SerializeField]
+        float m_duration = 1f;
+        ///
+
         [SerializeField]
         private QTEDone[] m_QTENeeded = new QTEDone[1];
-        protected static PlayerDatas s_player = null;
-        protected static ArduInput s_inputs = null;
+        internal static ArduInput s_inputs { get {return PlayerDatas.instance.player.GetComponent<ArduInput>();}}
 
         private bool m_activated = false;
         private BoxCollider2D m_collider;
@@ -40,11 +47,6 @@ namespace Scripting
         // Use this for initialization
         void Start()
         {
-            if(!s_player)
-                s_player = GameObject.FindObjectOfType<PlayerDatas>();
-            if (!s_inputs)
-                s_inputs = s_player.player.GetComponent<ArduInput>();
-
             m_collider = GetComponent<BoxCollider2D>();
         }
         
@@ -75,6 +77,7 @@ namespace Scripting
             }
         }
 
+        /// Callback - Triger enter
         void OnTriggerEnter2D(Collider2D other)
         {
             if (!other.CompareTag("Player"))
@@ -82,7 +85,7 @@ namespace Scripting
 
             //PlayerData data = s_player.GetWeakestPlayer(m_QTENeeded);
 
-            Utility.TimeManager.StartSlowMotion(0.25f);
+            Utility.TimeManager.StartSlowMotion();
 
             m_activated = true;
         }
@@ -90,6 +93,21 @@ namespace Scripting
         private void OnTriggerStay2D(Collider2D collision)
         {
             GetPositionInCollider();
+        }
+
+        /// Callback - Triger enter
+        void OnTriggerExit2D(Collider2D other)
+        {
+            if (!other.CompareTag("Player"))
+                return;
+
+            //PlayerData data = PlayerDatas.instance.GetWeakestPlayer(m_QTENeeded);
+
+            Utility.TimeManager.StopSlowMotion();
+
+            PlayerDatas.instance.player.JumpTo(m_destination.transform.position, m_duration);
+
+            m_activated = false;
         }
 
         private void UpdateQTERequierement()
@@ -126,7 +144,7 @@ namespace Scripting
 
         private float GetPositionInCollider()
         {
-            float playerXPos = s_player.player.transform.position.x;
+            float playerXPos = PlayerDatas.instance.player.transform.position.x;
 
             float qteSize = m_collider.size.x * transform.localScale.x;
 

@@ -23,33 +23,20 @@ namespace Scripting
 
         wrmhl m_arduino = new wrmhl();
 
-        private bool m_microOn = false, m_acceleroOn = false, m_buttonOn = false, m_lightOn = false;
+        private bool m_microOn = false;
+        internal bool microOn{get { return m_microOn;} }
+
+        private bool m_acceleroOn = false;
+        internal bool acceleroOn{get { return m_acceleroOn;} }
+
+        private bool m_buttonOn = false;
+        internal bool buttonOn{get { return m_buttonOn;} }
+
+        private bool m_lightOn = false;
+        internal bool lightOn{get { return m_lightOn;} }
+
         private bool m_microPreviouslyOn = false, m_acceleroPreviouslyOn = false, m_buttonPreviouslyOn = false, m_lightPreviouslyOn = false;
-        
-        public bool microOn
-        {
-            get { return m_microOn; }
-        }
-
-        public bool acceleroOn
-        {
-            get { return m_acceleroOn; }
-        }
-
-        public bool buttonOn
-        {
-            get { return m_buttonOn; }
-        }
-
-        public bool lightOn
-        {
-            get { return m_lightOn; }
-        }
-
-        public bool microJustOn
-        {
-            get { return m_microOn && !m_microPreviouslyOn; }
-        }
+        internal bool microJustOn{ get { return m_microOn && !m_microPreviouslyOn; }}
 
         public bool acceleroJustOn
         {
@@ -88,7 +75,7 @@ namespace Scripting
             m_arduino.connect();
         }
 
-        // Update is called once per frame
+        /// Physics update
         void FixedUpdate()
         {
             m_lightPreviouslyOn = m_lightOn;
@@ -96,9 +83,16 @@ namespace Scripting
             m_acceleroPreviouslyOn = m_acceleroOn;
             m_microPreviouslyOn = m_microOn;
 
-            string data = m_arduino.readQueue();
+            // string data = m_arduino.readQueue();
+
+            /// parsing
+
+            // Cheat - Pc control
+            m_acceleroOn    = Input.GetKeyDown(KeyCode.Space);
+            m_lightOn       = Input.GetKeyDown(KeyCode.L);
+            m_microOn       = Input.GetKeyDown(KeyCode.M);
+            m_buttonOn      = Input.GetKeyDown(KeyCode.B);
+            ///
         }
-
-
     }
 }
