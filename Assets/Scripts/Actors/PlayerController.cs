@@ -120,7 +120,7 @@ namespace Scripting.Actors
 
                 // Compte velocity
                 float velX = dx / m_jumpDuration;
-                float velY = -gravity * m_jumpDuration * 0.5f + dy;
+                float velY = -gravity * m_jumpDuration * 0.5f + dy / m_jumpDuration;
 
                 // Jump
                 m_body.velocity = new Vector3(velX, velY);
@@ -136,7 +136,7 @@ namespace Scripting.Actors
                 Debug.Break();
             }
         }
-        
+
         /// Called before each update
         protected override void OnPreStateAction()
         {

@@ -118149,7 +118149,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_destination: {fileID: 170116487}
-  m_duration: 1
+  m_duration: 0.25
   m_QTENeeded:
   - m_type: 3
     p_done: 0
