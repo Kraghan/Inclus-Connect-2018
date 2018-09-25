@@ -2,22 +2,25 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+namespace Scripting
 {
-
-    public float speed = 5f;
-    Rigidbody2D body;
-
-	// Use this for initialization
-	void Start ()
+    public class PlayerController : MonoBehaviour
     {
-        body = GetComponent<Rigidbody2D>();
-        
-	}
-	
-	void FixedUpdate ()
-    {
-        body.velocity = new Vector2(speed, body.velocity.y);
-	}
-    
+        [SerializeField]
+        private float       m_speed = 5f;
+        private Rigidbody2D m_body;
+
+        // Use this for initialization
+        void Start()
+        {
+            m_body = GetComponent<Rigidbody2D>();
+
+        }
+
+        void FixedUpdate()
+        {
+            m_body.velocity = new Vector2(m_speed, m_body.velocity.y);
+        }
+
+    }
 }

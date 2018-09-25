@@ -117950,9 +117950,11 @@ GameObject:
   - component: {fileID: 679937618}
   - component: {fileID: 679937617}
   - component: {fileID: 679937620}
+  - component: {fileID: 679937622}
+  - component: {fileID: 679937621}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -118027,7 +118029,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bffad81a2dedd8e428d18cd35b5187df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 1
+  m_speed: 5
+--- !u!114 &679937621
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 679937616}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7633c05fa020056499715c6966fb5746, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_baudRate: 250000
+  m_readTimeout: 20
+  m_queueLenght: 1
+  m_portName: COM5
+--- !u!114 &679937622
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 679937616}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75f53c1c022d6264eb7a8aa68c9871d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  portName: COM8
+  baudRate: 250000
+  ReadTimeout: 20
+  QueueLenght: 1
 --- !u!1 &939046047
 GameObject:
   m_ObjectHideFlags: 0
@@ -118068,23 +118100,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4563f09a766f0974089df9ee8522a588, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  datas:
-  - playerController: 0
-    enable: 0
-    isDisabledPlayer: 0
-    skill: 0.5
-  - playerController: 1
-    enable: 0
-    isDisabledPlayer: 0
-    skill: 0.5
-  - playerController: 2
-    enable: 0
-    isDisabledPlayer: 0
-    skill: 0.5
-  - playerController: 3
-    enable: 0
-    isDisabledPlayer: 0
-    skill: 0.5
+  m_datas:
+  - m_playerController: 0
+    m_enable: 0
+    m_isDisabledPlayer: 0
+    m_skill: 0.5
+  - m_playerController: 0
+    m_enable: 0
+    m_isDisabledPlayer: 0
+    m_skill: 0.5
+  - m_playerController: 0
+    m_enable: 0
+    m_isDisabledPlayer: 0
+    m_skill: 0.5
+  - m_playerController: 0
+    m_enable: 0
+    m_isDisabledPlayer: 0
+    m_skill: 0.5
 --- !u!1 &955406194
 GameObject:
   m_ObjectHideFlags: 0
@@ -118094,6 +118126,7 @@ GameObject:
   m_Component:
   - component: {fileID: 955406196}
   - component: {fileID: 955406195}
+  - component: {fileID: 955406197}
   m_Layer: 0
   m_Name: Interactable
   m_TagString: Untagged
@@ -118112,7 +118145,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b53a73bdf4472e14685da1abdde66c6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  QTENeeded: 00000000
+  m_QTENeeded: 03000000
 --- !u!4 &955406196
 Transform:
   m_ObjectHideFlags: 0
@@ -118120,12 +118153,37 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 955406194}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.3100586, y: -3.2312012, z: 0.59765625}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 4.5, y: -0.87, z: 0.59765625}
+  m_LocalScale: {x: 5, y: 5, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &955406197
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 955406194}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
 --- !u!1 &1051666903
 GameObject:
   m_ObjectHideFlags: 0
@@ -118386,7 +118444,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1308870590
 Transform:
   m_ObjectHideFlags: 0
