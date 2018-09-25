@@ -8,8 +8,6 @@ namespace Scripting
 
     public class ArduInput : MonoBehaviour
     {
-
-
         [Header("Arduino")]
         [SerializeField]
         private int m_baudRate = 250000;
@@ -24,6 +22,50 @@ namespace Scripting
         private string m_portName = "COM5";
 
         wrmhl m_arduino = new wrmhl();
+
+        private bool m_microOn = false, m_acceleroOn = false, m_buttonOn = false, m_lightOn = false;
+        private bool m_microPreviouslyOn = false, m_acceleroPreviouslyOn = false, m_buttonPreviouslyOn = false, m_lightPreviouslyOn = false;
+        
+        public bool microOn
+        {
+            get { return m_microOn; }
+        }
+
+        public bool acceleroOn
+        {
+            get { return m_acceleroOn; }
+        }
+
+        public bool buttonOn
+        {
+            get { return m_buttonOn; }
+        }
+
+        public bool lightOn
+        {
+            get { return m_lightOn; }
+        }
+
+        public bool microJustOn
+        {
+            get { return m_microOn && !m_microPreviouslyOn; }
+        }
+
+        public bool acceleroJustOn
+        {
+            get { return m_acceleroOn && !m_acceleroPreviouslyOn; }
+        }
+
+        public bool buttonJustOn
+        {
+            get { return m_buttonOn && !m_buttonPreviouslyOn; }
+        }
+
+        public bool lightJustOn
+        {
+            get { return m_lightOn && !m_lightPreviouslyOn; }
+        }
+
 
         // Use this for initialization
         void Start()
@@ -49,7 +91,14 @@ namespace Scripting
         // Update is called once per frame
         void FixedUpdate()
         {
+            m_lightPreviouslyOn = m_lightOn;
+            m_buttonPreviouslyOn = m_buttonOn;
+            m_acceleroPreviouslyOn = m_acceleroOn;
+            m_microPreviouslyOn = m_microOn;
+
             string data = m_arduino.readQueue();
         }
+
+
     }
 }

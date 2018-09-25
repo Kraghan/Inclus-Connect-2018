@@ -52,6 +52,16 @@ namespace Scripting
         [SerializeField]
         private PlayerData[] m_datas = new PlayerData[4];
 
+        [SerializeField]
+        private PlayerController m_player;
+
+        public PlayerController player
+        {
+            get
+            {
+                return m_player;
+            }
+        }
 
         // Use this for initialization
         void Start()
@@ -65,7 +75,7 @@ namespace Scripting
 
         }
 
-        public PlayerData GetWeakestPlayer(QTEType[] types)
+        /*public PlayerData GetWeakestPlayer(QTEType[] types)
         {
             uint weakestIndex = 0;
 
@@ -83,7 +93,7 @@ namespace Scripting
             }
 
             return m_datas[weakestIndex];
-        }
+        }*/
 
 
     }

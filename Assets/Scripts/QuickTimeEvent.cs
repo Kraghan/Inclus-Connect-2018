@@ -12,23 +12,62 @@ namespace Scripting
         BUTTON
     }
 
+    [System.Serializable]
+    public class QTEDone
+    {
+        [SerializeField]
+        private QTEType m_type;
+
+        public QTEType type
+        {
+            get { return m_type; }
+        }
+
+        public bool p_done = false;
+    }
+
     [RequireComponent(typeof(Collider2D))]
     public class QuickTimeEvent : MonoBehaviour
     {
         [SerializeField]
-        private QTEType[] m_QTENeeded = new QTEType[1];
+        private QTEDone[] m_QTENeeded = new QTEDone[1];
         protected static PlayerDatas s_player = null;
+        protected static ArduInput s_inputs = null;
+
+        private bool m_activated = false;
 
         // Use this for initialization
         void Start()
         {
-            s_player = GameObject.FindObjectOfType<PlayerDatas>();
+            if(!s_player)
+                s_player = GameObject.FindObjectOfType<PlayerDatas>();
+            if (!s_inputs)
+                s_inputs = s_player.player.GetComponent<ArduInput>();
         }
-
-        // Update is called once per frame
-        void Update()
+        
+        void FixedUpdate()
         {
+            if (!m_activated)
+                return;
 
+            UpdateQTERequierement();
+
+            bool allDone = true;
+
+            foreach (QTEDone qte in m_QTENeeded)
+            {
+                if (!qte.p_done)
+                {
+                    allDone = false;
+                    break;
+                }
+            }
+            
+            if(allDone)
+            {
+                m_activated = false;
+                Utility.TimeManager.StopSlowMotion();
+            }
         }
 
         void OnTriggerEnter2D(Collider2D other)
@@ -36,9 +75,43 @@ namespace Scripting
             if (!other.CompareTag("Player"))
                 return;
 
-            PlayerData data = s_player.GetWeakestPlayer(m_QTENeeded);
+            //PlayerData data = s_player.GetWeakestPlayer(m_QTENeeded);
 
-            Utility.TimeManager.StartSlowMotion(data.GetInitialSlowMotionFactor());
+            Utility.TimeManager.StartSlowMotion(0.25f);
+
+            m_activated = true;
+        }
+
+        private void UpdateQTERequierement()
+        {
+            foreach (QTEDone qte in m_QTENeeded)
+            {
+                if (qte.p_done)
+                    continue;
+
+                switch (qte.type)
+                {
+                    case QTEType.ACCELERO:
+                        if (s_inputs.acceleroOn)
+                            qte.p_done = true;
+                        break;
+
+                    case QTEType.BUTTON:
+                        if (s_inputs.buttonOn)
+                            qte.p_done = true;
+                        break;
+
+                    case QTEType.LIGHT:
+                        if (s_inputs.lightOn)
+                            qte.p_done = true;
+                        break;
+
+                    case QTEType.MICRO:
+                        if (s_inputs.microOn)
+                            qte.p_done = true;
+                        break;
+                }
+            }
         }
     }
 
