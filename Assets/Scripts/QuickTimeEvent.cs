@@ -17,28 +17,21 @@ namespace Scripting
     {
         [SerializeField]
         private QTEType[] m_QTENeeded = new QTEType[1];
-        protected static PlayerDatas s_player = null;
+        internal static PlayerDatas s_player = null;
 
         // Use this for initialization
         void Start()
         {
-            s_player = GameObject.FindObjectOfType<PlayerDatas>();
+            s_player = PlayerDatas.instance;
         }
 
-        // Update is called once per frame
-        void Update()
-        {
-
-        }
-
+        /// Callback - Triger enter
         void OnTriggerEnter2D(Collider2D other)
         {
             if (!other.CompareTag("Player"))
                 return;
 
-            PlayerData data = s_player.GetWeakestPlayer(m_QTENeeded);
-
-            Utility.TimeManager.StartSlowMotion(data.GetInitialSlowMotionFactor());
+            Utility.TimeManager.StartSlowMotion();
         }
     }
 

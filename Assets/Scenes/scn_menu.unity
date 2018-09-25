@@ -1076,7 +1076,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a7d94438ac073a4189013f012d4da04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_next_scene: Continuous Integration
+  m_next_scene: scn_launch
   m_option_controller: {fileID: 1896209576}
 --- !u!114 &1615636855
 MonoBehaviour:

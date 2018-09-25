@@ -5,86 +5,75 @@ using UnityEngine;
 namespace Scripting
 {
 
-    [System.Serializable]
-    public class PlayerData
+    /// The data container
+    internal class PlayerData
     {
+        /// Phe player controller
         [SerializeField]
-        private QTEType m_playerController;
+        internal QTEType playerController = QTEType.MICRO;
+        
+        /// Is the player enabled
         [SerializeField]
-        private bool    m_enable              = false;
+        internal bool    enabled                = false;
+
+        /// Is the player assisted
         [SerializeField]
-        private bool    m_isDisabledPlayer    = false;
-        [SerializeField]
-        private float   m_skill               = 0.5f;
+        internal bool    isAssisted            = false;
 
-        public QTEType playerController
+        /// Constructor
+        internal PlayerData(QTEType p_type, bool p_enabled, bool p_assisted)
         {
-            get { return m_playerController;  }
-            set { m_playerController = value;  }
-        }
-
-        public bool enable
-        {
-            get { return m_enable; }
-            set { enable = value; }
-        }
-
-        public bool isDisablePlayer
-        {
-            get { return m_isDisabledPlayer; }
-            set { m_isDisabledPlayer = value; }
-        }
-
-        public float skill
-        {
-            get { return m_skill; }
-            set { m_skill = value; }
-        }
-
-        public float GetInitialSlowMotionFactor()
-        {
-            return 0.05f;
+            playerController = p_type;
+            enabled = p_enabled;
+            isAssisted = p_assisted;
         }
     }
 
-    public class PlayerDatas : MonoBehaviour
+    /// The container class
+    internal class PlayerDatas
     {
-        [SerializeField]
-        private PlayerData[] m_datas = new PlayerData[4];
-
-
-        // Use this for initialization
-        void Start()
+        // Singleton 
+        static PlayerDatas m_instance = null;
+        static internal PlayerDatas instance 
         {
-
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-
-        }
-
-        public PlayerData GetWeakestPlayer(QTEType[] types)
-        {
-            uint weakestIndex = 0;
-
-            for (uint i = 0; i < m_datas.Length; ++i)
+            get 
             {
-                foreach (QTEType type in types)
+                if (m_instance == null)
                 {
-                    if (m_datas[i].playerController == type
-                        && m_datas[i].skill < m_datas[weakestIndex].skill)
-                    {
-                        weakestIndex = i;
-                        break;
-                    }
-                }
-            }
+                    m_instance = new PlayerDatas();
 
-            return m_datas[weakestIndex];
+                    // Initialize datas
+                    for(int i = 0 ; i < 4 ; ++i)
+                        m_instance.datas[i] =  new PlayerData((QTEType)i, true, true);
+                }
+
+                return m_instance;
+            }
         }
 
+        /// The datas for each players
+        internal PlayerData[] datas = new PlayerData[4];
 
+
+       /// Unused (DDA removed) 
+        // public PlayerData GetWeakestPlayer(QTEType[] types)
+        // {
+        //     uint weakestIndex = 0;
+
+        //     for (uint i = 0; i < m_datas.Length; ++i)
+        //     {
+        //         foreach (QTEType type in types)
+        //         {
+        //             if (m_datas[i].playerController == type
+        //                 && m_datas[i].skill < m_datas[weakestIndex].skill)
+        //             {
+        //                 weakestIndex = i;
+        //                 break;
+        //             }
+        //         }
+        //     }
+
+        //     return m_datas[weakestIndex];
+        // }
     }
 }
