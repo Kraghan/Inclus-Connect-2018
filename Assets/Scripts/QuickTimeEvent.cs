@@ -44,6 +44,11 @@ namespace Scripting
         private bool m_activated = false;
         private BoxCollider2D m_collider;
 
+        [Range(0, 1)]
+        private float m_succesPercentageToAdd = 0.05f;
+        [Range(0, 1)]
+        private float m_failurePercentageToRemove = 0.1f;
+
         // Use this for initialization
         void Start()
         {
@@ -68,12 +73,32 @@ namespace Scripting
                 }
             }
             
+            // If QTE is triggered
             if(allDone)
             {
                 m_activated = false;
                 Utility.TimeManager.StopSlowMotion();
 
-                GetPositionInCollider();
+                float position = GetPositionInCollider();
+
+                // Early trigger
+                if(position < 0.5)
+                {
+                    PlayerDatas.instance.GetPlayer(m_QTENeeded[0].type).skill += Mathf.Lerp(m_succesPercentageToAdd, 0, position * 2);
+                }
+                // Late Trigger
+                else
+                {
+                    PlayerDatas.instance.GetPlayer(m_QTENeeded[0].type).skill -= Mathf.Lerp(0, m_failurePercentageToRemove, position * 2 - 1);
+                }
+
+                Mathf.Clamp(PlayerDatas.instance.GetPlayer(m_QTENeeded[0].type).skill, 0.1f, 1);
+            }
+            // If QTE is not triggered
+            else
+            {
+                // Update slowmo
+                Utility.TimeManager.StartSlowMotion(Mathf.Lerp(1, PlayerDatas.instance.GetPlayer(m_QTENeeded[0].type).GetSlowMotionMin(), GetPositionInCollider()));
             }
         }
 
@@ -85,14 +110,9 @@ namespace Scripting
 
             //PlayerData data = s_player.GetWeakestPlayer(m_QTENeeded);
 
-            Utility.TimeManager.StartSlowMotion();
+            Utility.TimeManager.StartSlowMotion(1);
 
             m_activated = true;
-        }
-
-        private void OnTriggerStay2D(Collider2D collision)
-        {
-            GetPositionInCollider();
         }
 
         /// Callback - Triger enter
@@ -150,10 +170,6 @@ namespace Scripting
 
             float qteLeftPosition   = transform.position.x - qteSize / 2;
             float qteRightPosition  = transform.position.x + qteSize / 2;
-
-            //print(qteLeftPosition + " " + qteRightPosition + " " + playerXPos);
-
-            print((qteLeftPosition - playerXPos) / (qteLeftPosition - qteRightPosition));
 
             return Mathf.Clamp01(qteLeftPosition - playerXPos) / (qteLeftPosition - qteRightPosition);
         }
