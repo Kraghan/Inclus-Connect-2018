@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Scripting.Actors;
 using UnityEngine;
 
-namespace Scripting
+namespace Scripting.GameManagers
 {
 
     /// The data container
@@ -31,35 +31,25 @@ namespace Scripting
     }
 
     /// The container class
-    internal class PlayerDatas
+    internal class PlayerManager : MonoBehaviour
     {
-        // Singleton 
-        static PlayerDatas m_instance = null;
-        static internal PlayerDatas instance 
-        {
-            get 
-            {
-                if (m_instance == null)
-                {
-                    m_instance = new PlayerDatas();
-
-                    // Initialize datas
-                    for(int i = 0 ; i < 4 ; ++i)
-                        m_instance.datas[i] =  new PlayerData((QTEType)i, true, true);
-                }
-
-                return m_instance;
-            }
-        }
-
-        
         /// Player controller
         [SerializeField]
         private PlayerController m_player;
-        internal PlayerController player {get {return m_player;} set {m_player = value;}}
+        internal PlayerController player {get {return m_player;} set {m_player = value; inputs = m_player.GetComponent<ArduInput>();}}
+
+        internal ArduInput inputs {get; private set;}
 
         /// The datas for each players
         internal PlayerData[] datas = new PlayerData[4];
+
+        /// Awake
+        void Awake()
+        {
+            // Initialize datas
+            for(int i = 0 ; i < 4 ; ++i)
+                datas[i] =  new PlayerData((QTEType)i, true, true);
+        }
 
 
        /// Unused (DDA removed) 

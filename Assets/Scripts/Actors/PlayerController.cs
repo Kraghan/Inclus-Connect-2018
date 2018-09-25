@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Scripting.GameManagers;
 using UnityEngine;
 
 namespace Scripting.Actors
@@ -49,7 +50,7 @@ namespace Scripting.Actors
             m_inputs    = GetComponent<ArduInput>();
 
             // Register as current player
-            PlayerDatas.instance.player = this;
+            Managers.instance.playerManager.player = this;
 
             // FMS
             m_actions = new System.Action[]{
@@ -134,6 +135,8 @@ namespace Scripting.Actors
                 
                 Debug.DrawLine(position, position + new Vector3(velX, velY), Color.red, 1f);
                 Debug.LogFormat("Jumping from {0} to {1} with velocity {2}", position, m_jumpDestination, new Vector3(velX, velY));
+
+                Managers.instance.fxManager.SpawnFX(EFXType.Dust, transform.position);
             }
 
             // Exit condition - Jump done

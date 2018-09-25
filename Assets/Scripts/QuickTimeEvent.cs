@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using Scripting.Actors;
+using Scripting.GameManagers;
 using UnityEngine;
 
 namespace Scripting
@@ -40,7 +41,7 @@ namespace Scripting
 
         [SerializeField]
         private QTEDone[] m_QTENeeded = new QTEDone[1];
-        internal static ArduInput s_inputs { get {return PlayerDatas.instance.player.GetComponent<ArduInput>();}}
+        internal static ArduInput s_inputs { get {return Managers.instance.playerManager.inputs;}}
 
         private bool m_activated = false;
         
@@ -79,8 +80,8 @@ namespace Scripting
 
             Utility.TimeManager.StartSlowMotion();
 
-            if (PlayerDatas.instance.player.inputs.buttonJustOn == true)
-                PlayerDatas.instance.player.ForceState((int)PlayerController.EPlayerStates.Sprinting);
+            if (Managers.instance.playerManager.inputs.buttonJustOn == true)
+                Managers.instance.playerManager.player.ForceState((int)PlayerController.EPlayerStates.Sprinting);
 
             m_activated = true;
         }
@@ -95,7 +96,7 @@ namespace Scripting
 
             Utility.TimeManager.StopSlowMotion();
 
-            PlayerDatas.instance.player.JumpTo(m_destination.transform.position, m_duration);
+            Managers.instance.playerManager.player.JumpTo(m_destination.transform.position, m_duration);
 
             m_activated = false;
         }
