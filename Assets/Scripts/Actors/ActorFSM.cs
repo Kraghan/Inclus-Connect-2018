@@ -82,9 +82,12 @@ namespace Scripting.Actors
         /// Force a state
         internal void ForceState(int p_state)
         {
-            m_nextState = p_state;
-            FinalizeFSM();
-            FixedUpdate();
+            if (m_nextState != m_currentState)
+            {
+                m_nextState = p_state;
+                FinalizeFSM();
+                FixedUpdate();
+            }
         }
 
         /// Called before each update

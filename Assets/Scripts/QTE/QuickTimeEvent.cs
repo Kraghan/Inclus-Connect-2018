@@ -199,7 +199,11 @@ namespace Scripting.QTE
         }
 
         /// Player entered area
-        protected abstract void OnPlayerEntered();
+        protected virtual void OnPlayerEntered()
+        {
+            Managers.instance.playerManager.player.enableInputs = false;
+            // Managers.instance.playerManager.player.QTESucceeded = false;
+        }
 
         /// Player exited area
         protected abstract void OnPlayerExited();

@@ -126,7 +126,7 @@ namespace Scripting
                 m_acceleroOn = Input.GetKeyDown(KeyCode.Space);
                 m_lightOn = Input.GetKey(KeyCode.L);
                 m_microOn = Input.GetKeyDown(KeyCode.M);
-                m_buttonOn = Input.GetKeyDown(KeyCode.B);
+                m_buttonOn = Input.GetKey(KeyCode.B);
                 ///
             }
         }

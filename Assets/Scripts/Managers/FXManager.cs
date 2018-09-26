@@ -1,4 +1,5 @@
 using System;
+using Scripting.FX;
 using UnityEngine;
 
 namespace Scripting.GameManagers
@@ -38,16 +39,16 @@ namespace Scripting.GameManagers
         /// Return next available fx, or null if any
         internal GameObject GetNext()
         {
-            int index = poolIndex;
-
+            int index = poolIndex ;
             do
             {
+                index = ++index % pool.Length;
                 if (pool[index].activeSelf == false)
                 {
                     poolIndex = index;
                     return pool[index];
                 }
-            }while(++index % pool.Length != poolIndex);
+            }while(index != poolIndex);
 
             return null;
         }
@@ -56,6 +57,7 @@ namespace Scripting.GameManagers
     internal enum EFXType
     {
         Dust,
+        LandingSuccess,
 
         Count
     }
@@ -76,7 +78,7 @@ namespace Scripting.GameManagers
         }
 
         /// Spawns an FX
-        internal GameObject SpawnFX(EFXType p_type, Vector3 p_position)
+        internal GameObject SpawnFX(EFXType p_type, Vector3 p_position, GameObject p_targetToFollow = null)
         {
             int poolIndex = (int)p_type;
             
@@ -93,6 +95,11 @@ namespace Scripting.GameManagers
             {
                 fx.transform.position = p_position;
                 fx.gameObject.SetActive(true);
+
+                Following f = fx.GetComponent<Following>();
+                if (f != null)
+                    f.objectToFollow = p_targetToFollow;
+
                 return fx;
             }
 

@@ -11,11 +11,6 @@ namespace Scripting.QTE
         [SerializeField]
         GameObject m_target = null;
 
-        /// Callback - Player entered
-        protected override void OnPlayerEntered()
-        {
-        }
-
         /// Callback - Player exited
         protected override void OnPlayerExited()
         {
