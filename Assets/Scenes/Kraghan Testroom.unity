@@ -118595,6 +118595,29 @@ Prefab:
       propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[0].outWeight
       value: 0.10227272
       objectReference: {fileID: 0}
+    - target: {fileID: 4568901979952132, guid: 91174f1635345144394171fb160ea783, type: 2}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4568901979952132, guid: 91174f1635345144394171fb160ea783, type: 2}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 137557937772577978, guid: 91174f1635345144394171fb160ea783,
+        type: 2}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 59790a947fed78043bd0bad0725607b7, type: 2}
+    - target: {fileID: 95434882913309844, guid: 91174f1635345144394171fb160ea783,
+        type: 2}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: e0d7a69b2b514844493fcb139c4b3594, type: 2}
+    - target: {fileID: 96927039845018154, guid: 91174f1635345144394171fb160ea783,
+        type: 2}
+      propertyPath: m_Emitting
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 91174f1635345144394171fb160ea783, type: 2}
   m_IsPrefabAsset: 0

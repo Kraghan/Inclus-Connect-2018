@@ -52,8 +52,14 @@ namespace Scripting.QTE
         [Range(0, 1)]
         private float m_failurePercentageToRemove = 0.1f;
 
+        /// Color of the QTE
+        public Color color { get; protected set; }
+
+        /// Sprite of the QTE
+        public Sprite sprite { get; protected set; }
+
         /// Start
-        void Start()
+        protected virtual void Start()
         {
             // Get collider
             m_collider = GetComponent<BoxCollider2D>();
@@ -92,7 +98,6 @@ namespace Scripting.QTE
 
                 /// Add bonus|malus relative to current position of player in box
                 float position = GetPositionInCollider();
-
                 // Early trigger
                 if(position < 0.5)
                 {
@@ -103,8 +108,10 @@ namespace Scripting.QTE
                 {
                     Managers.instance.playerManager.GetPlayer(m_QTENeeded[0].type).skill -= Mathf.Lerp(0, m_failurePercentageToRemove, position * 2 - 1);
                 }
-
                 Mathf.Clamp(Managers.instance.playerManager.GetPlayer(m_QTENeeded[0].type).skill, 0.1f, 1);
+
+                /// Activate and setup trail
+                StartCoroutine(TrailControl(1 - position));
 
                 OnQTESucceeded();
             }
@@ -201,6 +208,25 @@ namespace Scripting.QTE
         protected virtual void OnQTESucceeded()
         {
             Managers.instance.playerManager.player.ForceState((int)EPlayerStates.Sprinting);
+        }
+
+        IEnumerator TrailControl(float time)
+        {
+            TrailRenderer trail = Managers.instance.playerManager.player.trail;
+            
+            /// Setup
+            trail.material.color = color;
+            trail.emitting = true;
+            trail.time = time;
+
+            // Make disapear trail
+            for (float timeElapsed = 0; timeElapsed < time; timeElapsed += Time.deltaTime)
+            {
+                // Not sure if useful 
+                trail.time -= Time.deltaTime;
+                yield return new WaitForEndOfFrame();
+            }
+            trail.emitting = false;            
         }
     }
 

@@ -15,6 +15,12 @@ namespace Scripting.QTE
         [SerializeField]
         float m_duration = 1f;
 
+        protected override void Start()
+        {
+            base.Start();
+            color = Color.green;
+        }
+
         /// Callback - Player entered
         protected override void OnPlayerEntered()
         {
@@ -25,5 +31,7 @@ namespace Scripting.QTE
         {
             Managers.instance.playerManager.player.JumpTo(m_destination.transform.position, m_duration);
         }
+
+
     }
 }

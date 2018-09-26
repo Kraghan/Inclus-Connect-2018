@@ -47,6 +47,9 @@ namespace Scripting.Actors
         [SerializeField]
         float m_sprintCoefficient = 5f;
 
+        /// Trail on good actions
+        public TrailRenderer trail { get; private set; }
+
         /// Start
         void Start()
         {
@@ -66,6 +69,9 @@ namespace Scripting.Actors
 /* SPRINTING*/  OnSprintingState,
 /* JUMPING  */  OnJumpingState
             };
+
+            // Get trail
+            trail = GetComponent<TrailRenderer>();
         }
 
         /// Physics update
