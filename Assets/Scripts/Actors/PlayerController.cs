@@ -9,8 +9,16 @@ namespace Scripting.Actors
     {
         Idle,
         Running,
-        Sprinting,
         Jumping,
+        Attacking,
+        Defending,
+        Ghosting,
+    }
+
+    internal enum EPlayerForm
+    {
+        Default,
+        Ghost
     }
     
     internal class PlayerController : ActorFSM
@@ -34,6 +42,11 @@ namespace Scripting.Actors
         private ArduInput   m_inputs;
         internal ArduInput  inputs {get {return m_inputs;}}
 
+        // Renderer
+        [SerializeField]
+        Renderer m_render = null;
+
+
 
         /// Jumping state datas
         // Jump destination
@@ -46,9 +59,24 @@ namespace Scripting.Actors
         // Sprint coefficient
         [SerializeField]
         float m_sprintCoefficient = 5f;
-
+        
         /// Trail on good actions
         public TrailRenderer trail { get; private set; }
+
+        internal bool isRunning = false;
+
+        /// Attacking state datas
+        GameObject m_attackTarget = null;
+
+        // The attack animation duration
+        float m_attackDuration = 0.3f;
+
+        /// Defending state datas
+        GameObject m_defendTarget = null;
+
+        /// Ghost state data
+        EPlayerForm m_form = EPlayerForm.Default;
+        internal EPlayerForm form {get {return m_form;} set {m_form = value;}}
 
         /// Start
         void Start()
@@ -66,8 +94,10 @@ namespace Scripting.Actors
             m_actions = new System.Action[]{
 /* IDLE     */  OnIdleState,      
 /* RUNNING  */  OnRunningState,
-/* SPRINTING*/  OnSprintingState,
-/* JUMPING  */  OnJumpingState
+/* JUMPING  */  OnJumpingState,
+/* ATTACKING*/  OnAttackingState,
+/* DEFENDING*/  OnDefendingState,
+/* GHOSTING */  OnGhostingState,
             };
 
             // Get trail
@@ -77,30 +107,7 @@ namespace Scripting.Actors
         /// Physics update
         void OnRunningState()
         {
-            // ArduInput example : 
-                // Check if button is active
-            if (m_inputs.buttonOn)
-            {
-            }
-
-                // Check if button has been activated on this frame
-            if(m_inputs.buttonJustOn)
-            {
-                JumpTo(transform.position + Vector3.right * m_simpleJumpDistance, m_simpleJumpDuration);
-            }
-
-            m_body.velocity = new Vector2(m_speed, m_body.velocity.y);
-        }
-
-        /// Sprinting state
-        void OnSprintingState()
-        {
-            if (m_firstFrameInState == true)
-            {
-                m_speed *= m_sprintCoefficient;
-            }
-
-            m_body.velocity = new Vector2(m_speed, m_body.velocity.y);
+            m_body.velocity = new Vector2(m_speed * (isRunning ? m_sprintCoefficient : 1f), m_body.velocity.y);
         }
         
         /// Idle State
@@ -126,6 +133,35 @@ namespace Scripting.Actors
             ForceState((int)EPlayerStates.Jumping);
         }
 
+        /// Orders to attack an object
+        internal void Attack(GameObject p_target)
+        {
+            m_attackTarget = p_target;
+
+            ForceState((int)EPlayerStates.Attacking);
+        }
+
+        /// Orders to defend
+        internal void Defend(GameObject p_target)
+        {
+            m_defendTarget = p_target;
+
+            ForceState((int)EPlayerStates.Defending);
+        }
+
+        /// Orders to change form
+        internal void EnterForm(EPlayerForm p_form)
+        {
+            m_form = p_form;
+
+            ForceState((int)EPlayerStates.Ghosting);
+        }
+
+        /// Update right form
+        internal void UpdateForm()
+        {
+            m_form = m_inputs.lightOn == true ? EPlayerForm.Default : EPlayerForm.Ghost;
+        }
         void OnJumpingState()
         {
             if (m_firstFrameInState == true)
@@ -159,9 +195,56 @@ namespace Scripting.Actors
             }
         }
 
+        /// Attacking state
+        void OnAttackingState()
+        {
+            if (m_stateDuration > m_attackDuration)
+            {
+                m_nextState = (int)EPlayerStates.Running;
+                isRunning = false;
+                m_attackTarget.SetActive(false);
+            }
+        }
+
+        /// Defending state
+        void OnDefendingState()
+        {
+            if (m_defendTarget.activeSelf == false)
+            {
+                isRunning = false;
+                m_nextState = (int)EPlayerStates.Running;
+            }
+        }
+
+        /// Ghost state
+        void OnGhostingState()
+        {
+            if (m_stateDuration > .3f)
+            {
+                isRunning = false;
+                UpdateForm();
+                m_nextState = (int)EPlayerStates.Running;
+            }
+        }
+
         /// Called before each update
         protected override void OnPreStateAction()
         {
+            // Allow controls only if not sprinting
+            if(isRunning == false)
+            {
+                // Check if button has been activated on this frame
+                if(m_inputs.buttonJustOn == true && m_currentState != (int)EPlayerStates.Jumping)
+                {
+                    JumpTo(transform.position + Vector3.right * m_simpleJumpDistance, m_simpleJumpDuration);
+                }
+
+                if (m_currentState != (int)EPlayerStates.Ghosting)
+                    UpdateForm();
+            }
+            
+            m_render.material.SetFloat("_isGhost", m_form == EPlayerForm.Default ? 0 : 1);
+
         }
 
         /// Called after each update
@@ -172,8 +255,7 @@ namespace Scripting.Actors
         /// Callback - State changed
         protected override void OnStateChanged()
         {
-            if (m_previousState == (int)EPlayerStates.Sprinting)
-                m_speed /= m_sprintCoefficient;
+            Debug.LogFormat("Player switching to state {0}.", (EPlayerStates) m_currentState);
         }
     }
 }

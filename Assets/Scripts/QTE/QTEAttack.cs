@@ -5,21 +5,11 @@ using UnityEngine;
 
 namespace Scripting.QTE
 {
-    internal class QTEJump : QuickTimeEvent
+    internal class QTEAttack : QuickTimeEvent
     {
         /// Jump destination
         [SerializeField]
-        GameObject m_destination = null;
-
-        /// Jump duration
-        [SerializeField]
-        float m_duration = 1f;
-
-        protected override void Start()
-        {
-            base.Start();
-            color = Color.green;
-        }
+        GameObject m_target = null;
 
         /// Callback - Player entered
         protected override void OnPlayerEntered()
@@ -29,9 +19,9 @@ namespace Scripting.QTE
         /// Callback - Player exited
         protected override void OnPlayerExited()
         {
-            Managers.instance.playerManager.player.isRunning = false;
-            Managers.instance.playerManager.player.JumpTo(m_destination.transform.position, m_duration);
+            Managers.instance.playerManager.player.Attack(m_target);
         }
+
         /// Player succeeded inputs
         protected override void OnQTESucceeded()
         {
