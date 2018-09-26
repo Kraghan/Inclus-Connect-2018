@@ -13,6 +13,7 @@ namespace Scripting.Utility
         {
             Time.timeScale = slowMotionFactor;
             Time.fixedDeltaTime = Time.timeScale * .02f;
+            Debug.LogFormat("Slomo factor : {0}", slowMotionFactor);
         }
 
         // Stop slow motion effect
@@ -20,6 +21,7 @@ namespace Scripting.Utility
         {
             Time.timeScale = 1f;
             Time.fixedDeltaTime = Time.timeScale * .02f;
+            Debug.Log("Slomo stopped");
         }
 
     }

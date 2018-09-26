@@ -46,8 +46,11 @@ namespace Scripting
         private bool m_activated = false;
         private BoxCollider2D m_collider;
 
+        [SerializeField]
         [Range(0, 1)]
         private float m_succesPercentageToAdd = 0.05f;
+
+        [SerializeField]
         [Range(0, 1)]
         private float m_failurePercentageToRemove = 0.1f;
 
@@ -99,6 +102,7 @@ namespace Scripting
             // If QTE is not triggered
             else
             {
+                // Debug.LogFormat("{0} - {1}", Managers.instance.playerManager.GetPlayer(m_QTENeeded[0].type).GetSlowMotionMin(), GetPositionInCollider() );
                 // Update slowmo
                 Utility.TimeManager.StartSlowMotion(Mathf.Lerp(1, Managers.instance.playerManager.GetPlayer(m_QTENeeded[0].type).GetSlowMotionMin(), GetPositionInCollider()));
             }
@@ -173,10 +177,12 @@ namespace Scripting
 
             float qteSize = m_collider.size.x * transform.localScale.x;
 
-            float qteLeftPosition   = transform.position.x - qteSize / 2;
-            float qteRightPosition  = transform.position.x + qteSize / 2;
+            float qteLeftPosition   = m_collider.bounds.min.x;
+            float qteRightPosition  = m_collider.bounds.max.x;
 
-            return Mathf.Clamp01(qteLeftPosition - playerXPos) / (qteLeftPosition - qteRightPosition);
+            float progress = (playerXPos - qteLeftPosition) / qteSize;
+            Debug.Log(progress);
+            return Mathf.Clamp01(progress);
         }
     }
 
