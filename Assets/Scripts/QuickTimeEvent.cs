@@ -28,7 +28,7 @@ namespace Scripting
         public bool p_done = false;
     }
 
-    [RequireComponent(typeof(Collider2D))]
+    [RequireComponent(typeof(BoxCollider2D))]
     public class QuickTimeEvent : MonoBehaviour
     {
         /// TEMP
@@ -44,6 +44,18 @@ namespace Scripting
         internal static ArduInput s_inputs { get {return Managers.instance.playerManager.inputs;}}
 
         private bool m_activated = false;
+        private BoxCollider2D m_collider;
+
+        [Range(0, 1)]
+        private float m_succesPercentageToAdd = 0.05f;
+        [Range(0, 1)]
+        private float m_failurePercentageToRemove = 0.1f;
+
+        // Use this for initialization
+        void Start()
+        {
+            m_collider = GetComponent<BoxCollider2D>();
+        }
         
         void FixedUpdate()
         {
@@ -63,10 +75,32 @@ namespace Scripting
                 }
             }
             
+            // If QTE is triggered
             if(allDone)
             {
                 m_activated = false;
                 Utility.TimeManager.StopSlowMotion();
+
+                float position = GetPositionInCollider();
+
+                // Early trigger
+                if(position < 0.5)
+                {
+                    Managers.instance.playerManager.GetPlayer(m_QTENeeded[0].type).skill += Mathf.Lerp(m_succesPercentageToAdd, 0, position * 2);
+                }
+                // Late Trigger
+                else
+                {
+                    Managers.instance.playerManager.GetPlayer(m_QTENeeded[0].type).skill -= Mathf.Lerp(0, m_failurePercentageToRemove, position * 2 - 1);
+                }
+
+                Mathf.Clamp(Managers.instance.playerManager.GetPlayer(m_QTENeeded[0].type).skill, 0.1f, 1);
+            }
+            // If QTE is not triggered
+            else
+            {
+                // Update slowmo
+                Utility.TimeManager.StartSlowMotion(Mathf.Lerp(1, Managers.instance.playerManager.GetPlayer(m_QTENeeded[0].type).GetSlowMotionMin(), GetPositionInCollider()));
             }
         }
 
@@ -78,7 +112,7 @@ namespace Scripting
 
             //PlayerData data = s_player.GetWeakestPlayer(m_QTENeeded);
 
-            Utility.TimeManager.StartSlowMotion();
+            Utility.TimeManager.StartSlowMotion(1);
 
             if (Managers.instance.playerManager.inputs.buttonJustOn == true)
                 Managers.instance.playerManager.player.ForceState((int)PlayerController.EPlayerStates.Sprinting);
@@ -92,7 +126,7 @@ namespace Scripting
             if (!other.CompareTag("Player"))
                 return;
 
-            //PlayerData data = PlayerDatas.instance.GetWeakestPlayer(m_QTENeeded);
+            //PlayerData data = Managers.instance.playerManager.GetWeakestPlayer(m_QTENeeded);
 
             Utility.TimeManager.StopSlowMotion();
 
@@ -131,6 +165,18 @@ namespace Scripting
                         break;
                 }
             }
+        }
+
+        private float GetPositionInCollider()
+        {
+            float playerXPos = Managers.instance.playerManager.player.transform.position.x;
+
+            float qteSize = m_collider.size.x * transform.localScale.x;
+
+            float qteLeftPosition   = transform.position.x - qteSize / 2;
+            float qteRightPosition  = transform.position.x + qteSize / 2;
+
+            return Mathf.Clamp01(qteLeftPosition - playerXPos) / (qteLeftPosition - qteRightPosition);
         }
     }
 

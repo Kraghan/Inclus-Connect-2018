@@ -11,7 +11,7 @@ namespace Scripting.GameManagers
     {
         /// Phe player controller
         [SerializeField]
-        internal QTEType playerController = QTEType.MICRO;
+        internal QTEType playerController       = QTEType.MICRO;
         
         /// Is the player enabled
         [SerializeField]
@@ -19,7 +19,12 @@ namespace Scripting.GameManagers
 
         /// Is the player assisted
         [SerializeField]
-        internal bool    isAssisted            = false;
+        internal bool    isAssisted             = false;
+
+        /// Player skill 
+        [SerializeField]
+        [Range(0,1)]
+        internal float   skill                  = 0.5f;
 
         /// Constructor
         internal PlayerData(QTEType p_type, bool p_enabled, bool p_assisted)
@@ -27,6 +32,16 @@ namespace Scripting.GameManagers
             playerController = p_type;
             enabled = p_enabled;
             isAssisted = p_assisted;
+
+            if (isAssisted)
+                skill = 0.75f;
+            else
+                skill = 0.25f;
+        }
+
+        internal float GetSlowMotionMin()
+        {
+            return Mathf.Lerp(0.1f, 1, skill);
         }
     }
 
@@ -52,25 +67,18 @@ namespace Scripting.GameManagers
         }
 
 
-       /// Unused (DDA removed) 
-        // public PlayerData GetWeakestPlayer(QTEType[] types)
-        // {
-        //     uint weakestIndex = 0;
+       /// Get datas from the controller
+        public PlayerData GetPlayer(QTEType type)
+        {
 
-        //     for (uint i = 0; i < m_datas.Length; ++i)
-        //     {
-        //         foreach (QTEType type in types)
-        //         {
-        //             if (m_datas[i].playerController == type
-        //                 && m_datas[i].skill < m_datas[weakestIndex].skill)
-        //             {
-        //                 weakestIndex = i;
-        //                 break;
-        //             }
-        //         }
-        //     }
-
-        //     return m_datas[weakestIndex];
-        // }
+            for (uint i = 0; i < datas.Length; ++i)
+            {
+                if (datas[i].playerController == type)
+                {
+                    return datas[i];
+                }
+            }
+            return null;
+        }
     }
 }
