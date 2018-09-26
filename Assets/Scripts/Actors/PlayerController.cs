@@ -5,20 +5,27 @@ using UnityEngine;
 
 namespace Scripting.Actors
 {
+    internal enum EPlayerStates
+    {
+        Idle,
+        Running,
+        Sprinting,
+        Jumping,
+    }
+    
     internal class PlayerController : ActorFSM
     {
-        internal enum EPlayerStates
-        {
-            Idle,
-            Running,
-            Sprinting,
-            Jumping,
-        }
-
         /// The player speed 
         [SerializeField]
         private float       m_speed = 5f;
 
+        // Simple Jump
+        [SerializeField]
+        float m_simpleJumpDistance = 5f;
+
+
+        [SerializeField]
+        float m_simpleJumpDuration = 0.8f;
 
         /// The rigid Body
         private Rigidbody2D m_body;
@@ -68,13 +75,12 @@ namespace Scripting.Actors
                 // Check if button is active
             if (m_inputs.buttonOn)
             {
-
             }
 
                 // Check if button has been activated on this frame
             if(m_inputs.buttonJustOn)
             {
-
+                JumpTo(transform.position + Vector3.right * m_simpleJumpDistance, m_simpleJumpDuration);
             }
 
             m_body.velocity = new Vector2(m_speed, m_body.velocity.y);
@@ -143,7 +149,7 @@ namespace Scripting.Actors
             if (m_stateDuration >= m_jumpDuration)
             {
                 m_nextState = (int)EPlayerStates.Running;
-                Debug.Break();
+                // Debug.Break();
             }
         }
 

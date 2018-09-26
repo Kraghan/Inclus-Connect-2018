@@ -84,6 +84,7 @@ namespace Scripting.Actors
         {
             m_nextState = p_state;
             FinalizeFSM();
+            FixedUpdate();
         }
 
         /// Called before each update

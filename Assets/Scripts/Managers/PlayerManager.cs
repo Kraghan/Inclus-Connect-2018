@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using Scripting.Actors;
+using Scripting.QTE;
 using UnityEngine;
 
 namespace Scripting.GameManagers
@@ -33,7 +34,7 @@ namespace Scripting.GameManagers
             enabled = p_enabled;
             isAssisted = p_assisted;
 
-            if (isAssisted)
+            if (isAssisted == false)
                 skill = 0.75f;
             else
                 skill = 0.25f;
