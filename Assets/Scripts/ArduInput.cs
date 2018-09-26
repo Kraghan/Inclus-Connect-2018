@@ -83,16 +83,52 @@ namespace Scripting
             m_acceleroPreviouslyOn = m_acceleroOn;
             m_microPreviouslyOn = m_microOn;
 
-            // string data = m_arduino.readQueue();
 
-            /// parsing
+            if (false)
+            {
+                /// parsing
+                string data = m_arduino.readQueue();
+                string[] dataSplitted = data.Split(';');
 
-            // Cheat - Pc control
-            m_acceleroOn    = Input.GetKeyDown(KeyCode.Space);
-            m_lightOn       = Input.GetKeyDown(KeyCode.L);
-            m_microOn       = Input.GetKeyDown(KeyCode.M);
-            m_buttonOn      = Input.GetKeyDown(KeyCode.B);
-            ///
+                if (dataSplitted.Length != 4)
+                    Debug.LogError("Parse error : wrong string");
+                else
+                {
+
+                    if (!bool.TryParse(dataSplitted[0], out m_lightOn))
+                    {
+                        m_lightOn = false;
+                        Debug.LogError("Parse error : light");
+                    }
+
+                    if (!bool.TryParse(dataSplitted[1], out m_buttonOn))
+                    {
+                        m_buttonOn = false;
+                        Debug.LogError("Parse error : button");
+                    }
+
+                    if (!bool.TryParse(dataSplitted[2], out m_microOn))
+                    {
+                        m_microOn = false;
+                        Debug.LogError("Parse error : micro");
+                    }
+
+                    if (!bool.TryParse(dataSplitted[3], out m_acceleroOn))
+                    {
+                        m_acceleroOn = false;
+                        Debug.LogError("Parse error : accelero / piezo");
+                    }
+                }
+            }
+            else
+            {
+                // Cheat - Pc control
+                m_acceleroOn = Input.GetKeyDown(KeyCode.Space);
+                m_lightOn = Input.GetKeyDown(KeyCode.L);
+                m_microOn = Input.GetKeyDown(KeyCode.M);
+                m_buttonOn = Input.GetKeyDown(KeyCode.B);
+                ///
+            }
         }
     }
 }
