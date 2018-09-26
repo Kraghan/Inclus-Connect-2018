@@ -44,11 +44,11 @@ TagManager:
   - name: Background
     uniqueID: 2455633923
     locked: 0
-  - name: Floor
-    uniqueID: 2124874051
-    locked: 0
   - name: Decorations
     uniqueID: 1993344595
+    locked: 0
+  - name: Floor
+    uniqueID: 2124874051
     locked: 0
   - name: Entities
     uniqueID: 1108130953
