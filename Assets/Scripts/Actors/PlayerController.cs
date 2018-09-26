@@ -29,6 +29,28 @@ namespace Scripting.Actors
         [SerializeField]
         private float       m_speed = 5f;
 
+        /// Bonus speed
+        float m_bonusSpeed = 0f;
+        internal float bonusSpeed {get {return m_bonusSpeed;} 
+            set 
+            {
+                m_bonusSpeed = Mathf.Lerp(m_bonusSpeed, 0, m_bonusSpeedDuration / m_bonusSpeedDiminutionDuration);
+                m_bonusSpeed = value; 
+                m_bonusSpeedDuration = 0f;
+            }
+        } 
+
+        [SerializeField]
+        float m_bonusSpeedDiminutionDuration = 2f;
+
+        // Counter
+        float m_bonusSpeedDuration = 0f;
+
+        [SerializeField]
+        float m_QTEBonusSpeed = 10f;
+
+        ///
+
         // Simple Jump
         [SerializeField]
         float m_simpleJumpDistance = 5f;
@@ -140,7 +162,8 @@ namespace Scripting.Actors
         /// Physics update
         void OnRunningState()
         {
-            m_body.velocity = new Vector2(m_speed * (isRunning ? m_sprintCoefficient : 1f), m_body.velocity.y);
+            float bonusSpeed = Mathf.Lerp(m_bonusSpeed, 0, m_bonusSpeedDuration / m_bonusSpeedDiminutionDuration);
+            m_body.velocity = new Vector2(m_speed * (isRunning ? m_sprintCoefficient : 1f) + bonusSpeed, m_body.velocity.y);
         }
         
         /// Idle State
@@ -228,7 +251,10 @@ namespace Scripting.Actors
             {
                 // Spawn FX
                 if (QTESucceeded == true)
+                {
                     Managers.instance.fxManager.SpawnFX(EFXType.LandingSuccess, transform.position, gameObject );
+                    bonusSpeed = m_QTEBonusSpeed;
+                }
                 else
                     Managers.instance.fxManager.SpawnFX(EFXType.Dust, transform.position);
 
@@ -241,11 +267,26 @@ namespace Scripting.Actors
         /// Attacking state
         void OnAttackingState()
         {
+            // FX
+            if (m_firstFrameInState == true)
+                if (QTESucceeded == true)
+                    Managers.instance.fxManager.SpawnFX(EFXType.AttackSuccess, m_attackTarget.transform.position);
+                else
+                    Managers.instance.fxManager.SpawnFX(EFXType.AttackConsequence, m_attackTarget.transform.position);
+
             if (m_stateDuration > m_attackDuration)
             {
+                // Change state
                 m_nextState = (int)EPlayerStates.Running;
+
+                // Disable running
                 isRunning = false;
+
+                // Disable target
                 m_attackTarget.SetActive(false);
+
+                // Bonus speed
+                bonusSpeed += m_QTEBonusSpeed;
             }
         }
 
@@ -294,6 +335,8 @@ namespace Scripting.Actors
         /// Called after each update
         protected override void OnPostStateAction()
         {
+            // Lose the bonus speed
+            m_bonusSpeedDuration += Time.deltaTime;
         }
 
         /// Callback - State changed

@@ -2484,6 +2484,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_speed: 5
+  m_bonusSpeedDiminutionDuration: 10
+  m_QTEBonusSpeed: 10
   m_simpleJumpDistance: 5
   m_simpleJumpDuration: 0.8
   m_renderer: {fileID: 137557937772577978}

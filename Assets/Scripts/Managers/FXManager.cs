@@ -58,6 +58,8 @@ namespace Scripting.GameManagers
     {
         Dust,
         LandingSuccess,
+        AttackConsequence,
+        AttackSuccess,
 
         Count
     }
