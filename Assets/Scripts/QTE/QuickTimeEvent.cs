@@ -4,7 +4,7 @@ using Scripting.Actors;
 using Scripting.GameManagers;
 using UnityEngine;
 
-namespace Scripting
+namespace Scripting.QTE
 {
     public enum QTEType
     {
@@ -29,44 +29,45 @@ namespace Scripting
     }
 
     [RequireComponent(typeof(BoxCollider2D))]
-    public class QuickTimeEvent : MonoBehaviour
+    public abstract class QuickTimeEvent : MonoBehaviour
     {
-        /// TEMP
-        [SerializeField]
-        GameObject m_destination = null;
-
-        [SerializeField]
-        float m_duration = 1f;
-        ///
-
+        /// All the QTE required
         [SerializeField]
         private QTEDone[] m_QTENeeded = new QTEDone[1];
+
+        /// Input shortcut
         internal static ArduInput s_inputs { get {return Managers.instance.playerManager.inputs;}}
 
-        private bool m_activated = false;
+
+        /// The box collider
         private BoxCollider2D m_collider;
 
+        /// Success bonus added to next same QTE
         [SerializeField]
         [Range(0, 1)]
         private float m_succesPercentageToAdd = 0.05f;
 
+        /// Malus bonus added to next same QTE
         [SerializeField]
         [Range(0, 1)]
         private float m_failurePercentageToRemove = 0.1f;
 
-        // Use this for initialization
+        /// Start
         void Start()
         {
+            // Get collider
             m_collider = GetComponent<BoxCollider2D>();
+
+            enabled = false;
         }
         
+        /// Update
         void FixedUpdate()
         {
-            if (!m_activated)
-                return;
-
+            // Update inputs
             UpdateQTERequierement();
 
+            /// Check if succeedded
             bool allDone = true;
 
             foreach (QTEDone qte in m_QTENeeded)
@@ -77,13 +78,19 @@ namespace Scripting
                     break;
                 }
             }
+            ///
             
             // If QTE is triggered
-            if(allDone)
+            if(allDone == true)
             {
-                m_activated = false;
+                // Disable update
+                enabled = false; 
+
+                // Disable slow motion
                 Utility.TimeManager.StopSlowMotion();
 
+
+                /// Add bonus|malus relative to current position of player in box
                 float position = GetPositionInCollider();
 
                 // Early trigger
@@ -98,11 +105,12 @@ namespace Scripting
                 }
 
                 Mathf.Clamp(Managers.instance.playerManager.GetPlayer(m_QTENeeded[0].type).skill, 0.1f, 1);
+
+                OnQTESucceeded();
             }
             // If QTE is not triggered
             else
             {
-                // Debug.LogFormat("{0} - {1}", Managers.instance.playerManager.GetPlayer(m_QTENeeded[0].type).GetSlowMotionMin(), GetPositionInCollider() );
                 // Update slowmo
                 Utility.TimeManager.StartSlowMotion(Mathf.Lerp(1, Managers.instance.playerManager.GetPlayer(m_QTENeeded[0].type).GetSlowMotionMin(), GetPositionInCollider()));
             }
@@ -118,10 +126,9 @@ namespace Scripting
 
             Utility.TimeManager.StartSlowMotion(1);
 
-            if (Managers.instance.playerManager.inputs.buttonJustOn == true)
-                Managers.instance.playerManager.player.ForceState((int)PlayerController.EPlayerStates.Sprinting);
+            OnPlayerEntered();
 
-            m_activated = true;
+            enabled = true;
         }
 
         /// Callback - Triger enter
@@ -134,9 +141,9 @@ namespace Scripting
 
             Utility.TimeManager.StopSlowMotion();
 
-            Managers.instance.playerManager.player.JumpTo(m_destination.transform.position, m_duration);
+            OnPlayerExited();
 
-            m_activated = false;
+            enabled = false;
         }
 
         private void UpdateQTERequierement()
@@ -171,18 +178,29 @@ namespace Scripting
             }
         }
 
-        private float GetPositionInCollider()
+        /// Return current X progress of player in collider
+        protected float GetPositionInCollider()
         {
             float playerXPos = Managers.instance.playerManager.player.transform.position.x;
 
             float qteSize = m_collider.size.x * transform.localScale.x;
 
             float qteLeftPosition   = m_collider.bounds.min.x;
-            float qteRightPosition  = m_collider.bounds.max.x;
 
             float progress = (playerXPos - qteLeftPosition) / qteSize;
-            Debug.Log(progress);
             return Mathf.Clamp01(progress);
+        }
+
+        /// Player entered area
+        protected abstract void OnPlayerEntered();
+
+        /// Player exited area
+        protected abstract void OnPlayerExited();
+
+        /// Player succeeded inputs
+        protected virtual void OnQTESucceeded()
+        {
+            Managers.instance.playerManager.player.ForceState((int)EPlayerStates.Sprinting);
         }
     }
 

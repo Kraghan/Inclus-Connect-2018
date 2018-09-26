@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using Scripting.Actors;
+using Scripting.QTE;
 using UnityEngine;
 
 namespace Scripting.GameManagers
