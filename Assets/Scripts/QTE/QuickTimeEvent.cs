@@ -198,10 +198,7 @@ namespace Scripting.QTE
         protected abstract void OnPlayerExited();
 
         /// Player succeeded inputs
-        protected virtual void OnQTESucceeded()
-        {
-            Managers.instance.playerManager.player.ForceState((int)EPlayerStates.Sprinting);
-        }
+        protected abstract void OnQTESucceeded();
     }
 
 }

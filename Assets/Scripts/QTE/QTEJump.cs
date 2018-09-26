@@ -23,7 +23,14 @@ namespace Scripting.QTE
         /// Callback - Player exited
         protected override void OnPlayerExited()
         {
+            Managers.instance.playerManager.player.isRunning = false;
             Managers.instance.playerManager.player.JumpTo(m_destination.transform.position, m_duration);
+        }
+        
+        /// Player succeeded inputs
+        protected override void OnQTESucceeded()
+        {
+            Managers.instance.playerManager.player.isRunning = true;
         }
     }
 }

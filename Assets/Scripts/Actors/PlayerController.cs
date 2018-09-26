@@ -9,7 +9,6 @@ namespace Scripting.Actors
     {
         Idle,
         Running,
-        Sprinting,
         Jumping,
         Attacking,
         Defending,
@@ -49,6 +48,8 @@ namespace Scripting.Actors
         [SerializeField]
         float m_sprintCoefficient = 5f;
 
+        internal bool isRunning = false;
+
         /// Attacking state datas
         GameObject m_attackTarget = null;
 
@@ -75,7 +76,6 @@ namespace Scripting.Actors
             m_actions = new System.Action[]{
 /* IDLE     */  OnIdleState,      
 /* RUNNING  */  OnRunningState,
-/* SPRINTING*/  OnSprintingState,
 /* JUMPING  */  OnJumpingState,
 /* ATTACKING*/  OnAttackingState,
 /* DEFENDING*/  OnDefendingState
@@ -85,30 +85,17 @@ namespace Scripting.Actors
         /// Physics update
         void OnRunningState()
         {
-            // ArduInput example : 
-                // Check if button is active
-            if (m_inputs.buttonOn)
+            // Allow controls only if not sprinting
+            if(isRunning == false)
             {
-            }
-
                 // Check if button has been activated on this frame
-            if(m_inputs.buttonJustOn)
-            {
-                JumpTo(transform.position + Vector3.right * m_simpleJumpDistance, m_simpleJumpDuration);
+                if(m_inputs.buttonJustOn)
+                {
+                    JumpTo(transform.position + Vector3.right * m_simpleJumpDistance, m_simpleJumpDuration);
+                }
             }
 
-            m_body.velocity = new Vector2(m_speed, m_body.velocity.y);
-        }
-
-        /// Sprinting state
-        void OnSprintingState()
-        {
-            if (m_firstFrameInState == true)
-            {
-                m_speed *= m_sprintCoefficient;
-            }
-
-            m_body.velocity = new Vector2(m_speed, m_body.velocity.y);
+            m_body.velocity = new Vector2(m_speed * (isRunning ? m_sprintCoefficient : 1f), m_body.velocity.y);
         }
         
         /// Idle State
@@ -138,7 +125,6 @@ namespace Scripting.Actors
         internal void Attack(GameObject p_target)
         {
             m_attackTarget = p_target;
-            m_body.velocity = Vector3.zero;
 
             ForceState((int)EPlayerStates.Attacking);
         }
@@ -147,7 +133,6 @@ namespace Scripting.Actors
         internal void Defend(GameObject p_target)
         {
             m_defendTarget = p_target;
-            m_body.velocity = Vector3.zero;
 
             ForceState((int)EPlayerStates.Defending);
         }
@@ -191,6 +176,7 @@ namespace Scripting.Actors
             if (m_stateDuration > m_attackDuration)
             {
                 m_nextState = (int)EPlayerStates.Running;
+                isRunning = false;
                 m_attackTarget.SetActive(false);
             }
         }
@@ -200,6 +186,7 @@ namespace Scripting.Actors
         {
             if (m_defendTarget.activeSelf == false)
             {
+                isRunning = false;
                 m_nextState = (int)EPlayerStates.Running;
             }
         }
@@ -217,8 +204,6 @@ namespace Scripting.Actors
         /// Callback - State changed
         protected override void OnStateChanged()
         {
-            if (m_previousState == (int)EPlayerStates.Sprinting)
-                m_speed /= m_sprintCoefficient;
         }
     }
 }

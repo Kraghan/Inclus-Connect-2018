@@ -21,5 +21,12 @@ namespace Scripting.QTE
         {
             Managers.instance.playerManager.player.Attack(m_target);
         }
+
+        /// Player succeeded inputs
+        protected override void OnQTESucceeded()
+        {
+            Managers.instance.playerManager.player.isRunning = true;
+
+        }
     }
 }
