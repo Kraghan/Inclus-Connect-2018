@@ -73,6 +73,7 @@ namespace Scripting.Actors
 
         /// Ghost state data
         EPlayerForm m_form = EPlayerForm.Default;
+        internal EPlayerForm form {get {return m_form;} set {m_form = value;}}
 
 
         /// Start
@@ -148,8 +149,7 @@ namespace Scripting.Actors
         {
             m_form = p_form;
 
-            if (p_form == EPlayerForm.Ghost)
-                ForceState((int)EPlayerStates.Ghosting);
+            ForceState((int)EPlayerStates.Ghosting);
         }
 
         /// Update right form
@@ -214,7 +214,7 @@ namespace Scripting.Actors
         /// Ghost state
         void OnGhostingState()
         {
-            if (m_stateDuration > 1f)
+            if (m_stateDuration > .3f)
             {
                 isRunning = false;
                 UpdateForm();
@@ -225,12 +225,6 @@ namespace Scripting.Actors
         /// Called before each update
         protected override void OnPreStateAction()
         {
-            m_render.material.SetFloat("_isGhost", m_form == EPlayerForm.Default ? 0 : 1);
-        }
-
-        /// Called after each update
-        protected override void OnPostStateAction()
-        {
             // Allow controls only if not sprinting
             if(isRunning == false)
             {
@@ -240,13 +234,23 @@ namespace Scripting.Actors
                     JumpTo(transform.position + Vector3.right * m_simpleJumpDistance, m_simpleJumpDuration);
                 }
 
-                UpdateForm();
+                if (m_currentState != (int)EPlayerStates.Ghosting)
+                    UpdateForm();
             }
+            
+            m_render.material.SetFloat("_isGhost", m_form == EPlayerForm.Default ? 0 : 1);
+
+        }
+
+        /// Called after each update
+        protected override void OnPostStateAction()
+        {
         }
 
         /// Callback - State changed
         protected override void OnStateChanged()
         {
+            Debug.LogFormat("Player switching to state {0}.", (EPlayerStates) m_currentState);
         }
     }
 }

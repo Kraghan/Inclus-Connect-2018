@@ -26,7 +26,6 @@ namespace Scripting.QTE
         protected override void OnQTESucceeded()
         {
             Managers.instance.playerManager.player.isRunning = true;
-
         }
     }
 }

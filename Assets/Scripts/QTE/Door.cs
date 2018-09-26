@@ -1,3 +1,4 @@
+using Scripting.Actors;
 using Scripting.GameManagers;
 using UnityEngine;
 
@@ -15,6 +16,9 @@ namespace Scripting.QTE
 
         /// The renderer
         SpriteRenderer m_renderer = null;
+
+        /// Form of the door
+        internal EPlayerForm form {get; private set;}
 
         /// Awake
         void Awake()
@@ -39,10 +43,12 @@ namespace Scripting.QTE
                 if (Managers.instance.playerManager.player.inputs.lightOn == true)
                 {
                    m_renderer.sprite = m_ghostDoor;
+                    form = EPlayerForm.Ghost;
                 }
                 else
                 {
                     m_renderer.sprite = m_defaultDoor;
+                    form = EPlayerForm.Default;
                 }
 
                 enabled = false;

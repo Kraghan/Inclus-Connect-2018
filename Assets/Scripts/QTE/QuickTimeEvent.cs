@@ -33,7 +33,7 @@ namespace Scripting.QTE
     {
         /// All the QTE required
         [SerializeField]
-        private QTEDone[] m_QTENeeded = new QTEDone[1];
+        protected QTEDone[] m_QTENeeded = new QTEDone[1];
 
         /// Input shortcut
         internal static ArduInput s_inputs { get {return Managers.instance.playerManager.inputs;}}
@@ -146,7 +146,7 @@ namespace Scripting.QTE
             enabled = false;
         }
 
-        private void UpdateQTERequierement()
+        virtual protected void UpdateQTERequierement()
         {
             foreach (QTEDone qte in m_QTENeeded)
             {
