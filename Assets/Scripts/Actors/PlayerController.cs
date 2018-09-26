@@ -11,6 +11,8 @@ namespace Scripting.Actors
         Running,
         Sprinting,
         Jumping,
+        Attacking,
+        Defending,
     }
     
     internal class PlayerController : ActorFSM
@@ -47,6 +49,16 @@ namespace Scripting.Actors
         [SerializeField]
         float m_sprintCoefficient = 5f;
 
+        /// Attacking state datas
+        GameObject m_attackTarget = null;
+
+        // The attack animation duration
+        float m_attackDuration = 0.3f;
+
+        /// Defending state datas
+        GameObject m_defendTarget = null;
+
+
         /// Start
         void Start()
         {
@@ -64,7 +76,9 @@ namespace Scripting.Actors
 /* IDLE     */  OnIdleState,      
 /* RUNNING  */  OnRunningState,
 /* SPRINTING*/  OnSprintingState,
-/* JUMPING  */  OnJumpingState
+/* JUMPING  */  OnJumpingState,
+/* ATTACKING*/  OnAttackingState,
+/* DEFENDING*/  OnDefendingState
             };
         }
 
@@ -120,6 +134,24 @@ namespace Scripting.Actors
             ForceState((int)EPlayerStates.Jumping);
         }
 
+        /// Orders to attack an object
+        internal void Attack(GameObject p_target)
+        {
+            m_attackTarget = p_target;
+            m_body.velocity = Vector3.zero;
+
+            ForceState((int)EPlayerStates.Attacking);
+        }
+
+        /// Orders to defend
+        internal void Defend(GameObject p_target)
+        {
+            m_defendTarget = p_target;
+            m_body.velocity = Vector3.zero;
+
+            ForceState((int)EPlayerStates.Defending);
+        }
+
         void OnJumpingState()
         {
             if (m_firstFrameInState == true)
@@ -150,6 +182,25 @@ namespace Scripting.Actors
             {
                 m_nextState = (int)EPlayerStates.Running;
                 // Debug.Break();
+            }
+        }
+
+        /// Attacking state
+        void OnAttackingState()
+        {
+            if (m_stateDuration > m_attackDuration)
+            {
+                m_nextState = (int)EPlayerStates.Running;
+                m_attackTarget.SetActive(false);
+            }
+        }
+
+        /// Defending state
+        void OnDefendingState()
+        {
+            if (m_defendTarget.activeSelf == false)
+            {
+                m_nextState = (int)EPlayerStates.Running;
             }
         }
 
