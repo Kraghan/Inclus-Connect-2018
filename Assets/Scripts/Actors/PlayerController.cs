@@ -12,6 +12,13 @@ namespace Scripting.Actors
         Jumping,
         Attacking,
         Defending,
+        Ghosting,
+    }
+
+    internal enum EPlayerForm
+    {
+        Default,
+        Ghost
     }
     
     internal class PlayerController : ActorFSM
@@ -34,6 +41,11 @@ namespace Scripting.Actors
         /// The inputs
         private ArduInput   m_inputs;
         internal ArduInput  inputs {get {return m_inputs;}}
+
+        // Renderer
+        [SerializeField]
+        Renderer m_render = null;
+
 
 
         /// Jumping state datas
@@ -59,6 +71,9 @@ namespace Scripting.Actors
         /// Defending state datas
         GameObject m_defendTarget = null;
 
+        /// Ghost state data
+        EPlayerForm m_form = EPlayerForm.Default;
+
 
         /// Start
         void Start()
@@ -78,23 +93,14 @@ namespace Scripting.Actors
 /* RUNNING  */  OnRunningState,
 /* JUMPING  */  OnJumpingState,
 /* ATTACKING*/  OnAttackingState,
-/* DEFENDING*/  OnDefendingState
+/* DEFENDING*/  OnDefendingState,
+/* GHOSTING */  OnGhostingState,
             };
         }
 
         /// Physics update
         void OnRunningState()
         {
-            // Allow controls only if not sprinting
-            if(isRunning == false)
-            {
-                // Check if button has been activated on this frame
-                if(m_inputs.buttonJustOn)
-                {
-                    JumpTo(transform.position + Vector3.right * m_simpleJumpDistance, m_simpleJumpDuration);
-                }
-            }
-
             m_body.velocity = new Vector2(m_speed * (isRunning ? m_sprintCoefficient : 1f), m_body.velocity.y);
         }
         
@@ -137,6 +143,20 @@ namespace Scripting.Actors
             ForceState((int)EPlayerStates.Defending);
         }
 
+        /// Orders to change form
+        internal void EnterForm(EPlayerForm p_form)
+        {
+            m_form = p_form;
+
+            if (p_form == EPlayerForm.Ghost)
+                ForceState((int)EPlayerStates.Ghosting);
+        }
+
+        /// Update right form
+        internal void UpdateForm()
+        {
+            m_form = m_inputs.lightOn == true ? EPlayerForm.Default : EPlayerForm.Ghost;
+        }
         void OnJumpingState()
         {
             if (m_firstFrameInState == true)
@@ -191,14 +211,37 @@ namespace Scripting.Actors
             }
         }
 
+        /// Ghost state
+        void OnGhostingState()
+        {
+            if (m_stateDuration > 1f)
+            {
+                isRunning = false;
+                UpdateForm();
+                m_nextState = (int)EPlayerStates.Running;
+            }
+        }
+
         /// Called before each update
         protected override void OnPreStateAction()
         {
+            m_render.material.SetFloat("_isGhost", m_form == EPlayerForm.Default ? 0 : 1);
         }
 
         /// Called after each update
         protected override void OnPostStateAction()
         {
+            // Allow controls only if not sprinting
+            if(isRunning == false)
+            {
+                // Check if button has been activated on this frame
+                if(m_inputs.buttonJustOn == true && m_currentState != (int)EPlayerStates.Jumping)
+                {
+                    JumpTo(transform.position + Vector3.right * m_simpleJumpDistance, m_simpleJumpDuration);
+                }
+
+                UpdateForm();
+            }
         }
 
         /// Callback - State changed

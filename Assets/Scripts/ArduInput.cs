@@ -89,7 +89,7 @@ namespace Scripting
 
             // Cheat - Pc control
             m_acceleroOn    = Input.GetKeyDown(KeyCode.Space);
-            m_lightOn       = Input.GetKeyDown(KeyCode.L);
+            m_lightOn       = Input.GetKey(KeyCode.L);
             m_microOn       = Input.GetKeyDown(KeyCode.M);
             m_buttonOn      = Input.GetKeyDown(KeyCode.B);
             ///
