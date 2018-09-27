@@ -168,7 +168,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_QTENeeded:
-  - m_type: 3
+    m_type: 3
     p_done: 0
   m_succesPercentageToAdd: 0.1
   m_failurePercentageToRemove: 0.1
