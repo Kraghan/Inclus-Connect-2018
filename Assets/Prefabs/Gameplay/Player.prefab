@@ -861,7 +861,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1550572253184012
 GameObject:
   m_ObjectHideFlags: 1
@@ -2991,7 +2991,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1646611159892526}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -9.99, y: -44.6, z: 0}
+  m_LocalPosition: {x: -9.99, y: -1.09, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4754694353585986}
@@ -3196,7 +3196,7 @@ Animator:
   m_GameObject: {fileID: 1900773301464730}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 52eb06f2f844fdb4f8c914de3b4674ab, type: 3}
-  m_Controller: {fileID: 9100000, guid: e0d7a69b2b514844493fcb139c4b3594, type: 2}
+  m_Controller: {fileID: 9100000, guid: 5d187d820378cd74db0e2d5412549943, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -4086,7 +4086,7 @@ MonoBehaviour:
   m_renderer: {fileID: 137557937772577978}
   m_animator: {fileID: 95434882913309844}
   m_sprintCoefficient: 5
-  m_trailRenderer: {fileID: 0}
+  m_trailRenderer: {fileID: 1283509731718674}
 --- !u!114 &114558693963414104
 MonoBehaviour:
   m_ObjectHideFlags: 1

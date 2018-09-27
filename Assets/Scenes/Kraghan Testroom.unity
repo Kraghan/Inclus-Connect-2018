@@ -193,6 +193,10 @@ Prefab:
       propertyPath: m_RootOrder
       value: 14
       objectReference: {fileID: 0}
+    - target: {fileID: 1749552600449680, guid: afe87fbe03a835e479648f9f9840ff24, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: afe87fbe03a835e479648f9f9840ff24, type: 2}
   m_IsPrefabAsset: 0
@@ -118546,6 +118550,10 @@ Prefab:
       propertyPath: m_SortingLayer
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 1970125717355964, guid: 9cf1fef385de6f7499d7fa2edc2a3519, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9cf1fef385de6f7499d7fa2edc2a3519, type: 2}
   m_IsPrefabAsset: 0
@@ -118587,11 +118595,6 @@ Prefab:
     - target: {fileID: 4985436608466018, guid: 91174f1635345144394171fb160ea783, type: 2}
       propertyPath: m_RootOrder
       value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 114246975678749376, guid: 91174f1635345144394171fb160ea783,
-        type: 2}
-      propertyPath: m_trailRenderer
-      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 91174f1635345144394171fb160ea783, type: 2}
