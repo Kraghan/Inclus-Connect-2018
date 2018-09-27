@@ -227,7 +227,15 @@ namespace Scripting.QTE
             }
             trail.emitting = false;            
         }
-        protected abstract void OnQTESucceeded();
+        
+        /// QTE Succeeded
+        protected virtual void OnQTESucceeded()
+        {
+            Managers.instance.playerManager.player.QTESucceeded = true;
+            Managers.instance.playerManager.player.QTEProgress = GetPositionInCollider();
+            
+            Managers.instance.playerManager.player.isRunning = true;
+        }
     }
 
 }

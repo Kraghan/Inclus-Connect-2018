@@ -26,7 +26,7 @@ namespace Scripting.QTE
         /// Player succeeded inputs
         protected override void OnQTESucceeded()
         {
-            Managers.instance.playerManager.player.isRunning = true;
+            base.OnQTESucceeded();
             Managers.instance.playerManager.player.form = m_door.form;
             // Managers.instance.playerManager.player.EnterForm(m_door.form);
         }

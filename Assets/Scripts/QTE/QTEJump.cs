@@ -29,11 +29,5 @@ namespace Scripting.QTE
             // Orders to jump
             Managers.instance.playerManager.player.JumpTo(m_destination.transform.position, m_duration);
         }
-        /// Player succeeded inputs
-        protected override void OnQTESucceeded()
-        {
-            Managers.instance.playerManager.player.isRunning = true;
-            Managers.instance.playerManager.player.QTESucceeded = true;
-        }
     }
 }
