@@ -392,8 +392,16 @@ namespace Scripting.Actors
                     Managers.instance.fxManager.SpawnFX(EFXType.Attack, transform.position + new Vector3(5,3,0), gameObject);
                 }
             }
+
             
-            m_renderer.material.SetFloat("_isGhost", m_form == EPlayerForm.Default ? 0 : 1);
+            float isGhost = m_renderer.material.GetFloat("_isGhost");
+            float newGhost = m_form == EPlayerForm.Default ? 0 : 1;
+            m_renderer.material.SetFloat("_isGhost", newGhost);
+
+            if (newGhost != isGhost)
+            {
+                Managers.instance.soundManager.PlaySound(newGhost != 0 ? "Play_Disappear" : "Play_Appear", gameObject);
+            }
 
         }
 
