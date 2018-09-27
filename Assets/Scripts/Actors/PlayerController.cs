@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using Scripting.GameManagers;
+using Scripting.QTE;
 using UnityEngine;
 
 namespace Scripting.Actors
@@ -83,6 +84,8 @@ namespace Scripting.Actors
         // Jump duration
         float m_jumpDuration = 1f;
 
+        float m_simpleJumpCooldown = 0f;
+
         /// Sprinting state
         // Sprint coefficient
         [SerializeField]
@@ -123,7 +126,7 @@ namespace Scripting.Actors
         internal bool enableInputs {get; set;}
 
         /// Remember if a QTE has been passed
-        internal bool QTESucceeded {get; set;}
+        internal QTEType QTESucceeded {get; set;}
 
         /// Progress in the QTE on success
         internal float QTEProgress {get; set;}
@@ -225,34 +228,36 @@ namespace Scripting.Actors
         /// Cllback - QTE Exited
         internal void QTEExit()
         {
-            if (QTESucceeded == true)
+            if (QTESucceeded != QTEType.NONE)
             {
                 m_bonusSpeed += Mathf.Lerp(m_QTEBonusSpeed, 0, QTEProgress);
             }
+        }
+
+        /// Returns the velocity to reach p_end in p_duration second from p_start
+        internal Vector2 GetBallisticTo(Vector3 p_start, Vector3 p_end, float p_duration)
+        {
+            // Datas
+            float dx = p_end.x - p_start.x;
+            float dy = p_end.y - p_start.y;
+
+            // Compute gravity
+            float gravity = m_body.gravityScale * Physics.gravity.y;
+
+            // Compte velocity
+            float velX = dx / p_duration;
+            float velY = -gravity * p_duration * 0.5f + dy / p_duration;
+
+            return new Vector2(velX, velY);
         }
         
         void OnJumpingState()
         {
             if (m_firstFrameInState == true)
             {
-                // Datas
-                Vector3 position = transform.position;
-                float dx = m_jumpDestination.x - position.x;
-                float dy = m_jumpDestination.y - position.y;
-
-                // Compute gravity
-                float gravity = m_body.gravityScale * Physics.gravity.y;
-
-                // Compte velocity
-                float velX = dx / m_jumpDuration;
-                float velY = -gravity * m_jumpDuration * 0.5f + dy / m_jumpDuration;
-
                 // Jump
-                m_body.velocity = new Vector3(velX, velY);
+                m_body.velocity = GetBallisticTo(transform.position, m_jumpDestination, m_jumpDuration);
                 
-                Debug.DrawLine(position, position + new Vector3(velX, velY), Color.red, 1f);
-                Debug.LogFormat("Jumping from {0} to {1} with velocity {2}", position, m_jumpDestination, new Vector3(velX, velY));
-
                 Managers.instance.fxManager.SpawnFX(EFXType.Dust, transform.position);
             }
 
@@ -263,10 +268,15 @@ namespace Scripting.Actors
             if (m_stateDuration >= m_jumpDuration)
             {
                 // Spawn FX
-                if (QTESucceeded == true)
+                if (QTESucceeded == QTEType.BUTTON)
                 {
                     Managers.instance.fxManager.SpawnFX(EFXType.LandingSuccess, transform.position, gameObject );
                     bonusSpeed += m_QTEBonusSpeed;
+                        
+                    enableInputs = true;
+                    QTEProgress = 0f;
+                    QTESucceeded = QTEType.NONE;
+
                 }
                 else
                     Managers.instance.fxManager.SpawnFX(EFXType.Dust, transform.position);
@@ -282,7 +292,7 @@ namespace Scripting.Actors
         {
             // FX
             if (m_firstFrameInState == true)
-                if (QTESucceeded == true)
+                if (QTESucceeded == QTEType.ACCELERO)
                     Managers.instance.fxManager.SpawnFX(EFXType.AttackSuccess, m_attackTarget.transform.position);
                 else
                     Managers.instance.fxManager.SpawnFX(EFXType.AttackConsequence, m_attackTarget.transform.position);
@@ -297,6 +307,10 @@ namespace Scripting.Actors
 
                 // Disable target
                 m_attackTarget.SetActive(false);
+
+                enableInputs = true;
+                QTEProgress = 0f;
+                QTESucceeded = QTEType.NONE;
             }
         }
 
@@ -305,7 +319,7 @@ namespace Scripting.Actors
         {
             if (m_firstFrameInState == true)
             {
-                GameObject fx = Managers.instance.fxManager.SpawnFX( QTESucceeded == true ? EFXType.DefenseSuccess : EFXType.DefenseConsequence, transform.position, gameObject);
+                GameObject fx = Managers.instance.fxManager.SpawnFX( QTESucceeded == QTEType.MICRO ? EFXType.DefenseSuccess : EFXType.DefenseConsequence, transform.position, gameObject);
                 FX.Following f = fx.GetComponent<FX.Following>();
                 if (f != null)
                 {
@@ -317,6 +331,11 @@ namespace Scripting.Actors
             {
                 isRunning = false;
                 m_nextState = (int)EPlayerStates.Running;
+
+                
+                enableInputs = true;
+                QTEProgress = 0f;
+                QTESucceeded = QTEType.NONE;
             }
         }
 
@@ -328,6 +347,10 @@ namespace Scripting.Actors
                 isRunning = false;
                 UpdateForm();
                 m_nextState = (int)EPlayerStates.Running;
+                
+                enableInputs = true;
+                QTEProgress = 0f;
+                QTESucceeded = QTEType.NONE;
             }
         }
 
@@ -338,10 +361,12 @@ namespace Scripting.Actors
             if(enableInputs == true)
             {
                 // Check if button has been activated on this frame
-                if(m_inputs.buttonJustOn == true && m_currentState != (int)EPlayerStates.Jumping)
+                if(m_inputs.buttonJustOn == true && m_currentState != (int)EPlayerStates.Jumping && m_simpleJumpCooldown <= 0)
                 {
-                    Debug.Log("JUMP");
-                    JumpTo(transform.position + Vector3.right * m_simpleJumpDistance, m_simpleJumpDuration);
+                    m_body.velocity = GetBallisticTo(transform.position, transform.position + Vector3.right * m_simpleJumpDistance, m_simpleJumpDuration);
+                    Managers.instance.fxManager.SpawnFX(EFXType.Dust, transform.position);
+                    m_animator.SetTrigger("jumping");
+                    m_simpleJumpCooldown = m_simpleJumpDuration;
                 }
 
                 if (m_currentState != (int)EPlayerStates.Ghosting)
@@ -357,6 +382,10 @@ namespace Scripting.Actors
         {
             // Lose the bonus speed
             m_bonusSpeedDuration += Time.deltaTime;
+
+            // Simple jump cooldown 
+            if (m_simpleJumpCooldown >= 0)
+                m_simpleJumpCooldown -= Time.deltaTime;
         }
 
         /// Callback - State changed

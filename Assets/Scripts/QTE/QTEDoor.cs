@@ -33,33 +33,31 @@ namespace Scripting.QTE
 
         protected override void UpdateQTERequierement()
         {
-            foreach (QTEDone qte in m_QTENeeded)
+            QTEDone qte = m_QTENeeded;
+            if (qte.p_done)
+                return;
+
+            switch (qte.type)
             {
-                if (qte.p_done)
-                    continue;
+                case QTEType.ACCELERO:
+                    if (s_inputs.acceleroOn)
+                        qte.p_done = true;
+                    break;
 
-                switch (qte.type)
-                {
-                    case QTEType.ACCELERO:
-                        if (s_inputs.acceleroOn)
-                            qte.p_done = true;
-                        break;
+                case QTEType.BUTTON:
+                    if (s_inputs.buttonOn)
+                        qte.p_done = true;
+                    break;
 
-                    case QTEType.BUTTON:
-                        if (s_inputs.buttonOn)
-                            qte.p_done = true;
-                        break;
+                case QTEType.LIGHT:
+                    if ((s_inputs.lightOn == true && m_door.form == EPlayerForm.Default) || (s_inputs.lightOn == false && m_door.form == EPlayerForm.Ghost))
+                        qte.p_done = true;
+                    break;
 
-                    case QTEType.LIGHT:
-                        if ((s_inputs.lightOn == true && m_door.form == EPlayerForm.Default) || (s_inputs.lightOn == false && m_door.form == EPlayerForm.Ghost))
-                            qte.p_done = true;
-                        break;
-
-                    case QTEType.MICRO:
-                        if (s_inputs.microOn)
-                            qte.p_done = true;
-                        break;
-                }
+                case QTEType.MICRO:
+                    if (s_inputs.microOn)
+                        qte.p_done = true;
+                    break;
             }
         }
     }

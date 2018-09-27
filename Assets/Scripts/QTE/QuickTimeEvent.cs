@@ -8,6 +8,7 @@ namespace Scripting.QTE
 {
     public enum QTEType
     {
+        NONE = -1,
         MICRO,
         LIGHT,
         ACCELERO,
@@ -33,7 +34,7 @@ namespace Scripting.QTE
     {
         /// All the QTE required
         [SerializeField]
-        protected QTEDone[] m_QTENeeded = new QTEDone[1];
+        protected QTEDone m_QTENeeded = null;
 
         /// Input shortcut
         internal static ArduInput s_inputs { get {return Managers.instance.playerManager.inputs;}}
@@ -74,20 +75,8 @@ namespace Scripting.QTE
             UpdateQTERequierement();
 
             /// Check if succeedded
-            bool allDone = true;
-
-            foreach (QTEDone qte in m_QTENeeded)
-            {
-                if (!qte.p_done)
-                {
-                    allDone = false;
-                    break;
-                }
-            }
-            ///
-            
             // If QTE is triggered
-            if(allDone == true)
+            if(m_QTENeeded.p_done == true)
             {
                 // Disable update
                 enabled = false; 
@@ -101,14 +90,14 @@ namespace Scripting.QTE
                 // Early trigger
                 if(position < 0.5)
                 {
-                    Managers.instance.playerManager.GetPlayer(m_QTENeeded[0].type).skill += Mathf.Lerp(m_succesPercentageToAdd, 0, position * 2);
+                    Managers.instance.playerManager.GetPlayer(m_QTENeeded.type).skill += Mathf.Lerp(m_succesPercentageToAdd, 0, position * 2);
                 }
                 // Late Trigger
                 else
                 {
-                    Managers.instance.playerManager.GetPlayer(m_QTENeeded[0].type).skill -= Mathf.Lerp(0, m_failurePercentageToRemove, position * 2 - 1);
+                    Managers.instance.playerManager.GetPlayer(m_QTENeeded.type).skill -= Mathf.Lerp(0, m_failurePercentageToRemove, position * 2 - 1);
                 }
-                Mathf.Clamp(Managers.instance.playerManager.GetPlayer(m_QTENeeded[0].type).skill, 0.1f, 1);
+                Mathf.Clamp(Managers.instance.playerManager.GetPlayer(m_QTENeeded.type).skill, 0.1f, 1);
 
                 /// Activate and setup trail
                 StartCoroutine(TrailControl(1 - position));
@@ -119,7 +108,7 @@ namespace Scripting.QTE
             else
             {
                 // Update slowmo
-                Utility.TimeManager.StartSlowMotion(Mathf.Lerp(1, Managers.instance.playerManager.GetPlayer(m_QTENeeded[0].type).GetSlowMotionMin(), GetPositionInCollider()));
+                Utility.TimeManager.StartSlowMotion(Mathf.Lerp(1, Managers.instance.playerManager.GetPlayer(m_QTENeeded.type).GetSlowMotionMin(), GetPositionInCollider()));
             }
         }
 
@@ -155,33 +144,32 @@ namespace Scripting.QTE
 
         virtual protected void UpdateQTERequierement()
         {
-            foreach (QTEDone qte in m_QTENeeded)
+            QTEDone qte = m_QTENeeded;
+
+            if (qte.p_done)
+                return;
+
+            switch (qte.type)
             {
-                if (qte.p_done)
-                    continue;
+                case QTEType.ACCELERO:
+                    if (s_inputs.acceleroOn)
+                        qte.p_done = true;
+                    break;
 
-                switch (qte.type)
-                {
-                    case QTEType.ACCELERO:
-                        if (s_inputs.acceleroOn)
-                            qte.p_done = true;
-                        break;
+                case QTEType.BUTTON:
+                    if (s_inputs.buttonOn)
+                        qte.p_done = true;
+                    break;
 
-                    case QTEType.BUTTON:
-                        if (s_inputs.buttonOn)
-                            qte.p_done = true;
-                        break;
+                case QTEType.LIGHT:
+                    if (s_inputs.lightOn)
+                        qte.p_done = true;
+                    break;
 
-                    case QTEType.LIGHT:
-                        if (s_inputs.lightOn)
-                            qte.p_done = true;
-                        break;
-
-                    case QTEType.MICRO:
-                        if (s_inputs.microOn)
-                            qte.p_done = true;
-                        break;
-                }
+                case QTEType.MICRO:
+                    if (s_inputs.microOn)
+                        qte.p_done = true;
+                    break;
             }
         }
 
@@ -231,9 +219,9 @@ namespace Scripting.QTE
         /// QTE Succeeded
         protected virtual void OnQTESucceeded()
         {
-            Managers.instance.playerManager.player.QTESucceeded = true;
+            Managers.instance.playerManager.player.QTESucceeded = m_QTENeeded.type;
             Managers.instance.playerManager.player.QTEProgress = GetPositionInCollider();
-            
+
             Managers.instance.playerManager.player.isRunning = true;
         }
     }
