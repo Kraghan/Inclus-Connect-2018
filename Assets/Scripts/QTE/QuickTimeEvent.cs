@@ -303,9 +303,19 @@ namespace Scripting.QTE
         /// QTE Succeeded
         protected virtual void OnQTESucceeded()
         {
+            // Which QTE succeeded
             Managers.instance.playerManager.player.QTESucceeded = m_QTENeeded.type;
+
+            // Progress
             Managers.instance.playerManager.player.QTEProgress = GetPositionInCollider();
 
+            // FX
+            Managers.instance.fxManager.SpawnFX(EFXType.Reward, Managers.instance.playerManager.player.transform.position);
+
+            // Sound FX
+            Managers.instance.soundManager.PlaySound("Play_Feedback_Success", Managers.instance.playerManager.player.gameObject);
+
+            // Make it run
             Managers.instance.playerManager.player.isRunning = true;
 
             if (isTutorial)

@@ -58,8 +58,8 @@ MonoBehaviour:
         ObjectType: 7
   EventWwu:
   - Guid: '{04D1AD93-A368-4A75-8FEB-52B9B8B81107}'
-    m_lastTimePart2: -1999231882
-    m_lastTimePsrt1: -1277446186
+    m_lastTimePart2: -1999231874
+    m_lastTimePsrt1: 1195272326
     ParentPhysicalPath: 
     PhysicalPath: Events\Default Work Unit.wwu
     List:
@@ -123,6 +123,18 @@ MonoBehaviour:
       maxAttenuation: 0
       maxDuration: 0
       minDuration: 0
+    - Guid: d791f272fda6784b9bd017927df32dab
+      ID: 24001019
+      Name: Play_Feedback_Success
+      Path: Default Work Unit\Play_Feedback_Success
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: Play_Feedback_Success
+        ObjectType: 3
+      maxAttenuation: 0
+      maxDuration: 0
+      minDuration: 0
     - Guid: e1d6648778ffa7408d6526859586d756
       ID: -440811497
       Name: Play_Footsteps
@@ -147,6 +159,18 @@ MonoBehaviour:
       maxAttenuation: 0
       maxDuration: 0
       minDuration: 0
+    - Guid: 44f1ced30d4d5b48a7124fe6adb10ff5
+      ID: -486645962
+      Name: Play_Jump_Landing
+      Path: Default Work Unit\Play_Jump_Landing
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: Play_Jump_Landing
+        ObjectType: 3
+      maxAttenuation: 0
+      maxDuration: 0
+      minDuration: 0
     - Guid: 52decbc8deab2c4cbdb14a215b69b01a
       ID: 1058038914
       Name: Play_MUSICGLOBAL
@@ -155,6 +179,30 @@ MonoBehaviour:
       - ElementName: Default Work Unit
         ObjectType: 12
       - ElementName: Play_MUSICGLOBAL
+        ObjectType: 3
+      maxAttenuation: 0
+      maxDuration: 0
+      minDuration: 0
+    - Guid: cfff2f6838c0d04c9bf34e3449c99218
+      ID: -657500725
+      Name: Play_Shield_Off
+      Path: Default Work Unit\Play_Shield_Off
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: Play_Shield_Off
+        ObjectType: 3
+      maxAttenuation: 0
+      maxDuration: 0
+      minDuration: 0
+    - Guid: 2becf06990baba4db9eb1ce0578e712e
+      ID: 1589040055
+      Name: Play_Shield_On
+      Path: Default Work Unit\Play_Shield_On
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: Play_Shield_On
         ObjectType: 3
       maxAttenuation: 0
       maxDuration: 0
@@ -185,12 +233,15 @@ MonoBehaviour:
       minDuration: 0
   ExpandedItems:
   - /Wwise_Inclusetco
+  - /Wwise_Inclusetco/Auxiliary Busses
+  - /Wwise_Inclusetco/Auxiliary Busses/Default Work Unit
   - /Wwise_Inclusetco/Events
   - /Wwise_Inclusetco/Events/Default Work Unit
+  - /Wwise_Inclusetco/SoundBanks
   RtpcWwu:
   - Guid: '{9549F168-4921-4CD3-B055-5D3C3461F822}'
-    m_lastTimePart2: -1999231882
-    m_lastTimePsrt1: -1277426231
+    m_lastTimePart2: -1999231873
+    m_lastTimePsrt1: 166156439
     ParentPhysicalPath: 
     PhysicalPath: Game Parameters\Default Work Unit.wwu
     List:
