@@ -388,6 +388,7 @@ namespace Scripting.Actors
                 if (m_inputs.acceleroJustOn == true)
                 {
                     m_animator.SetTrigger("attacking");
+                    Managers.instance.fxManager.SpawnFX(EFXType.Attack, transform.position + new Vector3(5,3,0), gameObject);
                 }
             }
             
