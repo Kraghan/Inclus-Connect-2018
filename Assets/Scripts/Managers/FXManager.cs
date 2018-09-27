@@ -29,7 +29,6 @@ namespace Scripting.GameManagers
             pool = new GameObject[poolSize];
             for(int i = 0 ; i < poolSize ; ++i)
             {
-                Debug.Log("Initialized one fx");
                 pool[i] = GameObject.Instantiate(prefab) as GameObject;
                 pool[i].transform.SetParent(p_root.transform);
                 pool[i].SetActive(false);
@@ -84,6 +83,7 @@ namespace Scripting.GameManagers
         /// Spawns an FX
         internal GameObject SpawnFX(EFXType p_type, Vector3 p_position, GameObject p_targetToFollow = null)
         {
+            Debug.Log("Spawn FX !");
             int poolIndex = (int)p_type;
             
             if (poolIndex > m_pools.Length)
