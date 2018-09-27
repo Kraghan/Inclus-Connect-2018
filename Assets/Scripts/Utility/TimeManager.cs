@@ -15,7 +15,7 @@ namespace Scripting.Utility
             Time.timeScale = slowMotionFactor;
             Time.fixedDeltaTime = Time.timeScale * .02f;
             Managers.instance.soundManager.SetRTPCvalue("SlowMo", slowMotionFactor, Managers.instance.soundManager.soundNode);
-            Debug.LogFormat("Slomo factor : {0}", slowMotionFactor);
+            // Debug.LogFormat("Slomo factor : {0}", slowMotionFactor);
         }
 
         // Stop slow motion effect
@@ -24,7 +24,7 @@ namespace Scripting.Utility
             Time.timeScale = 1f;
             Time.fixedDeltaTime = Time.timeScale * .02f;
             Managers.instance.soundManager.SetRTPCvalue("SlowMo", 1f, Managers.instance.soundManager.soundNode);
-            Debug.Log("Slomo stopped");
+            // Debug.Log("Slomo stopped");
         }
 
     }

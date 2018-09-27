@@ -105,8 +105,9 @@ namespace Scripting.Actors
                 //m_trailRenderer.emitting = value;
                 if (value == true) 
                 {
-                    Managers.instance.soundManager.PlaySound("Play_Dash", gameObject);  // sound
-                    m_animator.SetTrigger("dashing");                                   // anim
+                    Managers.instance.soundManager.PlaySound("Play_Dash", gameObject);      // sound
+                    Managers.instance.fxManager.SpawnFX(EFXType.Dash, transform.position);  // FX
+                    m_animator.SetTrigger("dashing");                                       // anim
                 }
             }
         }
@@ -275,7 +276,8 @@ namespace Scripting.Actors
                 // Spawn FX
                 if (QTESucceeded == QTEType.BUTTON)
                 {
-                    Managers.instance.fxManager.SpawnFX(EFXType.LandingSuccess, transform.position, gameObject );
+                    Managers.instance.soundManager.PlaySound("Play_Jump_Landing", gameObject);                      // Sound
+                    Managers.instance.fxManager.SpawnFX(EFXType.LandingSuccess, transform.position, gameObject );   // FX
                     bonusSpeed += m_QTEBonusSpeed;
                         
                     enableInputs = true;
@@ -303,6 +305,7 @@ namespace Scripting.Actors
                     Managers.instance.fxManager.SpawnFX(EFXType.AttackConsequence, m_attackTarget.transform.position);
 
             Managers.instance.soundManager.PlaySound("Play_Destroy", m_attackTarget);
+            Managers.instance.fxManager.SpawnFX(EFXType.Attack, transform.position + new Vector3(5,3,0), gameObject);
 
             if (m_stateDuration > m_attackDuration)
             {
@@ -382,9 +385,23 @@ namespace Scripting.Actors
                 {
                     Managers.instance.fxManager.SpawnFX(EFXType.SimpleShield, transform.position + Vector3.up * 2, gameObject);
                 }
+
+                if (m_inputs.acceleroJustOn == true)
+                {
+                    m_animator.SetTrigger("attacking");
+                    Managers.instance.fxManager.SpawnFX(EFXType.Attack, transform.position + new Vector3(5,3,0), gameObject);
+                }
             }
+
             
-            m_renderer.material.SetFloat("_isGhost", m_form == EPlayerForm.Default ? 0 : 1);
+            float isGhost = m_renderer.material.GetFloat("_isGhost");
+            float newGhost = m_form == EPlayerForm.Default ? 0 : 1;
+            m_renderer.material.SetFloat("_isGhost", newGhost);
+
+            if (newGhost != isGhost)
+            {
+                Managers.instance.soundManager.PlaySound(newGhost != 0 ? "Play_Disappear" : "Play_Appear", gameObject);
+            }
 
         }
 
@@ -396,7 +413,13 @@ namespace Scripting.Actors
 
             // Simple jump cooldown 
             if (m_simpleJumpCooldown >= 0)
+            {
                 m_simpleJumpCooldown -= Time.deltaTime;
+                if (m_simpleJumpCooldown <= 0)
+                    Managers.instance.soundManager.PlaySound("Play_Jump_Landing", gameObject);  // Sound
+            }
+            
+            
         }
 
         /// Callback - State changed

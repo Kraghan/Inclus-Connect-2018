@@ -1,3 +1,4 @@
+using System.Collections;
 using Scripting.Actors;
 using Scripting.GameManagers;
 using UnityEngine;
@@ -7,6 +8,7 @@ namespace Scripting.QTE
 {
     internal class QTEDoor : QuickTimeEvent
     {
+
         /// Jump destination
         [SerializeField]
         Door m_door = null;
@@ -28,6 +30,7 @@ namespace Scripting.QTE
         {
             base.OnQTESucceeded();
             Managers.instance.playerManager.player.form = m_door.form;
+            StartCoroutine("FadeOut");
             // Managers.instance.playerManager.player.EnterForm(m_door.form);
         }
 
@@ -58,6 +61,19 @@ namespace Scripting.QTE
                     if (s_inputs.microOn)
                         qte.p_done = true;
                     break;
+            }
+        }
+
+        IEnumerator FadeOut()
+        {
+            float count = 0f;
+            const float kFadeDuration = 0.5f;
+
+            while(count < 0.5f)
+            {
+                count += Time.deltaTime;
+                m_door.magma.color = new Color(1,1,1, Mathf.Lerp(1, 0, count / kFadeDuration));
+                yield return new WaitForEndOfFrame();
             }
         }
     }
