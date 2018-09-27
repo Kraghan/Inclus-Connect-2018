@@ -20,22 +20,20 @@ namespace Scripting.QTE
             base.Start();
             color = Color.green;
         }
-
-        /// Callback - Player entered
-        protected override void OnPlayerEntered()
-        {
-        }
-
+        
         /// Callback - Player exited
         protected override void OnPlayerExited()
         {
             Managers.instance.playerManager.player.isRunning = false;
+
+            // Orders to jump
             Managers.instance.playerManager.player.JumpTo(m_destination.transform.position, m_duration);
         }
         /// Player succeeded inputs
         protected override void OnQTESucceeded()
         {
             Managers.instance.playerManager.player.isRunning = true;
+            Managers.instance.playerManager.player.QTESucceeded = true;
         }
     }
 }

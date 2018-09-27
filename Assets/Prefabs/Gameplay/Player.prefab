@@ -2362,7 +2362,7 @@ Animator:
   m_GameObject: {fileID: 1900773301464730}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 52eb06f2f844fdb4f8c914de3b4674ab, type: 3}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: e0d7a69b2b514844493fcb139c4b3594, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -2471,7 +2471,7 @@ TrailRenderer:
     generateLightingData: 0
   m_MinVertexDistance: 0.1
   m_Autodestruct: 0
-  m_Emitting: 1
+  m_Emitting: 0
 --- !u!114 &114246975678749376
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2484,7 +2484,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_speed: 5
+  m_bonusSpeedDiminutionDuration: 10
+  m_QTEBonusSpeed: 10
+  m_simpleJumpDistance: 5
+  m_simpleJumpDuration: 0.8
+  m_renderer: {fileID: 137557937772577978}
+  m_animator: {fileID: 95434882913309844}
   m_sprintCoefficient: 5
+  m_trailRenderer: {fileID: 96927039845018154}
 --- !u!114 &114558693963414104
 MonoBehaviour:
   m_ObjectHideFlags: 1

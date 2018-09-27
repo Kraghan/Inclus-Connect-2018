@@ -77,5 +77,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_pools:
-  - poolSize: 1
+  - poolSize: 5
     prefab: {fileID: 1316056627665902, guid: 957a82da67da8a3429d43dfdbed05152, type: 2}
+  - poolSize: 2
+    prefab: {fileID: 1835825301029966, guid: 83b60910b39a50e46bbbdf1c8f0a870e, type: 2}
+  - poolSize: 2
+    prefab: {fileID: 1198066960203770, guid: 7655904cd8de3d148a47d0ab2698521d, type: 2}
+  - poolSize: 2
+    prefab: {fileID: 1198066960203770, guid: c895e7a90f3ed4c4395eab2b26810f89, type: 2}

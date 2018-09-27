@@ -13,6 +13,8 @@ namespace Scripting.Actors
         Attacking,
         Defending,
         Ghosting,
+
+        Count
     }
 
     internal enum EPlayerForm
@@ -26,6 +28,28 @@ namespace Scripting.Actors
         /// The player speed 
         [SerializeField]
         private float       m_speed = 5f;
+
+        /// Bonus speed
+        float m_bonusSpeed = 0f;
+        internal float bonusSpeed {get {return m_bonusSpeed;} 
+            set 
+            {
+                m_bonusSpeed = Mathf.Lerp(m_bonusSpeed, 0, m_bonusSpeedDuration / m_bonusSpeedDiminutionDuration);
+                m_bonusSpeed = value; 
+                m_bonusSpeedDuration = 0f;
+            }
+        } 
+
+        [SerializeField]
+        float m_bonusSpeedDiminutionDuration = 2f;
+
+        // Counter
+        float m_bonusSpeedDuration = 0f;
+
+        [SerializeField]
+        float m_QTEBonusSpeed = 10f;
+
+        ///
 
         // Simple Jump
         [SerializeField]
@@ -44,7 +68,11 @@ namespace Scripting.Actors
 
         // Renderer
         [SerializeField]
-        Renderer m_render = null;
+        Renderer m_renderer = null;
+
+        /// Player animator
+        [SerializeField]
+        Animator m_animator = null;
 
 
 
@@ -61,9 +89,21 @@ namespace Scripting.Actors
         float m_sprintCoefficient = 5f;
         
         /// Trail on good actions
-        public TrailRenderer trail { get; private set; }
+        [SerializeField]
+        TrailRenderer m_trailRenderer = null;
+        public TrailRenderer trail { get {return m_trailRenderer;} private set{ m_trailRenderer = value;} }
 
-        internal bool isRunning = false;
+        bool m_isRunning = false;
+        internal bool isRunning{
+            get {return m_isRunning;}
+            set 
+            {
+                m_isRunning = value; 
+                m_trailRenderer.emitting = value;
+                if (value == true) 
+                    m_animator.SetTrigger("dashing");
+            }
+        }
 
         /// Attacking state datas
         GameObject m_attackTarget = null;
@@ -78,6 +118,22 @@ namespace Scripting.Actors
         EPlayerForm m_form = EPlayerForm.Default;
         internal EPlayerForm form {get {return m_form;} set {m_form = value;}}
 
+
+        /// True to enable inputs
+        internal bool enableInputs {get; set;}
+
+        /// Remember if a QTE has been passed
+        internal bool QTESucceeded {get; set;}
+
+        readonly string[] kAnimations = new string[(int)EPlayerStates.Count]{
+/* IDLE     */  "idle",      
+/* RUNNING  */  "running",
+/* JUMPING  */  "jumping",
+/* ATTACKING*/  "attacking",
+/* DEFENDING*/  "defending",
+/* GHOSTING */  "ghosting"
+        };
+
         /// Start
         void Start()
         {
@@ -90,8 +146,10 @@ namespace Scripting.Actors
             // Register as current player
             Managers.instance.playerManager.player = this;
 
+            enableInputs = true;
+
             // FMS
-            m_actions = new System.Action[]{
+            m_actions = new System.Action[(int)EPlayerStates.Count]{
 /* IDLE     */  OnIdleState,      
 /* RUNNING  */  OnRunningState,
 /* JUMPING  */  OnJumpingState,
@@ -99,15 +157,13 @@ namespace Scripting.Actors
 /* DEFENDING*/  OnDefendingState,
 /* GHOSTING */  OnGhostingState,
             };
-
-            // Get trail
-            trail = GetComponent<TrailRenderer>();
         }
 
         /// Physics update
         void OnRunningState()
         {
-            m_body.velocity = new Vector2(m_speed * (isRunning ? m_sprintCoefficient : 1f), m_body.velocity.y);
+            float bonusSpeed = Mathf.Lerp(m_bonusSpeed, 0, m_bonusSpeedDuration / m_bonusSpeedDiminutionDuration);
+            m_body.velocity = new Vector2(m_speed * (isRunning ? m_sprintCoefficient : 1f) + bonusSpeed, m_body.velocity.y);
         }
         
         /// Idle State
@@ -187,9 +243,22 @@ namespace Scripting.Actors
                 Managers.instance.fxManager.SpawnFX(EFXType.Dust, transform.position);
             }
 
+            // For Jump animation - set velocity
+            m_animator.SetFloat("velocityY", m_body.velocity.y);
+
             // Exit condition - Jump done
             if (m_stateDuration >= m_jumpDuration)
             {
+                // Spawn FX
+                if (QTESucceeded == true)
+                {
+                    Managers.instance.fxManager.SpawnFX(EFXType.LandingSuccess, transform.position, gameObject );
+                    bonusSpeed = m_QTEBonusSpeed;
+                }
+                else
+                    Managers.instance.fxManager.SpawnFX(EFXType.Dust, transform.position);
+
+
                 m_nextState = (int)EPlayerStates.Running;
                 // Debug.Break();
             }
@@ -198,11 +267,26 @@ namespace Scripting.Actors
         /// Attacking state
         void OnAttackingState()
         {
+            // FX
+            if (m_firstFrameInState == true)
+                if (QTESucceeded == true)
+                    Managers.instance.fxManager.SpawnFX(EFXType.AttackSuccess, m_attackTarget.transform.position);
+                else
+                    Managers.instance.fxManager.SpawnFX(EFXType.AttackConsequence, m_attackTarget.transform.position);
+
             if (m_stateDuration > m_attackDuration)
             {
+                // Change state
                 m_nextState = (int)EPlayerStates.Running;
+
+                // Disable running
                 isRunning = false;
+
+                // Disable target
                 m_attackTarget.SetActive(false);
+
+                // Bonus speed
+                bonusSpeed += m_QTEBonusSpeed;
             }
         }
 
@@ -231,11 +315,12 @@ namespace Scripting.Actors
         protected override void OnPreStateAction()
         {
             // Allow controls only if not sprinting
-            if(isRunning == false)
+            if(enableInputs == true)
             {
                 // Check if button has been activated on this frame
                 if(m_inputs.buttonJustOn == true && m_currentState != (int)EPlayerStates.Jumping)
                 {
+                    Debug.Log("JUMP");
                     JumpTo(transform.position + Vector3.right * m_simpleJumpDistance, m_simpleJumpDuration);
                 }
 
@@ -243,19 +328,24 @@ namespace Scripting.Actors
                     UpdateForm();
             }
             
-            m_render.material.SetFloat("_isGhost", m_form == EPlayerForm.Default ? 0 : 1);
+            m_renderer.material.SetFloat("_isGhost", m_form == EPlayerForm.Default ? 0 : 1);
 
         }
 
         /// Called after each update
         protected override void OnPostStateAction()
         {
+            // Lose the bonus speed
+            m_bonusSpeedDuration += Time.deltaTime;
         }
 
         /// Callback - State changed
         protected override void OnStateChanged()
         {
             Debug.LogFormat("Player switching to state {0}.", (EPlayerStates) m_currentState);
+
+            // Switch animation
+            m_animator.SetTrigger(kAnimations[(int)m_currentState]);
         }
     }
 }

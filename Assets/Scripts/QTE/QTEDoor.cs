@@ -10,12 +10,7 @@ namespace Scripting.QTE
         /// Jump destination
         [SerializeField]
         Door m_door = null;
-
-        /// Callback - Player entered
-        protected override void OnPlayerEntered()
-        {
-        }
-
+        
         /// Callback - Player exited
         protected override void OnPlayerExited()
         {
