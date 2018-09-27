@@ -56,8 +56,8 @@ namespace Scripting.QTE
         /// Color of the QTE
         public Color color { get; protected set; }
 
-        /// Sprite of the QTE
-        public Sprite sprite { get; protected set; }
+        /// Area renderer of the QTE
+        public SpriteRenderer areaSprite;
 
         /// Start
         protected virtual void Start()
@@ -66,6 +66,8 @@ namespace Scripting.QTE
             m_collider = GetComponent<BoxCollider2D>();
 
             enabled = false;
+
+            areaSprite.color = color;
         }
         
         /// Update

@@ -11,6 +11,12 @@ namespace Scripting.QTE
         [SerializeField]
         GameObject m_target = null;
 
+        protected override void Start()
+        {
+            color = new Color(87 / 255f, 180 / 255f, 169 / 255f);
+            base.Start();
+        }
+
         /// Callback - Player exited
         protected override void OnPlayerExited()
         {
