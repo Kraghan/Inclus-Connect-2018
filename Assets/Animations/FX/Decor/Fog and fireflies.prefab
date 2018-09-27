@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4943901635345846}
   - component: {fileID: 198566207676894120}
   - component: {fileID: 199643831068249740}
+  - component: {fileID: 114707405076588424}
   m_Layer: 0
   m_Name: Fog and fireflies
   m_TagString: Untagged
@@ -81,8 +82,8 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1272096802074214}
-  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 4.5, y: -1.63, z: -3.06}
+  m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: -4.4976254, y: 3.402442, z: -3.06}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4820008994323186}
@@ -103,6 +104,19 @@ Transform:
   m_Father: {fileID: 4943901635345846}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114707405076588424
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1272096802074214}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7c6c738e66a23642b7fddad512afc9a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  p_fog: {fileID: 198778115204868754}
+  p_fireflies: {fileID: 198097308243717814}
 --- !u!198 &198097308243717814
 ParticleSystem:
   m_ObjectHideFlags: 1
