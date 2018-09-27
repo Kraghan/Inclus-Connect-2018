@@ -13,8 +13,8 @@ namespace Scripting.QTE
 
         protected override void Start()
         {
-            base.Start();
             color = new Color(112 / 255f, 0 / 255f, 193 / 255f);
+            base.Start();
         }
 
         /// Callback - Player exited
