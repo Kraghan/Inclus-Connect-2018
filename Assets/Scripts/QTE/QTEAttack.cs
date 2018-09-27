@@ -15,12 +15,7 @@ namespace Scripting.QTE
         protected override void OnPlayerExited()
         {
             Managers.instance.playerManager.player.Attack(m_target);
-        }
-
-        /// Player succeeded inputs
-        protected override void OnQTESucceeded()
-        {
-            Managers.instance.playerManager.player.isRunning = true;
+            Managers.instance.playerManager.player.QTEExit();
         }
     }
 }

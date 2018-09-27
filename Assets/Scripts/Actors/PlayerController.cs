@@ -125,6 +125,9 @@ namespace Scripting.Actors
         /// Remember if a QTE has been passed
         internal bool QTESucceeded {get; set;}
 
+        /// Progress in the QTE on success
+        internal float QTEProgress {get; set;}
+
         readonly string[] kAnimations = new string[(int)EPlayerStates.Count]{
 /* IDLE     */  "idle",      
 /* RUNNING  */  "running",
@@ -218,6 +221,16 @@ namespace Scripting.Actors
         {
             m_form = m_inputs.lightOn == true ? EPlayerForm.Default : EPlayerForm.Ghost;
         }
+
+        /// Cllback - QTE Exited
+        internal void QTEExit()
+        {
+            if (QTESucceeded == true)
+            {
+                m_bonusSpeed += Mathf.Lerp(m_QTEBonusSpeed, 0, QTEProgress);
+            }
+        }
+        
         void OnJumpingState()
         {
             if (m_firstFrameInState == true)
@@ -253,7 +266,7 @@ namespace Scripting.Actors
                 if (QTESucceeded == true)
                 {
                     Managers.instance.fxManager.SpawnFX(EFXType.LandingSuccess, transform.position, gameObject );
-                    bonusSpeed = m_QTEBonusSpeed;
+                    bonusSpeed += m_QTEBonusSpeed;
                 }
                 else
                     Managers.instance.fxManager.SpawnFX(EFXType.Dust, transform.position);
@@ -284,15 +297,22 @@ namespace Scripting.Actors
 
                 // Disable target
                 m_attackTarget.SetActive(false);
-
-                // Bonus speed
-                bonusSpeed += m_QTEBonusSpeed;
             }
         }
 
         /// Defending state
         void OnDefendingState()
         {
+            if (m_firstFrameInState == true)
+            {
+                GameObject fx = Managers.instance.fxManager.SpawnFX( QTESucceeded == true ? EFXType.DefenseSuccess : EFXType.DefenseConsequence, transform.position, gameObject);
+                FX.Following f = fx.GetComponent<FX.Following>();
+                if (f != null)
+                {
+                    f.offset = Vector3.up;
+                }
+            }
+
             if (m_defendTarget.activeSelf == false)
             {
                 isRunning = false;

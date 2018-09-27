@@ -8,10 +8,13 @@ namespace Scripting.FX
 		/// the object to follow
 		internal GameObject objectToFollow = null;
 
+		/// Offset following
+		internal Vector3 offset = Vector3.zero;
+
 		/// Late update
 		void LateUpdate()
 		{
-			gameObject.transform.position = objectToFollow.transform.position;
+			gameObject.transform.position = objectToFollow.transform.position + offset;
 		}
 	}
 }

@@ -60,6 +60,8 @@ namespace Scripting.GameManagers
         LandingSuccess,
         AttackConsequence,
         AttackSuccess,
+        DefenseConsequence,
+        DefenseSuccess,
 
         Count
     }
@@ -100,7 +102,9 @@ namespace Scripting.GameManagers
 
                 Following f = fx.GetComponent<Following>();
                 if (f != null)
+                {
                     f.objectToFollow = p_targetToFollow;
+                }
 
                 return fx;
             }
