@@ -5,7 +5,7 @@ AnimatorOverrideController:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: landing_success_ac
+  m_Name: fx_landing_success_ac
   m_Controller: {fileID: 9100000, guid: a5c9b13926de2a0439877005b105c79b, type: 2}
   m_Clips:
   - m_OriginalClip: {fileID: 7400000, guid: 67748ffa3df45aa4c9c92fd76d89730b, type: 2}

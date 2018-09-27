@@ -136,7 +136,7 @@ namespace Scripting.Actors
 /* RUNNING  */  "running",
 /* JUMPING  */  "jumping",
 /* ATTACKING*/  "attacking",
-/* DEFENDING*/  "defending",
+/* DEFENDING*/  "running",      // no dedicated animation
 /* GHOSTING */  "ghosting"
         };
 
@@ -319,12 +319,16 @@ namespace Scripting.Actors
         {
             if (m_firstFrameInState == true)
             {
+                // Spawn flare
                 GameObject fx = Managers.instance.fxManager.SpawnFX( QTESucceeded == QTEType.MICRO ? EFXType.DefenseSuccess : EFXType.DefenseConsequence, transform.position, gameObject);
                 FX.Following f = fx.GetComponent<FX.Following>();
                 if (f != null)
                 {
                     f.offset = Vector3.up;
                 }
+
+                // Spawn shield
+                Managers.instance.fxManager.SpawnFX(EFXType.Shield, transform.position + Vector3.up);
             }
 
             if (m_defendTarget.activeSelf == false)
@@ -371,6 +375,11 @@ namespace Scripting.Actors
 
                 if (m_currentState != (int)EPlayerStates.Ghosting)
                     UpdateForm();
+
+                if (m_inputs.microJustOn == true)
+                {
+                    Managers.instance.fxManager.SpawnFX(EFXType.SimpleShield, transform.position + Vector3.up);
+                }
             }
             
             m_renderer.material.SetFloat("_isGhost", m_form == EPlayerForm.Default ? 0 : 1);
