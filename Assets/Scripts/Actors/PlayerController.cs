@@ -276,7 +276,8 @@ namespace Scripting.Actors
                 // Spawn FX
                 if (QTESucceeded == QTEType.BUTTON)
                 {
-                    Managers.instance.fxManager.SpawnFX(EFXType.LandingSuccess, transform.position, gameObject );
+                    Managers.instance.soundManager.PlaySound("Play_Jump_Landing", gameObject);                      // Sound
+                    Managers.instance.fxManager.SpawnFX(EFXType.LandingSuccess, transform.position, gameObject );   // FX
                     bonusSpeed += m_QTEBonusSpeed;
                         
                     enableInputs = true;
@@ -404,7 +405,13 @@ namespace Scripting.Actors
 
             // Simple jump cooldown 
             if (m_simpleJumpCooldown >= 0)
+            {
                 m_simpleJumpCooldown -= Time.deltaTime;
+                if (m_simpleJumpCooldown <= 0)
+                    Managers.instance.soundManager.PlaySound("Play_Jump_Landing", gameObject);  // Sound
+            }
+            
+            
         }
 
         /// Callback - State changed

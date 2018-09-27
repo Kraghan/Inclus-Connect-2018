@@ -35,6 +35,7 @@ namespace Scripting.QTE
         [SerializeField]
         Sprite m_ghostDoorFront = null;
 
+
         /// The renderer
         [SerializeField]
         SpriteRenderer m_rendererBack = null;
@@ -43,6 +44,11 @@ namespace Scripting.QTE
         [SerializeField]
         SpriteRenderer m_rendererFront = null;
 
+        /// The magma renderer
+        [SerializeField]
+        SpriteRenderer m_magma = null;
+        internal SpriteRenderer magma {get{return m_magma;} set {m_magma = value;}}
+        
         /// Form of the door
         internal EPlayerForm form {get; private set;}
 
