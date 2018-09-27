@@ -304,6 +304,7 @@ namespace Scripting.Actors
                     Managers.instance.fxManager.SpawnFX(EFXType.AttackConsequence, m_attackTarget.transform.position);
 
             Managers.instance.soundManager.PlaySound("Play_Destroy", m_attackTarget);
+            Managers.instance.fxManager.SpawnFX(EFXType.Attack, transform.position + new Vector3(5,3,0), gameObject);
 
             if (m_stateDuration > m_attackDuration)
             {
