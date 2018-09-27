@@ -63,6 +63,7 @@ namespace Scripting.GameManagers
         DefenseSuccess,
         Shield,
         SimpleShield,
+        Dash,
 
         Count
     }

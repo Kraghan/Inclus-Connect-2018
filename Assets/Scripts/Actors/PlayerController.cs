@@ -105,8 +105,9 @@ namespace Scripting.Actors
                 //m_trailRenderer.emitting = value;
                 if (value == true) 
                 {
-                    Managers.instance.soundManager.PlaySound("Play_Dash", gameObject);  // sound
-                    m_animator.SetTrigger("dashing");                                   // anim
+                    Managers.instance.soundManager.PlaySound("Play_Dash", gameObject);      // sound
+                    Managers.instance.fxManager.SpawnFX(EFXType.Dash, transform.position);  // FX
+                    m_animator.SetTrigger("dashing");                                       // anim
                 }
             }
         }
