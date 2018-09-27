@@ -18,7 +18,7 @@ namespace Scripting.QTE
         protected override void Start()
         {
             base.Start();
-            color = Color.green;
+            color = new Color(66 / 255f, 199 / 255f, 75 / 255f);
         }
         
         /// Callback - Player exited

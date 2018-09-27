@@ -10,7 +10,13 @@ namespace Scripting.QTE
         /// Jump destination
         [SerializeField]
         Door m_door = null;
-        
+
+        protected override void Start()
+        {
+            base.Start();
+            color = new Color(112 / 255f, 0 / 255f, 193 / 255f);
+        }
+
         /// Callback - Player exited
         protected override void OnPlayerExited()
         {
