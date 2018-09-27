@@ -68,6 +68,10 @@ namespace Scripting.QTE
             enabled = false;
 
             areaSprite.color = color;
+
+            FogAndFirefliesColorChanger[] colorChangers = GetComponentsInChildren<FogAndFirefliesColorChanger>();
+            foreach (FogAndFirefliesColorChanger colorChanger in colorChangers)
+                colorChanger.ChangeColor(color);
         }
         
         /// Update
