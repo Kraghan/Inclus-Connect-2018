@@ -89,7 +89,7 @@ namespace Scripting
             m_microPreviouslyOn = m_microOn;
 
 
-            if (true)
+            if (false)
             {
                 /// parsing
                 string data = m_arduino.readQueue();

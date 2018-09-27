@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using Scripting.Actors;
 using Scripting.GameManagers;
 using UnityEngine;
+using UnityEngine.Rendering.PostProcessing;
+
 
 namespace Scripting.QTE
 {
@@ -59,6 +61,13 @@ namespace Scripting.QTE
         /// Area renderer of the QTE
         public SpriteRenderer areaSprite;
 
+        [Header("Tutorial")]
+        public bool isTutorial = false;
+
+        public PostProcessVolume processVolume;
+        private Vignette vignette; 
+
+
         /// Start
         protected virtual void Start()
         {
@@ -72,6 +81,9 @@ namespace Scripting.QTE
             FogAndFirefliesColorChanger[] colorChangers = areaSprite.GetComponentsInChildren<FogAndFirefliesColorChanger>();
             foreach (FogAndFirefliesColorChanger colorChanger in colorChangers)
                 colorChanger.ChangeColor(color);
+
+            if (!processVolume.profile.TryGetSettings<Vignette>(out vignette))
+                Debug.LogError("Vignette post process not found");
         }
         
         /// Update
@@ -114,7 +126,25 @@ namespace Scripting.QTE
             else
             {
                 // Update slowmo
-                Utility.TimeManager.StartSlowMotion(Mathf.Lerp(1, Managers.instance.playerManager.GetPlayer(m_QTENeeded.type).GetSlowMotionMin(), GetPositionInCollider()));
+                Utility.TimeManager.StartSlowMotion(Mathf.Lerp(1, Managers.instance.playerManager.GetPlayer(m_QTENeeded.type).GetSlowMotionMin(), GetPositionInCollider() * 10));
+
+                if (isTutorial && GetPositionInCollider() >= 0.5f)
+                {
+                    Utility.TimeManager.StartSlowMotion(0.001f);
+
+                    vignette.enabled.Override(true);
+                }
+            }
+        }
+
+        private void Update()
+        {
+            if (isTutorial && GetPositionInCollider() >= 0.5f)
+            {
+                float value = Mathf.Lerp(0.5f, 0.7f, Mathf.PingPong(Time.realtimeSinceStartup, 1));
+                print(value);
+
+                vignette.intensity.Override(value);
             }
         }
 
@@ -277,6 +307,9 @@ namespace Scripting.QTE
             Managers.instance.playerManager.player.QTEProgress = GetPositionInCollider();
 
             Managers.instance.playerManager.player.isRunning = true;
+
+            if (isTutorial)
+                vignette.enabled.Override(false);
         }
     }
 
