@@ -996,6 +996,7 @@ GameObject:
   - component: {fileID: 61996705278410540}
   - component: {fileID: 114246975678749376}
   - component: {fileID: 114558693963414104}
+  - component: {fileID: 114650150530099862}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -4102,6 +4103,17 @@ MonoBehaviour:
   m_readTimeout: 20
   m_queueLenght: 1
   m_portName: COM5
+--- !u!114 &114650150530099862
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1646611159892526}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3d32a9c472f43949a36c9579de32e7f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!137 &137545336369180454
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1

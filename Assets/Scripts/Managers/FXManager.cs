@@ -106,6 +106,7 @@ namespace Scripting.GameManagers
                 if (f != null)
                 {
                     f.objectToFollow = p_targetToFollow;
+                    f.offset = p_position - p_targetToFollow.transform.position;
                 }
 
                 return fx;

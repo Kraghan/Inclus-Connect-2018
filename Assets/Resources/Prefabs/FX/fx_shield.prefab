@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 212483612606283182}
   - component: {fileID: 95071690916342064}
   - component: {fileID: 114176188528248984}
+  - component: {fileID: 114909815993070444}
   m_Layer: 0
   m_Name: fx_shield
   m_TagString: Untagged
@@ -37,7 +38,7 @@ Transform:
   m_GameObject: {fileID: 1519895658676730}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.35, y: 0.35, z: 1}
+  m_LocalScale: {x: 0.3, y: 0.3, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -69,6 +70,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 104fabfe6772cb94391167080b025978, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114909815993070444
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1519895658676730}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33d5e261eaecc5e43a9a0500a9d7d371, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!212 &212483612606283182

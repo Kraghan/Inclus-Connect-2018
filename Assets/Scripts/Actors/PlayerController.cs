@@ -104,7 +104,10 @@ namespace Scripting.Actors
                 m_isRunning = value; 
                 //m_trailRenderer.emitting = value;
                 if (value == true) 
-                    m_animator.SetTrigger("dashing");
+                {
+                    Managers.instance.soundManager.PlaySound("Play_Dash", gameObject);  // sound
+                    m_animator.SetTrigger("dashing");                                   // anim
+                }
             }
         }
 
@@ -259,6 +262,8 @@ namespace Scripting.Actors
                 m_body.velocity = GetBallisticTo(transform.position, m_jumpDestination, m_jumpDuration);
                 
                 Managers.instance.fxManager.SpawnFX(EFXType.Dust, transform.position);
+
+                Managers.instance.soundManager.PlaySound("Play_Jump", gameObject);
             }
 
             // For Jump animation - set velocity
@@ -297,6 +302,8 @@ namespace Scripting.Actors
                 else
                     Managers.instance.fxManager.SpawnFX(EFXType.AttackConsequence, m_attackTarget.transform.position);
 
+            Managers.instance.soundManager.PlaySound("Play_Destroy", m_attackTarget);
+
             if (m_stateDuration > m_attackDuration)
             {
                 // Change state
@@ -320,15 +327,10 @@ namespace Scripting.Actors
             if (m_firstFrameInState == true)
             {
                 // Spawn flare
-                GameObject fx = Managers.instance.fxManager.SpawnFX( QTESucceeded == QTEType.MICRO ? EFXType.DefenseSuccess : EFXType.DefenseConsequence, transform.position, gameObject);
-                FX.Following f = fx.GetComponent<FX.Following>();
-                if (f != null)
-                {
-                    f.offset = Vector3.up;
-                }
+                Managers.instance.fxManager.SpawnFX( QTESucceeded == QTEType.MICRO ? EFXType.DefenseSuccess : EFXType.DefenseConsequence, transform.position + Vector3.up, gameObject);
 
                 // Spawn shield
-                Managers.instance.fxManager.SpawnFX(EFXType.Shield, transform.position + Vector3.up);
+                Managers.instance.fxManager.SpawnFX(EFXType.Shield, transform.position + Vector3.up * 2, gameObject);
             }
 
             if (m_defendTarget.activeSelf == false)
@@ -378,7 +380,7 @@ namespace Scripting.Actors
 
                 if (m_inputs.microJustOn == true)
                 {
-                    Managers.instance.fxManager.SpawnFX(EFXType.SimpleShield, transform.position + Vector3.up);
+                    Managers.instance.fxManager.SpawnFX(EFXType.SimpleShield, transform.position + Vector3.up * 2, gameObject);
                 }
             }
             
