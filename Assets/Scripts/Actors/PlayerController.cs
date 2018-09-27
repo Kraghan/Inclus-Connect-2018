@@ -382,6 +382,11 @@ namespace Scripting.Actors
                 {
                     Managers.instance.fxManager.SpawnFX(EFXType.SimpleShield, transform.position + Vector3.up * 2, gameObject);
                 }
+
+                if (m_inputs.acceleroJustOn == true)
+                {
+                    m_animator.SetTrigger("attacking");
+                }
             }
             
             m_renderer.material.SetFloat("_isGhost", m_form == EPlayerForm.Default ? 0 : 1);

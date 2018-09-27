@@ -7,6 +7,7 @@ namespace Scripting.QTE
 {
     internal class QTEDoor : QuickTimeEvent
     {
+
         /// Jump destination
         [SerializeField]
         Door m_door = null;
