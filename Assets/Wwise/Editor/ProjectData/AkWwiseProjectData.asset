@@ -24,11 +24,22 @@ MonoBehaviour:
     List: []
   AuxBusWwu:
   - Guid: '{DD15A29E-29CE-4B9A-A0C5-F35919CAAD3C}'
-    m_lastTimePart2: -1999232086
-    m_lastTimePsrt1: -200624640
+    m_lastTimePart2: -1999231882
+    m_lastTimePsrt1: -1274364422
     ParentPhysicalPath: 
     PhysicalPath: Master-Mixer Hierarchy\Default Work Unit.wwu
-    List: []
+    List:
+    - Guid: 3a3750e29c42fa4ab1f689b1afb8161d
+      ID: 695384145
+      Name: RVB
+      Path: Default Work Unit\Master Audio Bus\RVB
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: Master Audio Bus
+        ObjectType: 2
+      - ElementName: RVB
+        ObjectType: 1
   BankWwu:
   - Guid: '{92CB2F6B-5433-462E-BC36-0436CBF0F6BB}'
     m_lastTimePart2: -1999232066
@@ -47,11 +58,95 @@ MonoBehaviour:
         ObjectType: 7
   EventWwu:
   - Guid: '{04D1AD93-A368-4A75-8FEB-52B9B8B81107}'
-    m_lastTimePart2: -1999232066
-    m_lastTimePsrt1: -1936987808
+    m_lastTimePart2: -1999231882
+    m_lastTimePsrt1: -1277446186
     ParentPhysicalPath: 
     PhysicalPath: Events\Default Work Unit.wwu
     List:
+    - Guid: b0e934bca682ea4bae75697612e6d1a0
+      ID: -1335434006
+      Name: Play_AMB
+      Path: Default Work Unit\Play_AMB
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: Play_AMB
+        ObjectType: 3
+      maxAttenuation: 0
+      maxDuration: 0
+      minDuration: 0
+    - Guid: 2418823801ff0f4db5eb355c619c561b
+      ID: -97327431
+      Name: Play_Appear
+      Path: Default Work Unit\Play_Appear
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: Play_Appear
+        ObjectType: 3
+      maxAttenuation: 0
+      maxDuration: 0
+      minDuration: 0
+    - Guid: 2b7142181ec4614e82d2c20c71895801
+      ID: -2083179910
+      Name: Play_Dash
+      Path: Default Work Unit\Play_Dash
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: Play_Dash
+        ObjectType: 3
+      maxAttenuation: 0
+      maxDuration: 0
+      minDuration: 0
+    - Guid: 12914105a96b97459aed69f22b5d7c75
+      ID: -281259272
+      Name: Play_Destroy
+      Path: Default Work Unit\Play_Destroy
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: Play_Destroy
+        ObjectType: 3
+      maxAttenuation: 0
+      maxDuration: 0
+      minDuration: 0
+    - Guid: fe09ba5379c85a438a772243f50a02f1
+      ID: 1060825901
+      Name: Play_Disappear
+      Path: Default Work Unit\Play_Disappear
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: Play_Disappear
+        ObjectType: 3
+      maxAttenuation: 0
+      maxDuration: 0
+      minDuration: 0
+    - Guid: e1d6648778ffa7408d6526859586d756
+      ID: -440811497
+      Name: Play_Footsteps
+      Path: Default Work Unit\Play_Footsteps
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: Play_Footsteps
+        ObjectType: 3
+      maxAttenuation: 0
+      maxDuration: 0
+      minDuration: 0
+    - Guid: 3e2915ca0989ba45a2028544fbbd6196
+      ID: -605840630
+      Name: Play_Jump
+      Path: Default Work Unit\Play_Jump
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: Play_Jump
+        ObjectType: 3
+      maxAttenuation: 0
+      maxDuration: 0
+      minDuration: 0
     - Guid: 52decbc8deab2c4cbdb14a215b69b01a
       ID: 1058038914
       Name: Play_MUSICGLOBAL
@@ -64,19 +159,50 @@ MonoBehaviour:
       maxAttenuation: 0
       maxDuration: 0
       minDuration: 0
+    - Guid: f42bbf8040a14049a22394e58ace6321
+      ID: 435770000
+      Name: Stop_AMB
+      Path: Default Work Unit\Stop_AMB
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: Stop_AMB
+        ObjectType: 3
+      maxAttenuation: 0
+      maxDuration: 0
+      minDuration: 0
+    - Guid: 83ca64a7d939e04f8af3e6b373e09075
+      ID: 1311704800
+      Name: Stop_MUSICGLOBAL
+      Path: Default Work Unit\Stop_MUSICGLOBAL
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: Stop_MUSICGLOBAL
+        ObjectType: 3
+      maxAttenuation: 0
+      maxDuration: 0
+      minDuration: 0
   ExpandedItems:
   - /Wwise_Inclusetco
   - /Wwise_Inclusetco/Events
   - /Wwise_Inclusetco/Events/Default Work Unit
-  - /Wwise_Inclusetco/SoundBanks
-  - /Wwise_Inclusetco/SoundBanks/Default Work Unit
   RtpcWwu:
   - Guid: '{9549F168-4921-4CD3-B055-5D3C3461F822}'
-    m_lastTimePart2: -1999232086
-    m_lastTimePsrt1: -200644587
+    m_lastTimePart2: -1999231882
+    m_lastTimePsrt1: -1277426231
     ParentPhysicalPath: 
     PhysicalPath: Game Parameters\Default Work Unit.wwu
-    List: []
+    List:
+    - Guid: 81b4b711b2513049bd05e1e60cde1943
+      ID: -1058819202
+      Name: SlowMo
+      Path: Default Work Unit\SlowMo
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: SlowMo
+        ObjectType: 13
   StateWwu:
   - Guid: '{6FA3D7AC-DC24-4F81-B0FC-D9F9EE089231}'
     m_lastTimePart2: -1999232086

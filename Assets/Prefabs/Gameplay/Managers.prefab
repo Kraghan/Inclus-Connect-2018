@@ -22,8 +22,24 @@ GameObject:
   - component: {fileID: 114099778230513962}
   - component: {fileID: 114738650838920426}
   - component: {fileID: 114962055460678044}
+  - component: {fileID: 114706060647830950}
   m_Layer: 0
   m_Name: Managers
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1734585077216718
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4467627838198140}
+  m_Layer: 0
+  m_Name: SoundNode
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -38,8 +54,22 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 2.576978, y: -8.624583, z: -0.2006836}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 4467627838198140}
   m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4467627838198140
+Transform:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1734585077216718}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4008366778943494}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &114099778230513962
@@ -53,6 +83,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e1a416f4fc50fa478a6271969e70ba6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114706060647830950
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1009461500299756}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58e8d2f1317f43c46bdfd3dc2c2c7f93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _SoundNode: {fileID: 1734585077216718}
+  _BankName: INCLUETCOMAIN
 --- !u!114 &114738650838920426
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -89,3 +132,7 @@ MonoBehaviour:
     prefab: {fileID: 1773249269390210, guid: 49bc8d2a5ce5fdc47840d34ab724de3e, type: 2}
   - poolSize: 2
     prefab: {fileID: 1222143070877894, guid: 9b1815a3f6f266f4188d2c5cfd23abb6, type: 2}
+  - poolSize: 1
+    prefab: {fileID: 1519895658676730, guid: d5c4b7b69fd1f6c4180b79f5cc1bfa3f, type: 2}
+  - poolSize: 1
+    prefab: {fileID: 1519895658676730, guid: d5c4b7b69fd1f6c4180b79f5cc1bfa3f, type: 2}

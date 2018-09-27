@@ -20,6 +20,9 @@ namespace Scripting.GameManagers
         // Player manager
         internal PlayerManager playerManager {get; private set;}
 
+        // Sound manager
+        internal SoundManager soundManager {get; private set;}
+
         void Awake()
         {
             if (m_instance == null)
@@ -34,6 +37,9 @@ namespace Scripting.GameManagers
 
             // get player manager
             playerManager = GetComponent<PlayerManager>();
+
+            // get sound manager
+            soundManager = GetComponent<SoundManager>();
         }
     }
 }
