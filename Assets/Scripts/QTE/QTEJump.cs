@@ -28,6 +28,14 @@ namespace Scripting.QTE
 
             // Orders to jump
             Managers.instance.playerManager.player.JumpTo(m_destination.transform.position, m_duration);
+
+        
+        }
+
+        protected override void OnQTESucceeded()
+        {
+            base.OnQTESucceeded();
+            StartCoroutine(Managers.instance.playerManager.player.ActivateJumpArtifact());
         }
     }
 }

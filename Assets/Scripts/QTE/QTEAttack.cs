@@ -21,7 +21,14 @@ namespace Scripting.QTE
         protected override void OnPlayerExited()
         {
             Managers.instance.playerManager.player.Attack(m_target);
+
             Managers.instance.playerManager.player.QTEExit();
+        }
+
+        protected override void OnQTESucceeded()
+        {
+            base.OnQTESucceeded();
+            StartCoroutine(Managers.instance.playerManager.player.ActivateAttackArtifact());
         }
     }
 }

@@ -140,6 +140,16 @@ namespace Scripting.Actors
 /* GHOSTING */  "ghosting"
         };
 
+        [Header("Artifacts")]
+        [SerializeField]
+        private Renderer m_attackCube;
+        [SerializeField]
+        private Renderer m_shieldCube;
+        [SerializeField]
+        private Renderer m_jumpCube;
+        [SerializeField]
+        private Renderer m_ghostCube;
+
         /// Start
         void Start()
         {
@@ -395,6 +405,124 @@ namespace Scripting.Actors
 
             // Switch animation
             m_animator.SetTrigger(kAnimations[(int)m_currentState]);
+        }
+
+        public IEnumerator ActivateJumpArtifact()
+        {
+            Color colorCube = m_jumpCube.material.GetColor("_EmissionColor");
+
+            m_jumpCube.material.SetColor("_EmissionColor", colorCube * Mathf.LinearToGammaSpace(10));
+
+            for(float timeElapsed = 0; timeElapsed < 2; timeElapsed += Time.deltaTime)
+            {
+                yield return new WaitForEndOfFrame();
+            }
+
+            m_jumpCube.material.SetColor("_EmissionColor", colorCube);
+
+        }
+
+        public IEnumerator DeactivateJumpArtifact()
+        {
+            Color colorCube = m_jumpCube.material.GetColor("_EmissionColor");
+
+            m_jumpCube.material.SetColor("_EmissionColor", Color.black);
+
+            for (float timeElapsed = 0; timeElapsed < 2; timeElapsed += Time.deltaTime)
+            {
+                yield return new WaitForEndOfFrame();
+            }
+
+            m_jumpCube.material.SetColor("_EmissionColor", colorCube);
+        }
+
+        public IEnumerator ActivateShieldArtifact()
+        {
+            Color colorCube = m_shieldCube.material.GetColor("_EmissionColor");
+
+            m_shieldCube.material.SetColor("_EmissionColor", colorCube * Mathf.LinearToGammaSpace(10));
+
+            for (float timeElapsed = 0; timeElapsed < 2; timeElapsed += Time.deltaTime)
+            {
+                yield return new WaitForEndOfFrame();
+            }
+
+            m_shieldCube.material.SetColor("_EmissionColor", colorCube);
+
+        }
+
+        public IEnumerator DeactivateShieldArtifact()
+        {
+            Color colorCube = m_shieldCube.material.GetColor("_EmissionColor");
+
+            m_shieldCube.material.SetColor("_EmissionColor", Color.black);
+
+            for (float timeElapsed = 0; timeElapsed < 2; timeElapsed += Time.deltaTime)
+            {
+                yield return new WaitForEndOfFrame();
+            }
+
+            m_shieldCube.material.SetColor("_EmissionColor", colorCube);
+
+        }
+
+        public IEnumerator ActivateAttackArtifact()
+        {
+            Color colorCube = m_attackCube.material.GetColor("_EmissionColor");
+
+            m_attackCube.material.SetColor("_EmissionColor", colorCube * Mathf.LinearToGammaSpace(10));
+
+            for (float timeElapsed = 0; timeElapsed < 2; timeElapsed += Time.deltaTime)
+            {
+                yield return new WaitForEndOfFrame();
+            }
+
+            m_attackCube.material.SetColor("_EmissionColor", colorCube);
+
+        }
+
+        public IEnumerator DeactivateAttackArtifact()
+        {
+            Color colorCube = m_attackCube.material.GetColor("_EmissionColor");
+
+            m_attackCube.material.SetColor("_EmissionColor", Color.black);
+
+            for (float timeElapsed = 0; timeElapsed < 2; timeElapsed += Time.deltaTime)
+            {
+                yield return new WaitForEndOfFrame();
+            }
+
+            m_attackCube.material.SetColor("_EmissionColor", colorCube);
+
+        }
+
+        public IEnumerator ActivateGhostArtifact()
+        {
+            Color colorCube = m_ghostCube.material.GetColor("_EmissionColor");
+
+            m_ghostCube.material.SetColor("_EmissionColor", colorCube * Mathf.LinearToGammaSpace(10));
+
+            for (float timeElapsed = 0; timeElapsed < 2; timeElapsed += Time.deltaTime)
+            {
+                yield return new WaitForEndOfFrame();
+            }
+
+            m_ghostCube.material.SetColor("_EmissionColor", colorCube);
+        }
+
+        public IEnumerator DeactivateGhostArtifact()
+        {
+            Color colorCube = m_ghostCube.material.GetColor("_EmissionColor");
+
+            m_ghostCube.material.SetColor("_EmissionColor", Color.black);
+
+            for (float timeElapsed = 0; timeElapsed < 2; timeElapsed += Time.deltaTime)
+            {
+                yield return new WaitForEndOfFrame();
+            }
+
+            m_ghostCube.material.SetColor("_EmissionColor", colorCube);
+
         }
     }
 }

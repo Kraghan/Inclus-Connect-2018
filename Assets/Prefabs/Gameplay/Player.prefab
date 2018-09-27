@@ -4087,6 +4087,10 @@ MonoBehaviour:
   m_animator: {fileID: 95434882913309844}
   m_sprintCoefficient: 5
   m_trailRenderer: {fileID: 1283509731718674}
+  m_attackCube: {fileID: 137860608912233566}
+  m_shieldCube: {fileID: 137988239549701844}
+  m_jumpCube: {fileID: 137614782233089896}
+  m_ghostCube: {fileID: 137545336369180454}
 --- !u!114 &114558693963414104
 MonoBehaviour:
   m_ObjectHideFlags: 1

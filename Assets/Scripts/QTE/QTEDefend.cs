@@ -23,5 +23,11 @@ namespace Scripting.QTE
             m_target.SetActive(true);
             Managers.instance.playerManager.player.Defend(m_target);
         }
+
+        protected override void OnQTESucceeded()
+        {
+            base.OnQTESucceeded();
+            StartCoroutine(Managers.instance.playerManager.player.ActivateShieldArtifact());
+        }
     }
 }

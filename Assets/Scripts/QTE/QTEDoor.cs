@@ -28,6 +28,7 @@ namespace Scripting.QTE
         {
             base.OnQTESucceeded();
             Managers.instance.playerManager.player.form = m_door.form;
+            StartCoroutine(Managers.instance.playerManager.player.ActivateGhostArtifact());
             // Managers.instance.playerManager.player.EnterForm(m_door.form);
         }
 
