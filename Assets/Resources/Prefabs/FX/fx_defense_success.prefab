@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 212571997661230874}
   - component: {fileID: 95864269979696876}
   - component: {fileID: 114771296330602460}
+  - component: {fileID: 114411221283210262}
   m_Layer: 0
   m_Name: fx_defense_success
   m_TagString: Untagged
@@ -60,6 +61,17 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &114411221283210262
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1222143070877894}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33d5e261eaecc5e43a9a0500a9d7d371, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114771296330602460
 MonoBehaviour:
   m_ObjectHideFlags: 1

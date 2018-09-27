@@ -36,7 +36,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4504509828915144}
   - component: {fileID: 212551640856248254}
-  - component: {fileID: 114671014677227364}
   m_Layer: 0
   m_Name: Door_Back
   m_TagString: EditorOnly
@@ -54,6 +53,7 @@ GameObject:
   - component: {fileID: 4915929262296108}
   - component: {fileID: 114196521119061236}
   - component: {fileID: 61712296493779280}
+  - component: {fileID: 114895960202489968}
   m_Layer: 0
   m_Name: QTEDoor
   m_TagString: Untagged
@@ -70,7 +70,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4464774619578270}
   - component: {fileID: 212525457382625450}
-  - component: {fileID: 114007855675883434}
   m_Layer: 0
   m_Name: Door_Front
   m_TagString: EditorOnly
@@ -158,19 +157,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 15, y: 20}
   m_EdgeRadius: 0
---- !u!114 &114007855675883434
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1718104811382042}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ab0b5b98ed8b87147b9d01a3f065d43c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_defaultDoor: {fileID: 21300000, guid: 4d5e56573057ae941b6c1df77503bae9, type: 3}
-  m_ghostDoor: {fileID: 21300000, guid: 3f9b868b5d84d8548ae957db1b637c70, type: 3}
 --- !u!114 &114196521119061236
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -187,20 +173,24 @@ MonoBehaviour:
     p_done: 0
   m_succesPercentageToAdd: 0.1
   m_failurePercentageToRemove: 0.1
-  m_door: {fileID: 114671014677227364}
---- !u!114 &114671014677227364
+  m_door: {fileID: 114895960202489968}
+--- !u!114 &114895960202489968
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1277833487227312}
+  m_GameObject: {fileID: 1469127560791712}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ab0b5b98ed8b87147b9d01a3f065d43c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_defaultDoor: {fileID: 21300000, guid: 5c5dc50d2d715bd4cad6d2799a6888fa, type: 3}
-  m_ghostDoor: {fileID: 21300000, guid: 2c3c326ba74de6e4196a53eb3c3332cb, type: 3}
+  m_defaultDoorBack: {fileID: 21300000, guid: 2c3c326ba74de6e4196a53eb3c3332cb, type: 3}
+  m_ghostDoorBack: {fileID: 21300000, guid: 5c5dc50d2d715bd4cad6d2799a6888fa, type: 3}
+  m_defaultDoorFront: {fileID: 21300000, guid: 3f9b868b5d84d8548ae957db1b637c70, type: 3}
+  m_ghostDoorFront: {fileID: 21300000, guid: 4d5e56573057ae941b6c1df77503bae9, type: 3}
+  m_rendererBack: {fileID: 212551640856248254}
+  m_rendererFront: {fileID: 212525457382625450}
 --- !u!212 &212151223284212982
 SpriteRenderer:
   m_ObjectHideFlags: 1

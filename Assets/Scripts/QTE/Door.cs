@@ -8,23 +8,31 @@ namespace Scripting.QTE
     {
         /// The door ghost form
         [SerializeField]
-        Sprite m_defaultDoor = null;
+        Sprite m_defaultDoorBack = null;
 
         /// The door ghost form
         [SerializeField]
-        Sprite m_ghostDoor = null;
+        Sprite m_ghostDoorBack = null;
+
+        
+        /// The door ghost form
+        [SerializeField]
+        Sprite m_defaultDoorFront = null;
+
+        /// The door ghost form
+        [SerializeField]
+        Sprite m_ghostDoorFront = null;
 
         /// The renderer
-        SpriteRenderer m_renderer = null;
+        [SerializeField]
+        SpriteRenderer m_rendererBack = null;
+
+        /// The renderer
+        [SerializeField]
+        SpriteRenderer m_rendererFront = null;
 
         /// Form of the door
         internal EPlayerForm form {get; private set;}
-
-        /// Awake
-        void Awake()
-        {
-            m_renderer = GetComponent<SpriteRenderer>();
-        }
 
         /// Update
         void Update()
@@ -38,16 +46,18 @@ namespace Scripting.QTE
             Debug.DrawLine(bounds.max, bounds.max + Vector3.down * bounds.size.y, Color.red, 0.1f);
             //
             
-            if (bounds.Intersects(m_renderer.bounds) == true)
+            if (bounds.Intersects(m_rendererBack.bounds) == true)
             {
                 if (Managers.instance.playerManager.player.inputs.lightOn == true)
                 {
-                   m_renderer.sprite = m_ghostDoor;
+                   m_rendererBack.sprite = m_ghostDoorBack;
+                   m_rendererFront.sprite = m_ghostDoorFront;
                     form = EPlayerForm.Ghost;
                 }
                 else
                 {
-                    m_renderer.sprite = m_defaultDoor;
+                    m_rendererBack.sprite = m_defaultDoorBack;
+                    m_rendererFront.sprite = m_defaultDoorFront;
                     form = EPlayerForm.Default;
                 }
 
