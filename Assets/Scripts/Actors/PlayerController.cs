@@ -244,8 +244,18 @@ namespace Scripting.Actors
         {
             if (QTESucceeded != QTEType.NONE)
             {
-                m_bonusSpeed += Mathf.Lerp(m_QTEBonusSpeed, 0, QTEProgress);
+                if(QTEProgress < 0.5)
+                    m_bonusSpeed += Mathf.Lerp(m_QTEBonusSpeed, 0, QTEProgress * 2);
+                else
+                    m_bonusSpeed -= Mathf.Lerp(0, m_QTEBonusSpeed, QTEProgress * 2 - 1);
+
+                m_bonusSpeed = Mathf.Clamp(m_bonusSpeed, 0, 10 * m_speed);
             }
+        }
+
+        internal void DecreaseSpeed()
+        {
+            m_bonusSpeed = 0; 
         }
 
         /// Returns the velocity to reach p_end in p_duration second from p_start
@@ -343,7 +353,7 @@ namespace Scripting.Actors
                 Managers.instance.fxManager.SpawnFX( QTESucceeded == QTEType.MICRO ? EFXType.DefenseSuccess : EFXType.DefenseConsequence, transform.position + Vector3.up, gameObject);
 
                 // Spawn shield
-                Managers.instance.fxManager.SpawnFX(EFXType.Shield, transform.position + Vector3.up * 2, gameObject);
+                Managers.instance.fxManager.SpawnFX(EFXType.Shield, transform.position + Vector3.up * 2 + Vector3.back * 2, gameObject);
             }
 
             if (m_defendTarget.activeSelf == false)
@@ -393,7 +403,7 @@ namespace Scripting.Actors
 
                 if (m_inputs.microJustOn == true)
                 {
-                    Managers.instance.fxManager.SpawnFX(EFXType.SimpleShield, transform.position + Vector3.up * 2, gameObject);
+                    Managers.instance.fxManager.SpawnFX(EFXType.SimpleShield, transform.position + Vector3.up * 2 + Vector3.back * 2, gameObject);
                 }
 
                 if (m_inputs.acceleroJustOn == true)
@@ -435,7 +445,7 @@ namespace Scripting.Actors
         /// Callback - State changed
         protected override void OnStateChanged()
         {
-            Debug.LogFormat("Player switching to state {0}.", (EPlayerStates) m_currentState);
+            //Debug.LogFormat("Player switching to state {0}.", (EPlayerStates) m_currentState);
 
             // Switch animation
             m_animator.SetTrigger(kAnimations[(int)m_currentState]);

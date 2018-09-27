@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Rendering.PostProcessing;
 
 namespace Scripting.GameManagers
 {
@@ -22,6 +23,9 @@ namespace Scripting.GameManagers
 
         // Sound manager
         internal SoundManager soundManager {get; private set;}
+        
+        // Post processing stack 
+        internal PostProcessVolume processVolume { get; private set; }
 
         void Awake()
         {
@@ -40,6 +44,9 @@ namespace Scripting.GameManagers
 
             // get sound manager
             soundManager = GetComponent<SoundManager>();
+
+            // get post processing stack
+            processVolume = FindObjectOfType<PostProcessVolume>();
         }
     }
 }

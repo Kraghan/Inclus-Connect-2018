@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class Display_Ending : MonoBehaviour
 {
 
-	public GameObject Player;
+	//public GameObject Player;
 	public CanvasRenderer[] UI_Ending;
 
 	bool fadein;
@@ -15,13 +15,15 @@ public class Display_Ending : MonoBehaviour
 	public Image[] stars_sprites;
 	public Sprite wonstar;
 
-	void OnTriggerEnter2D (Collider2D other)
+    float m_startTime;
+
+    void OnTriggerEnter2D (Collider2D other)
 	{
-		Player.SetActive (false);
+		//Player.SetActive (false);
 
 		fadein = true;
 
-		float YourTime = Time.fixedUnscaledTime;
+		float YourTime = Time.realtimeSinceStartup - m_startTime;
 
 		if (YourTime >= 290)
 			stars = 1;
@@ -41,6 +43,8 @@ public class Display_Ending : MonoBehaviour
 
 	void Start ()
 	{
+        m_startTime = Time.realtimeSinceStartup;
+
 		foreach (CanvasRenderer UI in UI_Ending) {
 			UI.SetAlpha (0);
 		}

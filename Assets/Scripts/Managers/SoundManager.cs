@@ -87,7 +87,7 @@ namespace Scripting.GameManagers
 		/// </summary>
 		internal uint PlaySound(string p_id, GameObject p_origin)
 		{
-			Debug.LogFormat("SoundManager.playSound(): Playing the sound {0} form object {1}.", p_id, p_origin.name);
+			//Debug.LogFormat("SoundManager.playSound(): Playing the sound {0} form object {1}.", p_id, p_origin.name);
 
 			return AkSoundEngine.PostEvent(p_id, p_origin);
 		}

@@ -17,15 +17,15 @@ MonoBehaviour:
   m_lastPopulateTimePsrt1: 0
   AcousticTextureWwu:
   - Guid: '{D48E46A2-C125-4AFC-8E89-8D00FD43526E}'
-    m_lastTimePart2: -1999232086
-    m_lastTimePsrt1: -200504960
+    m_lastTimePart2: -1999231803
+    m_lastTimePsrt1: -1450234691
     ParentPhysicalPath: 
     PhysicalPath: Virtual Acoustics\Default Work Unit.wwu
     List: []
   AuxBusWwu:
   - Guid: '{DD15A29E-29CE-4B9A-A0C5-F35919CAAD3C}'
-    m_lastTimePart2: -1999231882
-    m_lastTimePsrt1: -1274364422
+    m_lastTimePart2: -1999231803
+    m_lastTimePsrt1: -1480898498
     ParentPhysicalPath: 
     PhysicalPath: Master-Mixer Hierarchy\Default Work Unit.wwu
     List:
@@ -42,8 +42,8 @@ MonoBehaviour:
         ObjectType: 1
   BankWwu:
   - Guid: '{92CB2F6B-5433-462E-BC36-0436CBF0F6BB}'
-    m_lastTimePart2: -1999232066
-    m_lastTimePsrt1: -1913051266
+    m_lastTimePart2: -1999231803
+    m_lastTimePsrt1: -1450292254
     ParentPhysicalPath: 
     PhysicalPath: SoundBanks\Default Work Unit.wwu
     List:
@@ -58,8 +58,8 @@ MonoBehaviour:
         ObjectType: 7
   EventWwu:
   - Guid: '{04D1AD93-A368-4A75-8FEB-52B9B8B81107}'
-    m_lastTimePart2: -1999231874
-    m_lastTimePsrt1: 1195272326
+    m_lastTimePart2: -1999231803
+    m_lastTimePsrt1: -1483411906
     ParentPhysicalPath: 
     PhysicalPath: Events\Default Work Unit.wwu
     List:
@@ -119,6 +119,18 @@ MonoBehaviour:
       - ElementName: Default Work Unit
         ObjectType: 12
       - ElementName: Play_Disappear
+        ObjectType: 3
+      maxAttenuation: 0
+      maxDuration: 0
+      minDuration: 0
+    - Guid: 750edb2d5bca2143add68d0e766bd56a
+      ID: -41142414
+      Name: Play_Feedback_Fail
+      Path: Default Work Unit\Play_Feedback_Fail
+      PathAndIcons:
+      - ElementName: Default Work Unit
+        ObjectType: 12
+      - ElementName: Play_Feedback_Fail
         ObjectType: 3
       maxAttenuation: 0
       maxDuration: 0
@@ -240,8 +252,8 @@ MonoBehaviour:
   - /Wwise_Inclusetco/SoundBanks
   RtpcWwu:
   - Guid: '{9549F168-4921-4CD3-B055-5D3C3461F822}'
-    m_lastTimePart2: -1999231873
-    m_lastTimePsrt1: 166156439
+    m_lastTimePart2: -1999231803
+    m_lastTimePsrt1: -1483401933
     ParentPhysicalPath: 
     PhysicalPath: Game Parameters\Default Work Unit.wwu
     List:
@@ -256,22 +268,22 @@ MonoBehaviour:
         ObjectType: 13
   StateWwu:
   - Guid: '{6FA3D7AC-DC24-4F81-B0FC-D9F9EE089231}'
-    m_lastTimePart2: -1999232086
-    m_lastTimePsrt1: -200524907
+    m_lastTimePart2: -1999231803
+    m_lastTimePsrt1: -1450264602
     ParentPhysicalPath: 
     PhysicalPath: States\Default Work Unit.wwu
     List: []
   SwitchWwu:
   - Guid: '{735855A6-7539-47DE-BAE1-9B5C4D9126F2}'
-    m_lastTimePart2: -1999232086
-    m_lastTimePsrt1: -200514930
+    m_lastTimePart2: -1999231803
+    m_lastTimePsrt1: -1450254633
     ParentPhysicalPath: 
     PhysicalPath: Switches\Default Work Unit.wwu
     List: []
   TriggerWwu:
   - Guid: '{6FFF9BC1-441D-4BAB-90CF-3F159A12E808}'
-    m_lastTimePart2: -1999232086
-    m_lastTimePsrt1: -200514930
+    m_lastTimePart2: -1999231803
+    m_lastTimePsrt1: -1450244660
     ParentPhysicalPath: 
     PhysicalPath: Triggers\Default Work Unit.wwu
     List: []

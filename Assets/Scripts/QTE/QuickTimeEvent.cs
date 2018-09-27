@@ -61,10 +61,12 @@ namespace Scripting.QTE
         /// Area renderer of the QTE
         public SpriteRenderer areaSprite;
 
+        [SerializeField]
+        SpriteRenderer m_logoRenderer;
+
         [Header("Tutorial")]
         public bool isTutorial = false;
 
-        public PostProcessVolume processVolume;
         private Vignette vignette; 
 
 
@@ -82,8 +84,10 @@ namespace Scripting.QTE
             foreach (FogAndFirefliesColorChanger colorChanger in colorChangers)
                 colorChanger.ChangeColor(color);
 
-            if (!processVolume.profile.TryGetSettings<Vignette>(out vignette))
+            if (!Managers.instance.processVolume.profile.TryGetSettings<Vignette>(out vignette))
                 Debug.LogError("Vignette post process not found");
+
+            m_logoRenderer.gameObject.SetActive(false);
         }
         
         /// Update
@@ -130,7 +134,7 @@ namespace Scripting.QTE
 
                 if (isTutorial && GetPositionInCollider() >= 0.5f)
                 {
-                    Utility.TimeManager.StartSlowMotion(0.001f);
+                    Utility.TimeManager.StartSlowMotion(0.01f);
 
                     vignette.enabled.Override(true);
                 }
@@ -139,12 +143,16 @@ namespace Scripting.QTE
 
         private void Update()
         {
-            if (isTutorial && GetPositionInCollider() >= 0.5f)
+            if (GetPositionInCollider() >= 0.5f)
             {
-                float value = Mathf.Lerp(0.5f, 0.7f, Mathf.PingPong(Time.realtimeSinceStartup, 1));
-                print(value);
+                m_logoRenderer.gameObject.SetActive(true);
 
-                vignette.intensity.Override(value);
+                if (isTutorial)
+                {
+                    float value = Mathf.Lerp(0.5f, 0.7f, Mathf.PingPong(Time.realtimeSinceStartup, 1));
+
+                    vignette.intensity.Override(value);
+                }
             }
         }
 
@@ -176,6 +184,9 @@ namespace Scripting.QTE
             OnPlayerExited();
 
             enabled = false;
+
+            if (!m_QTENeeded.p_done)
+                Managers.instance.playerManager.player.DecreaseSpeed();
         }
 
         virtual protected void UpdateQTERequierement()
@@ -320,6 +331,8 @@ namespace Scripting.QTE
 
             if (isTutorial)
                 vignette.enabled.Override(false);
+
+            m_logoRenderer.gameObject.SetActive(false);
         }
     }
 
