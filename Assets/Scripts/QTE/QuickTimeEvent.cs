@@ -201,21 +201,35 @@ namespace Scripting.QTE
         /// Player succeeded inputs
         IEnumerator TrailControl(float time)
         {
-            TrailRenderer trail = Managers.instance.playerManager.player.trail;
-            
+            GameObject trail = Managers.instance.playerManager.player.trail;
+            TrailRenderer[] trails = trail.GetComponentsInChildren<TrailRenderer>();
+            trail.SetActive(true);
             /// Setup
-            trail.material.color = color;
-            trail.emitting = true;
-            trail.time = time;
+            foreach (TrailRenderer t in trails)
+            {
+                t.material.color = color;
+                t.material.SetColor("_EmissionColor", color * Mathf.LinearToGammaSpace(10));
+                t.emitting = true;
+                t.time = time;
+            }
 
             // Make disapear trail
             for (float timeElapsed = 0; timeElapsed < time; timeElapsed += Time.deltaTime)
             {
                 // Not sure if useful 
-                trail.time -= Time.deltaTime;
+                foreach (TrailRenderer t in trails)
+                {
+                    t.time -= Time.deltaTime;
+                }
                 yield return new WaitForEndOfFrame();
             }
-            trail.emitting = false;            
+
+            foreach (TrailRenderer t in trails)
+            {
+                t.emitting = false;
+            }
+            trail.SetActive(false);
+
         }
         
         /// QTE Succeeded

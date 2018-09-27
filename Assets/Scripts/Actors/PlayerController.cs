@@ -93,8 +93,8 @@ namespace Scripting.Actors
         
         /// Trail on good actions
         [SerializeField]
-        TrailRenderer m_trailRenderer = null;
-        public TrailRenderer trail { get {return m_trailRenderer;} private set{ m_trailRenderer = value;} }
+        GameObject m_trailRenderer = null;
+        public GameObject trail { get {return m_trailRenderer;} private set{ m_trailRenderer = value;} }
 
         bool m_isRunning = false;
         internal bool isRunning{
@@ -102,7 +102,7 @@ namespace Scripting.Actors
             set 
             {
                 m_isRunning = value; 
-                m_trailRenderer.emitting = value;
+                //m_trailRenderer.emitting = value;
                 if (value == true) 
                     m_animator.SetTrigger("dashing");
             }
