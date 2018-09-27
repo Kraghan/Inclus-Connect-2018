@@ -75,6 +75,11 @@ namespace Scripting
             m_arduino.connect();
         }
 
+        void OnApplicationQuit()
+        {
+            m_arduino.close();
+        }
+
         /// Physics update
         void FixedUpdate()
         {
@@ -84,40 +89,48 @@ namespace Scripting
             m_microPreviouslyOn = m_microOn;
 
 
-            if (false)
+            if (true)
             {
                 /// parsing
                 string data = m_arduino.readQueue();
                 string[] dataSplitted = data.Split(';');
 
                 if (dataSplitted.Length != 4)
-                    Debug.LogError("Parse error : wrong string");
+                    Debug.LogError("Parse error : wrong string : " + dataSplitted.Length + " " + data);
                 else
                 {
-
-                    if (!bool.TryParse(dataSplitted[0], out m_lightOn))
+                    int tmp;
+                    if (!int.TryParse(dataSplitted[0], out tmp))
                     {
                         m_lightOn = false;
                         Debug.LogError("Parse error : light");
                     }
+                    else
+                        m_lightOn = tmp == 1;
 
-                    if (!bool.TryParse(dataSplitted[1], out m_buttonOn))
+                    if (!int.TryParse(dataSplitted[1], out tmp))
                     {
                         m_buttonOn = false;
                         Debug.LogError("Parse error : button");
                     }
+                    else
+                        m_buttonOn = tmp == 1;
 
-                    if (!bool.TryParse(dataSplitted[2], out m_microOn))
+                    if (!int.TryParse(dataSplitted[2], out tmp))
                     {
                         m_microOn = false;
                         Debug.LogError("Parse error : micro");
                     }
+                    else
+                        m_microOn = tmp == 1;
 
-                    if (!bool.TryParse(dataSplitted[3], out m_acceleroOn))
+                    if (!int.TryParse(dataSplitted[3], out tmp))
                     {
                         m_acceleroOn = false;
                         Debug.LogError("Parse error : accelero / piezo");
                     }
+                    else
+                        m_acceleroOn = tmp == 1;
                 }
             }
             else

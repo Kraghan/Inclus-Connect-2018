@@ -68,6 +68,10 @@ namespace Scripting.QTE
             enabled = false;
 
             areaSprite.color = color;
+
+            FogAndFirefliesColorChanger[] colorChangers = areaSprite.GetComponentsInChildren<FogAndFirefliesColorChanger>();
+            foreach (FogAndFirefliesColorChanger colorChanger in colorChangers)
+                colorChanger.ChangeColor(color);
         }
         
         /// Update
@@ -156,21 +160,50 @@ namespace Scripting.QTE
                 case QTEType.ACCELERO:
                     if (s_inputs.acceleroOn)
                         qte.p_done = true;
+
+                    if (s_inputs.buttonJustOn)
+                        StartCoroutine(Managers.instance.playerManager.player.DeactivateJumpArtifact());
+                    if (s_inputs.microJustOn)
+                        StartCoroutine(Managers.instance.playerManager.player.DeactivateShieldArtifact());
+                    if (s_inputs.lightJustOn)
+                        StartCoroutine(Managers.instance.playerManager.player.DeactivateGhostArtifact());
+
                     break;
 
                 case QTEType.BUTTON:
                     if (s_inputs.buttonOn)
                         qte.p_done = true;
+
+                    if (s_inputs.acceleroJustOn)
+                        StartCoroutine(Managers.instance.playerManager.player.DeactivateAttackArtifact());
+                    if (s_inputs.microJustOn)
+                        StartCoroutine(Managers.instance.playerManager.player.DeactivateShieldArtifact());
+                    if (s_inputs.lightJustOn)
+                        StartCoroutine(Managers.instance.playerManager.player.DeactivateGhostArtifact());
                     break;
 
                 case QTEType.LIGHT:
                     if (s_inputs.lightOn)
                         qte.p_done = true;
+
+                    if (s_inputs.buttonJustOn)
+                        StartCoroutine(Managers.instance.playerManager.player.DeactivateJumpArtifact());
+                    if (s_inputs.microJustOn)
+                        StartCoroutine(Managers.instance.playerManager.player.DeactivateShieldArtifact());
+                    if (s_inputs.acceleroJustOn)
+                        StartCoroutine(Managers.instance.playerManager.player.DeactivateAttackArtifact());
                     break;
 
                 case QTEType.MICRO:
                     if (s_inputs.microOn)
                         qte.p_done = true;
+
+                    if (s_inputs.buttonJustOn)
+                        StartCoroutine(Managers.instance.playerManager.player.DeactivateJumpArtifact());
+                    if (s_inputs.acceleroJustOn)
+                        StartCoroutine(Managers.instance.playerManager.player.DeactivateAttackArtifact());
+                    if (s_inputs.lightJustOn)
+                        StartCoroutine(Managers.instance.playerManager.player.DeactivateGhostArtifact());
                     break;
             }
         }
@@ -214,6 +247,11 @@ namespace Scripting.QTE
             }
 
             // Make disapear trail
+            for (float timeElapsed = 0; timeElapsed < time; timeElapsed += Time.deltaTime)
+            {
+                yield return new WaitForEndOfFrame();
+            }
+
             for (float timeElapsed = 0; timeElapsed < time; timeElapsed += Time.deltaTime)
             {
                 // Not sure if useful 

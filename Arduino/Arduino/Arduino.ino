@@ -1,3 +1,6 @@
+#include <SerialCommand.h>
+#include <Wire.h>
+
 // CONSTANTS
 const int LUM = A1;
 const int MIC = A3;
@@ -22,7 +25,11 @@ void setup() {
   pinMode(MIC, INPUT);
   pinMode(BTN, INPUT);
   pinMode(PIEZO, INPUT);
+  Wire.begin(); 
   Serial.begin(9600);
+  while (!Serial);
+  
+  Serial.setTimeout(5);
 }
 
 // PROGRAM
@@ -73,9 +80,9 @@ void loop() {
   state += ";";
   state += checkBtn(BTN);
   state += ";";
-  state += checkMic(MIC);
+  state += !checkMic(MIC);
   state += ";";
   state += checkPiezo(PIEZO);
-  Serial.flush();
   Serial.println(state);
+  //Serial.flush();
 }
