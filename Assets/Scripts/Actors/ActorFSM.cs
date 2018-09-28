@@ -9,6 +9,7 @@ namespace Scripting.Actors
         protected int m_previousState = -1;
         protected int m_currentState = -1;
         protected int m_nextState = -1;
+        internal void SetNextState(int p_state){m_nextState = p_state;}
 
         /// True if first frame in current state
         protected bool m_firstFrameInState = false;

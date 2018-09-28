@@ -15,38 +15,30 @@ namespace Scripting.QTE
         }
 
         /// The door type
-        [SerializeField]
-        EDoorType m_type = EDoorType.Adaptative;
+        public EDoorType m_type = EDoorType.Adaptative;
 
         /// The door ghost form
-        [SerializeField]
-        Sprite m_defaultDoorBack = null;
+        public Sprite m_defaultDoorBack = null;
 
         /// The door ghost form
-        [SerializeField]
-        Sprite m_ghostDoorBack = null;
+        public Sprite m_ghostDoorBack = null;
 
         
         /// The door ghost form
-        [SerializeField]
-        Sprite m_defaultDoorFront = null;
+        public Sprite m_defaultDoorFront = null;
 
         /// The door ghost form
-        [SerializeField]
-        Sprite m_ghostDoorFront = null;
+        public Sprite m_ghostDoorFront = null;
 
 
         /// The renderer
-        [SerializeField]
-        SpriteRenderer m_rendererBack = null;
+        public SpriteRenderer m_rendererBack = null;
 
         /// The renderer
-        [SerializeField]
-        SpriteRenderer m_rendererFront = null;
+        public SpriteRenderer m_rendererFront = null;
 
         /// The magma renderer
-        [SerializeField]
-        SpriteRenderer m_magma = null;
+        public SpriteRenderer m_magma = null;
         internal SpriteRenderer magma {get{return m_magma;} set {m_magma = value;}}
         
         /// Form of the door
@@ -68,18 +60,23 @@ namespace Scripting.QTE
                     Debug.DrawLine(bounds.max, bounds.max + Vector3.down * bounds.size.y, Color.red, 0.1f);
                     //
                     
-                    if (bounds.Intersects(m_rendererBack.bounds) == true)
+                    // Debug.LogFormat("UPDATE ({1}) Door {0}", m_magma.name, gameObject.transform.position);
+                    if (bounds.Intersects(m_magma.bounds) == true)
                     {
                         if (Managers.instance.playerManager.player.inputs.lightOn == true)
                         {
-                        m_rendererBack.sprite = m_ghostDoorBack;
-                        m_rendererFront.sprite = m_ghostDoorFront;
+                            if(m_rendererBack != null)
+                                m_rendererBack.sprite = m_ghostDoorBack;
+                            if(m_rendererFront != null)
+                                m_rendererFront.sprite = m_ghostDoorFront;
                             form = EPlayerForm.Ghost;
                         }
                         else
                         {
-                            m_rendererBack.sprite = m_defaultDoorBack;
-                            m_rendererFront.sprite = m_defaultDoorFront;
+                            if(m_rendererBack != null)
+                                m_rendererBack.sprite = m_defaultDoorBack;
+                            if(m_rendererFront != null)
+                                m_rendererFront.sprite = m_defaultDoorFront;
                             form = EPlayerForm.Default;
                         }
 
@@ -89,15 +86,19 @@ namespace Scripting.QTE
 
                 case EDoorType.Ghost:
                 {
-                    m_rendererBack.sprite = m_ghostDoorBack;
-                    m_rendererFront.sprite = m_ghostDoorFront;
+                    if(m_rendererBack != null)
+                        m_rendererBack.sprite = m_ghostDoorBack;
+                    if(m_rendererFront != null)
+                        m_rendererFront.sprite = m_ghostDoorFront;
                     form = EPlayerForm.Ghost;
                 } break;
 
                 case EDoorType.Default:
                 {
-                    m_rendererBack.sprite = m_defaultDoorBack;
-                    m_rendererFront.sprite = m_defaultDoorFront;
+                    if(m_rendererBack != null)
+                        m_rendererBack.sprite = m_defaultDoorBack;
+                    if(m_rendererFront != null)
+                        m_rendererFront.sprite = m_defaultDoorFront;
                     form = EPlayerForm.Default;
                 }break;
             }

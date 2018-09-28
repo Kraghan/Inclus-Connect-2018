@@ -165,6 +165,7 @@ namespace Scripting.Actors
 
             // Register as current player
             Managers.instance.playerManager.player = this;
+            Debug.LogFormat("Player registered, now manager player is {0}", Managers.instance.playerManager.player);
 
             enableInputs = true;
 
@@ -319,12 +320,13 @@ namespace Scripting.Actors
         {
             // FX
             if (m_firstFrameInState == true)
-                if (QTESucceeded == QTEType.ACCELERO)
+                if (QTESucceeded == QTEType.ACCELERO && m_attackTarget != null)
                     Managers.instance.fxManager.SpawnFX(EFXType.AttackSuccess, m_attackTarget.transform.position);
-                else
+                else if (m_attackTarget != null)
                     Managers.instance.fxManager.SpawnFX(EFXType.AttackConsequence, m_attackTarget.transform.position);
 
-            Managers.instance.soundManager.PlaySound("Play_Destroy", m_attackTarget);
+            
+            Managers.instance.soundManager.PlaySound("Play_Destroy", m_attackTarget != null ? m_attackTarget : gameObject);
             Managers.instance.fxManager.SpawnFX(EFXType.Attack, transform.position + new Vector3(5,3,0), gameObject);
 
             if (m_stateDuration > m_attackDuration)
@@ -336,7 +338,8 @@ namespace Scripting.Actors
                 isRunning = false;
 
                 // Disable target
-                m_attackTarget.SetActive(false);
+                if (m_attackTarget != null)
+                    m_attackTarget.SetActive(false);
 
                 enableInputs = true;
                 QTEProgress = 0f;
@@ -356,7 +359,7 @@ namespace Scripting.Actors
                 Managers.instance.fxManager.SpawnFX(EFXType.Shield, transform.position + Vector3.up * 2 + Vector3.back * 2, gameObject);
             }
 
-            if (m_defendTarget.activeSelf == false)
+            if (m_defendTarget != null && m_defendTarget.activeSelf == false)
             {
                 isRunning = false;
                 m_nextState = (int)EPlayerStates.Running;

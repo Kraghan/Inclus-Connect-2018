@@ -20,8 +20,7 @@ namespace Scripting.QTE
     [System.Serializable]
     public class QTEDone
     {
-        [SerializeField]
-        private QTEType m_type;
+        public QTEType m_type;
 
         public QTEType type
         {
@@ -35,8 +34,7 @@ namespace Scripting.QTE
     public abstract class QuickTimeEvent : MonoBehaviour
     {
         /// All the QTE required
-        [SerializeField]
-        protected QTEDone m_QTENeeded = null;
+        public QTEDone m_QTENeeded = null;
 
         /// Input shortcut
         internal static ArduInput s_inputs { get {return Managers.instance.playerManager.inputs;}}
@@ -46,14 +44,12 @@ namespace Scripting.QTE
         private BoxCollider2D m_collider;
 
         /// Success bonus added to next same QTE
-        [SerializeField]
         [Range(0, 1)]
-        private float m_succesPercentageToAdd = 0.05f;
+        public float m_succesPercentageToAdd = 0.05f;
 
         /// Malus bonus added to next same QTE
-        [SerializeField]
         [Range(0, 1)]
-        private float m_failurePercentageToRemove = 0.1f;
+        public float m_failurePercentageToRemove = 0.1f;
 
         /// Color of the QTE
         public Color color { get; protected set; }
@@ -61,8 +57,7 @@ namespace Scripting.QTE
         /// Area renderer of the QTE
         public SpriteRenderer areaSprite;
 
-        [SerializeField]
-        SpriteRenderer m_logoRenderer;
+        public SpriteRenderer m_logoRenderer;
 
         [Header("Tutorial")]
         public bool isTutorial = false;

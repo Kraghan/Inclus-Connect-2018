@@ -25,14 +25,23 @@ namespace Scripting.GameManagers
         internal SoundManager soundManager {get; private set;}
         
         // Post processing stack 
-        internal PostProcessVolume processVolume { get; private set; }
+        [SerializeField]
+        PostProcessVolume m_processVolum = null;
+        internal PostProcessVolume processVolume { get {return m_processVolum;} private set {m_processVolum = value;} }
 
         void Awake()
         {
             if (m_instance == null)
                 m_instance = this;
             else
+            {
+                if (GetComponent<PlayerManager>().player != null)
+                {
+                    m_instance.playerManager.player = GetComponent<PlayerManager>().player;
+                    Debug.LogFormat("Managers tryied to save player.");
+                }
                 Destroy(gameObject);
+            }
 
             DontDestroyOnLoad(gameObject);
 
@@ -46,7 +55,7 @@ namespace Scripting.GameManagers
             soundManager = GetComponent<SoundManager>();
 
             // get post processing stack
-            processVolume = FindObjectOfType<PostProcessVolume>();
+            // processVolume = FindObjectOfType<PostProcessVolume>();
         }
     }
 }

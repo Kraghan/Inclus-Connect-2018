@@ -1,0 +1,84 @@
+Event	ID	Name			Wwise Object Path	Notes
+	24001019	Play_Feedback_Success			\Default Work Unit\Play_Feedback_Success	
+	435770000	Stop_AMB			\Default Work Unit\Stop_AMB	
+	1058038914	Play_MUSICGLOBAL			\Default Work Unit\Play_MUSICGLOBAL	
+	1060825901	Play_Disappear			\Default Work Unit\Play_Disappear	
+	1311704800	Stop_MUSICGLOBAL			\Default Work Unit\Stop_MUSICGLOBAL	
+	1589040055	Play_Shield_On			\Default Work Unit\Play_Shield_On	
+	2211787386	Play_Dash			\Default Work Unit\Play_Dash	
+	2959533290	Play_AMB			\Default Work Unit\Play_AMB	
+	3637466571	Play_Shield_Off			\Default Work Unit\Play_Shield_Off	
+	3689126666	Play_Jump			\Default Work Unit\Play_Jump	
+	3808321334	Play_Jump_Landing			\Default Work Unit\Play_Jump_Landing	
+	3854155799	Play_Footsteps			\Default Work Unit\Play_Footsteps	
+	4013708024	Play_Destroy			\Default Work Unit\Play_Destroy	
+	4197639865	Play_Appear			\Default Work Unit\Play_Appear	
+	4253824882	Play_Feedback_Fail			\Default Work Unit\Play_Feedback_Fail	
+
+Game Parameter	ID	Name			Wwise Object Path	Notes
+	3236148094	SlowMo			\Default Work Unit\SlowMo	
+
+Audio Bus	ID	Name			Wwise Object Path	Notes
+	3803692087	Master Audio Bus			\Default Work Unit\Master Audio Bus	
+
+Auxiliary Bus	ID	Name			Wwise Object Path	Notes
+	695384145	RVB			\Default Work Unit\Master Audio Bus\RVB	
+
+Effect plug-ins	ID	Name	Type				Notes
+	602546716	Room_Large	Wwise RoomVerb			
+	1008402193	Low_Pass_20KHz	Wwise Parametric EQ			
+
+In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
+	5216303	AMB	D:\ENJMIN 2017-2018-Lourd\Wwise_Incluetco\Inclus-Connect-2018_Wwise\Wwise_Inclusetco\.cache\Windows\SFX\MACK Drone Low Wind Voice Medium_43C7CE41.wem		\Actor-Mixer Hierarchy\Default Work Unit\AMB		1959209
+	16680800	SHAKER	D:\ENJMIN 2017-2018-Lourd\Wwise_Incluetco\Inclus-Connect-2018_Wwise\Wwise_Inclusetco\.cache\Windows\SFX\SHAKER_7CB04C8C.wem		\Interactive Music Hierarchy\Default Work Unit\MUSICGLOBAL\MUSIC1\SHAKER		4696464
+	22502188	Foosteps-008	D:\ENJMIN 2017-2018-Lourd\Wwise_Incluetco\Inclus-Connect-2018_Wwise\Wwise_Inclusetco\.cache\Windows\SFX\Foosteps-008_2A91B1B2.wem		\Actor-Mixer Hierarchy\Default Work Unit\Footsteps\Foosteps-008		18955
+	39770710	Dash-NoVoice-004	D:\ENJMIN 2017-2018-Lourd\Wwise_Incluetco\Inclus-Connect-2018_Wwise\Wwise_Inclusetco\.cache\Windows\SFX\Dash-NoVoice-004_2A91B1B2.wem		\Actor-Mixer Hierarchy\Default Work Unit\Dash\Dash-NoVoice-004		27057
+	44933870	Foosteps-010	D:\ENJMIN 2017-2018-Lourd\Wwise_Incluetco\Inclus-Connect-2018_Wwise\Wwise_Inclusetco\.cache\Windows\SFX\Foosteps-010_2A91B1B2.wem		\Actor-Mixer Hierarchy\Default Work Unit\Footsteps\Foosteps-010		18841
+	97221082	Jump-Landing-002	D:\ENJMIN 2017-2018-Lourd\Wwise_Incluetco\Inclus-Connect-2018_Wwise\Wwise_Inclusetco\.cache\Windows\SFX\Jump-Landing-002_2A91B1B2.wem		\Actor-Mixer Hierarchy\Default Work Unit\Jump_Landing\Jump-Landing-002		17977
+	99668524	DARBUKA	D:\ENJMIN 2017-2018-Lourd\Wwise_Incluetco\Inclus-Connect-2018_Wwise\Wwise_Inclusetco\.cache\Windows\SFX\DARBUKA_7CB04C8C.wem		\Interactive Music Hierarchy\Default Work Unit\MUSICGLOBAL\MUSIC1\DARBUKA		4683081
+	138817614	Jump-Landing-001	D:\ENJMIN 2017-2018-Lourd\Wwise_Incluetco\Inclus-Connect-2018_Wwise\Wwise_Inclusetco\.cache\Windows\SFX\Jump-Landing-001_2A91B1B2.wem		\Actor-Mixer Hierarchy\Default Work Unit\Jump_Landing\Jump-Landing-001		14954
+	184550670	Disappear	D:\ENJMIN 2017-2018-Lourd\Wwise_Incluetco\Inclus-Connect-2018_Wwise\Wwise_Inclusetco\.cache\Windows\SFX\Disappear-001_2A91B1B2.wem		\Actor-Mixer Hierarchy\Default Work Unit\Disappear		63170
+	192356166	ARP SYNTH	D:\ENJMIN 2017-2018-Lourd\Wwise_Incluetco\Inclus-Connect-2018_Wwise\Wwise_Inclusetco\.cache\Windows\SFX\ARP SYNTH_7CB04C8C.wem		\Interactive Music Hierarchy\Default Work Unit\MUSICGLOBAL\MUSIC1\ARP SYNTH		3956044
+	196430537	Destroy-001	D:\ENJMIN 2017-2018-Lourd\Wwise_Incluetco\Inclus-Connect-2018_Wwise\Wwise_Inclusetco\.cache\Windows\SFX\Destroy-001_2A91B1B2.wem		\Actor-Mixer Hierarchy\Default Work Unit\Destroy\Destroy-001		77331
+	256462143	Jump-Novoice-003	D:\ENJMIN 2017-2018-Lourd\Wwise_Incluetco\Inclus-Connect-2018_Wwise\Wwise_Inclusetco\.cache\Windows\SFX\Jump-Novoice-003_2A91B1B2.wem		\Actor-Mixer Hierarchy\Default Work Unit\Jump\Jump-Novoice-003		23153
+	268410752	Jump-Voice-003	D:\ENJMIN 2017-2018-Lourd\Wwise_Incluetco\Inclus-Connect-2018_Wwise\Wwise_Inclusetco\.cache\Windows\SFX\Jump-Voice-003_2A91B1B2.wem		\Actor-Mixer Hierarchy\Default Work Unit\Jump\Jump-Voice-003		23499
+	275579964	Foosteps-011	D:\ENJMIN 2017-2018-Lourd\Wwise_Incluetco\Inclus-Connect-2018_Wwise\Wwise_Inclusetco\.cache\Windows\SFX\Foosteps-011_2A91B1B2.wem		\Actor-Mixer Hierarchy\Default Work Unit\Footsteps\Foosteps-011		18406
+	295037141	Feedback_Fail	D:\ENJMIN 2017-2018-Lourd\Wwise_Incluetco\Inclus-Connect-2018_Wwise\Wwise_Inclusetco\.cache\Windows\SFX\Feedback_Fail_2A91B1B2.wem		\Actor-Mixer Hierarchy\Default Work Unit\Feedback_Fail		71892
+	321824748	SYNTHBASS	D:\ENJMIN 2017-2018-Lourd\Wwise_Incluetco\Inclus-Connect-2018_Wwise\Wwise_Inclusetco\.cache\Windows\SFX\SYNTHBASS_7CB04C8C.wem		\Interactive Music Hierarchy\Default Work Unit\MUSICGLOBAL\MUSIC1\SYNTHBASS		3001707
+	327839617	Foosteps-002	D:\ENJMIN 2017-2018-Lourd\Wwise_Incluetco\Inclus-Connect-2018_Wwise\Wwise_Inclusetco\.cache\Windows\SFX\Foosteps-002_2A91B1B2.wem		\Actor-Mixer Hierarchy\Default Work Unit\Footsteps\Foosteps-002		12986
+	332494324	Jump-Novoice-004	D:\ENJMIN 2017-2018-Lourd\Wwise_Incluetco\Inclus-Connect-2018_Wwise\Wwise_Inclusetco\.cache\Windows\SFX\Jump-Novoice-004_2A91B1B2.wem		\Actor-Mixer Hierarchy\Default Work Unit\Jump\Jump-Novoice-004		23250
+	376523382	Foosteps-003	D:\ENJMIN 2017-2018-Lourd\Wwise_Incluetco\Inclus-Connect-2018_Wwise\Wwise_Inclusetco\.cache\Windows\SFX\Foosteps-003_2A91B1B2.wem		\Actor-Mixer Hierarchy\Default Work Unit\Footsteps\Foosteps-003		17686
+	446254693	Jump-Novoice-001	D:\ENJMIN 2017-2018-Lourd\Wwise_Incluetco\Inclus-Connect-2018_Wwise\Wwise_Inclusetco\.cache\Windows\SFX\Jump-Novoice-001_2A91B1B2.wem		\Actor-Mixer Hierarchy\Default Work Unit\Jump\Jump-Novoice-001		32482
+	483267495	Foosteps-001	D:\ENJMIN 2017-2018-Lourd\Wwise_Incluetco\Inclus-Connect-2018_Wwise\Wwise_Inclusetco\.cache\Windows\SFX\Foosteps-001_2A91B1B2.wem		\Actor-Mixer Hierarchy\Default Work Unit\Footsteps\Foosteps-001		16494
+	590797557	TAIKOS	D:\ENJMIN 2017-2018-Lourd\Wwise_Incluetco\Inclus-Connect-2018_Wwise\Wwise_Inclusetco\.cache\Windows\SFX\TAIKOS_7CB04C8C.wem		\Interactive Music Hierarchy\Default Work Unit\MUSICGLOBAL\MUSIC1\TAIKOS		4948571
+	592779459	Destroy-003	D:\ENJMIN 2017-2018-Lourd\Wwise_Incluetco\Inclus-Connect-2018_Wwise\Wwise_Inclusetco\.cache\Windows\SFX\Destroy-003_2A91B1B2.wem		\Actor-Mixer Hierarchy\Default Work Unit\Destroy\Destroy-003		70734
+	623369400	MALE SHOUT	D:\ENJMIN 2017-2018-Lourd\Wwise_Incluetco\Inclus-Connect-2018_Wwise\Wwise_Inclusetco\.cache\Windows\SFX\MALE SHOUT_7CB04C8C.wem		\Interactive Music Hierarchy\Default Work Unit\MUSICGLOBAL\MUSIC1\MALE SHOUT		794911
+	641625461	Jump-Novoice-002	D:\ENJMIN 2017-2018-Lourd\Wwise_Incluetco\Inclus-Connect-2018_Wwise\Wwise_Inclusetco\.cache\Windows\SFX\Jump-Novoice-002_2A91B1B2.wem		\Actor-Mixer Hierarchy\Default Work Unit\Jump\Jump-Novoice-002		31048
+	645214160	Dash-NoVoice-003	D:\ENJMIN 2017-2018-Lourd\Wwise_Incluetco\Inclus-Connect-2018_Wwise\Wwise_Inclusetco\.cache\Windows\SFX\Dash-NoVoice-003_2A91B1B2.wem		\Actor-Mixer Hierarchy\Default Work Unit\Dash\Dash-NoVoice-003		26832
+	683381286	Shield-Off	D:\ENJMIN 2017-2018-Lourd\Wwise_Incluetco\Inclus-Connect-2018_Wwise\Wwise_Inclusetco\.cache\Windows\SFX\Shield-Off_2A91B1B2.wem		\Actor-Mixer Hierarchy\Default Work Unit\Shield-Off		26819
+	688038215	LEAD FEMALE SINGER	D:\ENJMIN 2017-2018-Lourd\Wwise_Incluetco\Inclus-Connect-2018_Wwise\Wwise_Inclusetco\.cache\Windows\SFX\LEAD FEMALE SINGER_7CB04C8C.wem		\Interactive Music Hierarchy\Default Work Unit\MUSICGLOBAL\MUSIC1\LEAD FEMALE SINGER		3463005
+	697334524	Jump-Voice-002	D:\ENJMIN 2017-2018-Lourd\Wwise_Incluetco\Inclus-Connect-2018_Wwise\Wwise_Inclusetco\.cache\Windows\SFX\Jump-Voice-002_2A91B1B2.wem		\Actor-Mixer Hierarchy\Default Work Unit\Jump\Jump-Voice-002		33325
+	711412047	Foosteps-004	D:\ENJMIN 2017-2018-Lourd\Wwise_Incluetco\Inclus-Connect-2018_Wwise\Wwise_Inclusetco\.cache\Windows\SFX\Foosteps-004_2A91B1B2.wem		\Actor-Mixer Hierarchy\Default Work Unit\Footsteps\Foosteps-004		19273
+	754601689	Feedback-Success	D:\ENJMIN 2017-2018-Lourd\Wwise_Incluetco\Inclus-Connect-2018_Wwise\Wwise_Inclusetco\.cache\Windows\SFX\Feedback-Sucess_2A91B1B2.wem		\Actor-Mixer Hierarchy\Default Work Unit\Feedback-Success		76816
+	762442242	RIQ	D:\ENJMIN 2017-2018-Lourd\Wwise_Incluetco\Inclus-Connect-2018_Wwise\Wwise_Inclusetco\.cache\Windows\SFX\RIQ_7CB04C8C.wem		\Interactive Music Hierarchy\Default Work Unit\MUSICGLOBAL\MUSIC1\RIQ		5180249
+	766540712	Foosteps-012	D:\ENJMIN 2017-2018-Lourd\Wwise_Incluetco\Inclus-Connect-2018_Wwise\Wwise_Inclusetco\.cache\Windows\SFX\Foosteps-012_2A91B1B2.wem		\Actor-Mixer Hierarchy\Default Work Unit\Footsteps\Foosteps-012		18143
+	798929187	Foosteps-005	D:\ENJMIN 2017-2018-Lourd\Wwise_Incluetco\Inclus-Connect-2018_Wwise\Wwise_Inclusetco\.cache\Windows\SFX\Foosteps-005_2A91B1B2.wem		\Actor-Mixer Hierarchy\Default Work Unit\Footsteps\Foosteps-005		18128
+	821581042	Destroy-004	D:\ENJMIN 2017-2018-Lourd\Wwise_Incluetco\Inclus-Connect-2018_Wwise\Wwise_Inclusetco\.cache\Windows\SFX\Destroy-004_2A91B1B2.wem		\Actor-Mixer Hierarchy\Default Work Unit\Destroy\Destroy-004		55637
+	837653799	Foosteps-009	D:\ENJMIN 2017-2018-Lourd\Wwise_Incluetco\Inclus-Connect-2018_Wwise\Wwise_Inclusetco\.cache\Windows\SFX\Foosteps-009_2A91B1B2.wem		\Actor-Mixer Hierarchy\Default Work Unit\Footsteps\Foosteps-009		17294
+	841508329	Destroy-002	D:\ENJMIN 2017-2018-Lourd\Wwise_Incluetco\Inclus-Connect-2018_Wwise\Wwise_Inclusetco\.cache\Windows\SFX\Destroy-002_2A91B1B2.wem		\Actor-Mixer Hierarchy\Default Work Unit\Destroy\Destroy-002		68750
+	851255009	Appear	D:\ENJMIN 2017-2018-Lourd\Wwise_Incluetco\Inclus-Connect-2018_Wwise\Wwise_Inclusetco\.cache\Windows\SFX\Disappear-002_2A91B1B2.wem		\Actor-Mixer Hierarchy\Default Work Unit\Appear		53225
+	852013581	REVERSE CRASH	D:\ENJMIN 2017-2018-Lourd\Wwise_Incluetco\Inclus-Connect-2018_Wwise\Wwise_Inclusetco\.cache\Windows\SFX\REVERSE CRASH_7CB04C8C.wem		\Interactive Music Hierarchy\Default Work Unit\MUSICGLOBAL\MUSIC1\REVERSE CRASH		749933
+	869428988	Dash-NoVoice-001	D:\ENJMIN 2017-2018-Lourd\Wwise_Incluetco\Inclus-Connect-2018_Wwise\Wwise_Inclusetco\.cache\Windows\SFX\Dash-NoVoice-001_2A91B1B2.wem		\Actor-Mixer Hierarchy\Default Work Unit\Dash\Dash-NoVoice-001		25187
+	876387218	Dash-NoVoice-002	D:\ENJMIN 2017-2018-Lourd\Wwise_Incluetco\Inclus-Connect-2018_Wwise\Wwise_Inclusetco\.cache\Windows\SFX\Dash-NoVoice-002_2A91B1B2.wem		\Actor-Mixer Hierarchy\Default Work Unit\Dash\Dash-NoVoice-002		25368
+	888664821	Foosteps-013	D:\ENJMIN 2017-2018-Lourd\Wwise_Incluetco\Inclus-Connect-2018_Wwise\Wwise_Inclusetco\.cache\Windows\SFX\Foosteps-013_2A91B1B2.wem		\Actor-Mixer Hierarchy\Default Work Unit\Footsteps\Foosteps-013		17273
+	939234257	Jump-Landing-004	D:\ENJMIN 2017-2018-Lourd\Wwise_Incluetco\Inclus-Connect-2018_Wwise\Wwise_Inclusetco\.cache\Windows\SFX\Jump-Landing-004_2A91B1B2.wem		\Actor-Mixer Hierarchy\Default Work Unit\Jump_Landing\Jump-Landing-004		18807
+	950569611	Foosteps-006	D:\ENJMIN 2017-2018-Lourd\Wwise_Incluetco\Inclus-Connect-2018_Wwise\Wwise_Inclusetco\.cache\Windows\SFX\Foosteps-006_2A91B1B2.wem		\Actor-Mixer Hierarchy\Default Work Unit\Footsteps\Foosteps-006		18121
+	972173130	Shield-On	D:\ENJMIN 2017-2018-Lourd\Wwise_Incluetco\Inclus-Connect-2018_Wwise\Wwise_Inclusetco\.cache\Windows\SFX\Shield-On_2A91B1B2.wem		\Actor-Mixer Hierarchy\Default Work Unit\Shield-On		26577
+	978894297	GONG	D:\ENJMIN 2017-2018-Lourd\Wwise_Incluetco\Inclus-Connect-2018_Wwise\Wwise_Inclusetco\.cache\Windows\SFX\GONG_7CB04C8C.wem		\Interactive Music Hierarchy\Default Work Unit\MUSICGLOBAL\MUSIC1\GONG		496433
+	979045238	SHEPHERD HORN	D:\ENJMIN 2017-2018-Lourd\Wwise_Incluetco\Inclus-Connect-2018_Wwise\Wwise_Inclusetco\.cache\Windows\SFX\SHEPHERD HORN_7CB04C8C.wem		\Interactive Music Hierarchy\Default Work Unit\MUSICGLOBAL\MUSIC1\SHEPHERD HORN		2301588
+	1001600010	Foosteps-007	D:\ENJMIN 2017-2018-Lourd\Wwise_Incluetco\Inclus-Connect-2018_Wwise\Wwise_Inclusetco\.cache\Windows\SFX\Foosteps-007_2A91B1B2.wem		\Actor-Mixer Hierarchy\Default Work Unit\Footsteps\Foosteps-007		17570
+	1004241715	Jump-Landing-003	D:\ENJMIN 2017-2018-Lourd\Wwise_Incluetco\Inclus-Connect-2018_Wwise\Wwise_Inclusetco\.cache\Windows\SFX\Jump-Landing-003_2A91B1B2.wem		\Actor-Mixer Hierarchy\Default Work Unit\Jump_Landing\Jump-Landing-003		20702
+	1020544549	Jump-Voice-001	D:\ENJMIN 2017-2018-Lourd\Wwise_Incluetco\Inclus-Connect-2018_Wwise\Wwise_Inclusetco\.cache\Windows\SFX\Jump-Voice-001_2A91B1B2.wem		\Actor-Mixer Hierarchy\Default Work Unit\Jump\Jump-Voice-001		33579
+	1059481908	Jump-Voice-004	D:\ENJMIN 2017-2018-Lourd\Wwise_Incluetco\Inclus-Connect-2018_Wwise\Wwise_Inclusetco\.cache\Windows\SFX\Jump-Voice-004_2A91B1B2.wem		\Actor-Mixer Hierarchy\Default Work Unit\Jump\Jump-Voice-004		26020
+	1069133955	TUVAN MALE VOICE	D:\ENJMIN 2017-2018-Lourd\Wwise_Incluetco\Inclus-Connect-2018_Wwise\Wwise_Inclusetco\.cache\Windows\SFX\TUVAN MALE VOICE_7CB04C8C.wem		\Interactive Music Hierarchy\Default Work Unit\MUSICGLOBAL\MUSIC1\TUVAN MALE VOICE		4282013
+

@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="utf-8"?>
+<SoundBanksInfo Platform="Windows" BasePlatform="Windows" SchemaVersion="11" SoundbankVersion="132">
+	<RootPaths>
+		<ProjectRoot>D:\ENJMIN 2017-2018-Lourd\Wwise_Incluetco\Inclus-Connect-2018_Wwise\Wwise_Inclusetco\</ProjectRoot>
+		<SourceFilesRoot>D:\ENJMIN 2017-2018-Lourd\Wwise_Incluetco\Inclus-Connect-2018_Wwise\Wwise_Inclusetco\.cache\Windows\</SourceFilesRoot>
+		<SoundBanksRoot>D:\ENJMIN 2017-2018-Lourd\Wwise_Incluetco\Inclus-Connect-2018_Wwise\Wwise_Inclusetco\GeneratedSoundBanks\Windows\</SoundBanksRoot>
+		<ExternalSourcesInputFile></ExternalSourcesInputFile>
+		<ExternalSourcesOutputRoot>D:\ENJMIN 2017-2018-Lourd\Wwise_Incluetco\Inclus-Connect-2018_Wwise\Wwise_Inclusetco\GeneratedSoundBanks\Windows</ExternalSourcesOutputRoot>
+	</RootPaths>
+	<DialogueEvents/>
+	<StreamedFiles/>
+	<MediaFilesNotInAnyBank/>
+	<SoundBanks>
+		<SoundBank Id="251770488" Language="SFX">
+			<ObjectPath>\SoundBanks\Default Work Unit\INCLUETCOMAIN</ObjectPath>
+			<ShortName>INCLUETCOMAIN</ShortName>
+			<Path>INCLUETCOMAIN.bnk</Path>
+			<IncludedEvents>
+				<Event Id="2959533290" Name="Play_AMB" ObjectPath="\Events\Default Work Unit\Play_AMB"/>
+				<Event Id="4197639865" Name="Play_Appear" ObjectPath="\Events\Default Work Unit\Play_Appear"/>
+				<Event Id="2211787386" Name="Play_Dash" ObjectPath="\Events\Default Work Unit\Play_Dash"/>
+				<Event Id="4013708024" Name="Play_Destroy" ObjectPath="\Events\Default Work Unit\Play_Destroy"/>
+				<Event Id="1060825901" Name="Play_Disappear" ObjectPath="\Events\Default Work Unit\Play_Disappear"/>
+				<Event Id="4253824882" Name="Play_Feedback_Fail" ObjectPath="\Events\Default Work Unit\Play_Feedback_Fail"/>
+				<Event Id="24001019" Name="Play_Feedback_Success" ObjectPath="\Events\Default Work Unit\Play_Feedback_Success"/>
+				<Event Id="3854155799" Name="Play_Footsteps" ObjectPath="\Events\Default Work Unit\Play_Footsteps"/>
+				<Event Id="3689126666" Name="Play_Jump" ObjectPath="\Events\Default Work Unit\Play_Jump"/>
+				<Event Id="3808321334" Name="Play_Jump_Landing" ObjectPath="\Events\Default Work Unit\Play_Jump_Landing"/>
+				<Event Id="1058038914" Name="Play_MUSICGLOBAL" ObjectPath="\Events\Default Work Unit\Play_MUSICGLOBAL"/>
+				<Event Id="3637466571" Name="Play_Shield_Off" ObjectPath="\Events\Default Work Unit\Play_Shield_Off"/>
+				<Event Id="1589040055" Name="Play_Shield_On" ObjectPath="\Events\Default Work Unit\Play_Shield_On"/>
+				<Event Id="435770000" Name="Stop_AMB" ObjectPath="\Events\Default Work Unit\Stop_AMB" MaxAttenuation="0.000000"/>
+				<Event Id="1311704800" Name="Stop_MUSICGLOBAL" ObjectPath="\Events\Default Work Unit\Stop_MUSICGLOBAL" MaxAttenuation="0.000000"/>
+			</IncludedEvents>
+			<IncludedMemoryFiles>
+				<File Id="5216303" Language="SFX">
+					<ShortName>MACK Drone Low Wind Voice Medium.wav</ShortName>
+					<Path>SFX\MACK Drone Low Wind Voice Medium_43C7CE41.wem</Path>
+				</File>
+				<File Id="16680800" Language="SFX">
+					<ShortName>SHAKER.wav</ShortName>
+					<Path>SFX\SHAKER_7CB04C8C.wem</Path>
+				</File>
+				<File Id="22502188" Language="SFX">
+					<ShortName>Foosteps-008.wav</ShortName>
+					<Path>SFX\Foosteps-008_2A91B1B2.wem</Path>
+				</File>
+				<File Id="39770710" Language="SFX">
+					<ShortName>Dash-NoVoice-004.wav</ShortName>
+					<Path>SFX\Dash-NoVoice-004_2A91B1B2.wem</Path>
+				</File>
+				<File Id="44933870" Language="SFX">
+					<ShortName>Foosteps-010.wav</ShortName>
+					<Path>SFX\Foosteps-010_2A91B1B2.wem</Path>
+				</File>
+				<File Id="97221082" Language="SFX">
+					<ShortName>Jump-Landing-002.wav</ShortName>
+					<Path>SFX\Jump-Landing-002_2A91B1B2.wem</Path>
+				</File>
+				<File Id="99668524" Language="SFX">
+					<ShortName>DARBUKA.wav</ShortName>
+					<Path>SFX\DARBUKA_7CB04C8C.wem</Path>
+				</File>
+				<File Id="138817614" Language="SFX">
+					<ShortName>Jump-Landing-001.wav</ShortName>
+					<Path>SFX\Jump-Landing-001_2A91B1B2.wem</Path>
+				</File>
+				<File Id="184550670" Language="SFX">
+					<ShortName>Disappear-001.wav</ShortName>
+					<Path>SFX\Disappear-001_2A91B1B2.wem</Path>
+				</File>
+				<File Id="192356166" Language="SFX">
+					<ShortName>ARP SYNTH.wav</ShortName>
+					<Path>SFX\ARP SYNTH_7CB04C8C.wem</Path>
+				</File>
+				<File Id="196430537" Language="SFX">
+					<ShortName>Destroy-001.wav</ShortName>
+					<Path>SFX\Destroy-001_2A91B1B2.wem</Path>
+				</File>
+				<File Id="256462143" Language="SFX">
+					<ShortName>Jump-Novoice-003.wav</ShortName>
+					<Path>SFX\Jump-Novoice-003_2A91B1B2.wem</Path>
+				</File>
+				<File Id="268410752" Language="SFX">
+					<ShortName>Jump-Voice-003.wav</ShortName>
+					<Path>SFX\Jump-Voice-003_2A91B1B2.wem</Path>
+				</File>
+				<File Id="275579964" Language="SFX">
+					<ShortName>Foosteps-011.wav</ShortName>
+					<Path>SFX\Foosteps-011_2A91B1B2.wem</Path>
+				</File>
+				<File Id="295037141" Language="SFX">
+					<ShortName>Feedback_Fail.wav</ShortName>
+					<Path>SFX\Feedback_Fail_2A91B1B2.wem</Path>
+				</File>
+				<File Id="321824748" Language="SFX">
+					<ShortName>SYNTHBASS.wav</ShortName>
+					<Path>SFX\SYNTHBASS_7CB04C8C.wem</Path>
+				</File>
+				<File Id="327839617" Language="SFX">
+					<ShortName>Foosteps-002.wav</ShortName>
+					<Path>SFX\Foosteps-002_2A91B1B2.wem</Path>
+				</File>
+				<File Id="332494324" Language="SFX">
+					<ShortName>Jump-Novoice-004.wav</ShortName>
+					<Path>SFX\Jump-Novoice-004_2A91B1B2.wem</Path>
+				</File>
+				<File Id="376523382" Language="SFX">
+					<ShortName>Foosteps-003.wav</ShortName>
+					<Path>SFX\Foosteps-003_2A91B1B2.wem</Path>
+				</File>
+				<File Id="446254693" Language="SFX">
+					<ShortName>Jump-Novoice-001.wav</ShortName>
+					<Path>SFX\Jump-Novoice-001_2A91B1B2.wem</Path>
+				</File>
+				<File Id="483267495" Language="SFX">
+					<ShortName>Foosteps-001.wav</ShortName>
+					<Path>SFX\Foosteps-001_2A91B1B2.wem</Path>
+				</File>
+				<File Id="590797557" Language="SFX">
+					<ShortName>TAIKOS.wav</ShortName>
+					<Path>SFX\TAIKOS_7CB04C8C.wem</Path>
+				</File>
+				<File Id="592779459" Language="SFX">
+					<ShortName>Destroy-003.wav</ShortName>
+					<Path>SFX\Destroy-003_2A91B1B2.wem</Path>
+				</File>
+				<File Id="623369400" Language="SFX">
+					<ShortName>MALE SHOUT.wav</ShortName>
+					<Path>SFX\MALE SHOUT_7CB04C8C.wem</Path>
+				</File>
+				<File Id="641625461" Language="SFX">
+					<ShortName>Jump-Novoice-002.wav</ShortName>
+					<Path>SFX\Jump-Novoice-002_2A91B1B2.wem</Path>
+				</File>
+				<File Id="645214160" Language="SFX">
+					<ShortName>Dash-NoVoice-003.wav</ShortName>
+					<Path>SFX\Dash-NoVoice-003_2A91B1B2.wem</Path>
+				</File>
+				<File Id="683381286" Language="SFX">
+					<ShortName>Shield-Off.wav</ShortName>
+					<Path>SFX\Shield-Off_2A91B1B2.wem</Path>
+				</File>
+				<File Id="688038215" Language="SFX">
+					<ShortName>LEAD FEMALE SINGER.wav</ShortName>
+					<Path>SFX\LEAD FEMALE SINGER_7CB04C8C.wem</Path>
+				</File>
+				<File Id="697334524" Language="SFX">
+					<ShortName>Jump-Voice-002.wav</ShortName>
+					<Path>SFX\Jump-Voice-002_2A91B1B2.wem</Path>
+				</File>
+				<File Id="711412047" Language="SFX">
+					<ShortName>Foosteps-004.wav</ShortName>
+					<Path>SFX\Foosteps-004_2A91B1B2.wem</Path>
+				</File>
+				<File Id="754601689" Language="SFX">
+					<ShortName>Feedback-Sucess.wav</ShortName>
+					<Path>SFX\Feedback-Sucess_2A91B1B2.wem</Path>
+				</File>
+				<File Id="762442242" Language="SFX">
+					<ShortName>RIQ.wav</ShortName>
+					<Path>SFX\RIQ_7CB04C8C.wem</Path>
+				</File>
+				<File Id="766540712" Language="SFX">
+					<ShortName>Foosteps-012.wav</ShortName>
+					<Path>SFX\Foosteps-012_2A91B1B2.wem</Path>
+				</File>
+				<File Id="798929187" Language="SFX">
+					<ShortName>Foosteps-005.wav</ShortName>
+					<Path>SFX\Foosteps-005_2A91B1B2.wem</Path>
+				</File>
+				<File Id="821581042" Language="SFX">
+					<ShortName>Destroy-004.wav</ShortName>
+					<Path>SFX\Destroy-004_2A91B1B2.wem</Path>
+				</File>
+				<File Id="837653799" Language="SFX">
+					<ShortName>Foosteps-009.wav</ShortName>
+					<Path>SFX\Foosteps-009_2A91B1B2.wem</Path>
+				</File>
+				<File Id="841508329" Language="SFX">
+					<ShortName>Destroy-002.wav</ShortName>
+					<Path>SFX\Destroy-002_2A91B1B2.wem</Path>
+				</File>
+				<File Id="851255009" Language="SFX">
+					<ShortName>Disappear-002.wav</ShortName>
+					<Path>SFX\Disappear-002_2A91B1B2.wem</Path>
+				</File>
+				<File Id="852013581" Language="SFX">
+					<ShortName>REVERSE CRASH.wav</ShortName>
+					<Path>SFX\REVERSE CRASH_7CB04C8C.wem</Path>
+				</File>
+				<File Id="869428988" Language="SFX">
+					<ShortName>Dash-NoVoice-001.wav</ShortName>
+					<Path>SFX\Dash-NoVoice-001_2A91B1B2.wem</Path>
+				</File>
+				<File Id="876387218" Language="SFX">
+					<ShortName>Dash-NoVoice-002.wav</ShortName>
+					<Path>SFX\Dash-NoVoice-002_2A91B1B2.wem</Path>
+				</File>
+				<File Id="888664821" Language="SFX">
+					<ShortName>Foosteps-013.wav</ShortName>
+					<Path>SFX\Foosteps-013_2A91B1B2.wem</Path>
+				</File>
+				<File Id="939234257" Language="SFX">
+					<ShortName>Jump-Landing-004.wav</ShortName>
+					<Path>SFX\Jump-Landing-004_2A91B1B2.wem</Path>
+				</File>
+				<File Id="950569611" Language="SFX">
+					<ShortName>Foosteps-006.wav</ShortName>
+					<Path>SFX\Foosteps-006_2A91B1B2.wem</Path>
+				</File>
+				<File Id="972173130" Language="SFX">
+					<ShortName>Shield-On.wav</ShortName>
+					<Path>SFX\Shield-On_2A91B1B2.wem</Path>
+				</File>
+				<File Id="978894297" Language="SFX">
+					<ShortName>GONG.wav</ShortName>
+					<Path>SFX\GONG_7CB04C8C.wem</Path>
+				</File>
+				<File Id="979045238" Language="SFX">
+					<ShortName>SHEPHERD HORN.wav</ShortName>
+					<Path>SFX\SHEPHERD HORN_7CB04C8C.wem</Path>
+				</File>
+				<File Id="1001600010" Language="SFX">
+					<ShortName>Foosteps-007.wav</ShortName>
+					<Path>SFX\Foosteps-007_2A91B1B2.wem</Path>
+				</File>
+				<File Id="1004241715" Language="SFX">
+					<ShortName>Jump-Landing-003.wav</ShortName>
+					<Path>SFX\Jump-Landing-003_2A91B1B2.wem</Path>
+				</File>
+				<File Id="1020544549" Language="SFX">
+					<ShortName>Jump-Voice-001.wav</ShortName>
+					<Path>SFX\Jump-Voice-001_2A91B1B2.wem</Path>
+				</File>
+				<File Id="1059481908" Language="SFX">
+					<ShortName>Jump-Voice-004.wav</ShortName>
+					<Path>SFX\Jump-Voice-004_2A91B1B2.wem</Path>
+				</File>
+				<File Id="1069133955" Language="SFX">
+					<ShortName>TUVAN MALE VOICE.wav</ShortName>
+					<Path>SFX\TUVAN MALE VOICE_7CB04C8C.wem</Path>
+				</File>
+			</IncludedMemoryFiles>
+		</SoundBank>
+		<SoundBank Id="1355168291" Language="SFX">
+			<ObjectPath>Init</ObjectPath>
+			<ShortName>Init</ShortName>
+			<Path>Init.bnk</Path>
+		</SoundBank>
+	</SoundBanks>
+</SoundBanksInfo>
