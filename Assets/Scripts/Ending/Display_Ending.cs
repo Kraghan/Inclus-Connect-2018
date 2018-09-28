@@ -24,16 +24,16 @@ public class Display_Ending : MonoBehaviour
 		fadein = true;
 
 		float YourTime = Time.realtimeSinceStartup - m_startTime;
-
-		if (YourTime >= 290)
+		Debug.Log (YourTime);
+		if (YourTime >= 330)
 			stars = 1;
-		if (YourTime <= 290)
+		if (YourTime <= 310)
 			stars = 2;
-		if (YourTime <= 250)
+		if (YourTime <= 280)
 			stars = 3;
-		if (YourTime <= 200)
+		if (YourTime <= 250)
 			stars = 4;
-		if (YourTime <= 150)
+		if (YourTime <= 220)
 			stars = 5;
 
 		for (int i = 0; i < stars; i++) {

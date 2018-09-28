@@ -319,15 +319,16 @@ namespace Scripting.Actors
         void OnAttackingState()
         {
             // FX
-            if (m_firstFrameInState == true)
-                if (QTESucceeded == QTEType.ACCELERO && m_attackTarget != null)
-                    Managers.instance.fxManager.SpawnFX(EFXType.AttackSuccess, m_attackTarget.transform.position);
-                else if (m_attackTarget != null)
-                    Managers.instance.fxManager.SpawnFX(EFXType.AttackConsequence, m_attackTarget.transform.position);
+			if (m_firstFrameInState == true) {
+				if (QTESucceeded == QTEType.ACCELERO && m_attackTarget != null)
+					Managers.instance.fxManager.SpawnFX (EFXType.AttackSuccess, m_attackTarget.transform.position);
+				else if (m_attackTarget != null)
+					Managers.instance.fxManager.SpawnFX (EFXType.AttackConsequence, m_attackTarget.transform.position);
 
             
-            Managers.instance.soundManager.PlaySound("Play_Destroy", m_attackTarget != null ? m_attackTarget : gameObject);
-            Managers.instance.fxManager.SpawnFX(EFXType.Attack, transform.position + new Vector3(5,3,0), gameObject);
+				Managers.instance.soundManager.PlaySound ("Play_Destroy", m_attackTarget != null ? m_attackTarget : gameObject);
+				Managers.instance.fxManager.SpawnFX (EFXType.Attack, transform.position + new Vector3 (5, 3, 0), gameObject);
+			}
 
             if (m_stateDuration > m_attackDuration)
             {
@@ -356,7 +357,7 @@ namespace Scripting.Actors
                 Managers.instance.fxManager.SpawnFX( QTESucceeded == QTEType.MICRO ? EFXType.DefenseSuccess : EFXType.DefenseConsequence, transform.position + Vector3.up, gameObject);
 
                 // Spawn shield
-                Managers.instance.fxManager.SpawnFX(EFXType.Shield, transform.position + Vector3.up * 2 + Vector3.back * 2, gameObject);
+				Managers.instance.fxManager.SpawnFX(EFXType.Shield, transform.position + Vector3.right * 0.1f + Vector3.up * 2.25f + Vector3.back * 2.5f, gameObject);
             }
 
             if (m_defendTarget != null && m_defendTarget.activeSelf == false)
@@ -406,13 +407,13 @@ namespace Scripting.Actors
 
                 if (m_inputs.microJustOn == true)
                 {
-                    Managers.instance.fxManager.SpawnFX(EFXType.SimpleShield, transform.position + Vector3.up * 2 + Vector3.back * 2, gameObject);
+					Managers.instance.fxManager.SpawnFX(EFXType.SimpleShield, transform.position + Vector3.right * 0.1f + Vector3.up * 2.25f + Vector3.back * 2.5f, gameObject);
                 }
 
                 if (m_inputs.acceleroJustOn == true)
                 {
                     m_animator.SetTrigger("attacking");
-                    Managers.instance.fxManager.SpawnFX(EFXType.Attack, transform.position + new Vector3(5,3,0), gameObject);
+                    Managers.instance.fxManager.SpawnFX(EFXType.Attack, transform.position + new Vector3(5f,3f,0f), gameObject);
                 }
             }
 
